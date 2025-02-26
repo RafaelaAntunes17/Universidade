@@ -1,0 +1,16 @@
+\begin{thebibliography}{1}
+
+\bibitem{Kn92}
+D.E. Knuth.
+\newblock {\em Literate Programming}.
+\newblock CSLI Lecture Notes Number 27. Stanford University Center for the
+  Study of Language and Information, Stanford, CA, USA, 1992.
+
+\bibitem{Ol05}
+J.N. Oliveira.
+\newblock {Program Design by Calculation}, 2024.
+\newblock Draft of textbook in preparation. First version: 1998. Current
+  version: Sep. 2024. Informatics Department, University of Minho
+  (\href{http://www.di.uminho.pt/~jno/ps/pdbc.pdf}{\textsc{pdf}}).
+
+\end{thebibliography}

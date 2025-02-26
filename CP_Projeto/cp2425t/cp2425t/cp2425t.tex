@@ -1,0 +1,1147 @@
+\documentclass[11pt, a4paper, fleqn]{article}
+\usepackage{cp2425t}
+\makeindex
+
+%================= lhs2tex=====================================================%
+%% ODER: format ==         = "\mathrel{==}"
+%% ODER: format /=         = "\neq "
+%
+%
+\makeatletter
+\@ifundefined{lhs2tex.lhs2tex.sty.read}%
+  {\@namedef{lhs2tex.lhs2tex.sty.read}{}%
+   \newcommand\SkipToFmtEnd{}%
+   \newcommand\EndFmtInput{}%
+   \long\def\SkipToFmtEnd#1\EndFmtInput{}%
+  }\SkipToFmtEnd
+
+\newcommand\ReadOnlyOnce[1]{\@ifundefined{#1}{\@namedef{#1}{}}\SkipToFmtEnd}
+\usepackage{amstext}
+\usepackage{amssymb}
+\usepackage{stmaryrd}
+\DeclareFontFamily{OT1}{cmtex}{}
+\DeclareFontShape{OT1}{cmtex}{m}{n}
+  {<5><6><7><8>cmtex8
+   <9>cmtex9
+   <10><10.95><12><14.4><17.28><20.74><24.88>cmtex10}{}
+\DeclareFontShape{OT1}{cmtex}{m}{it}
+  {<-> ssub * cmtt/m/it}{}
+\newcommand{\texfamily}{\fontfamily{cmtex}\selectfont}
+\DeclareFontShape{OT1}{cmtt}{bx}{n}
+  {<5><6><7><8>cmtt8
+   <9>cmbtt9
+   <10><10.95><12><14.4><17.28><20.74><24.88>cmbtt10}{}
+\DeclareFontShape{OT1}{cmtex}{bx}{n}
+  {<-> ssub * cmtt/bx/n}{}
+\newcommand{\tex}[1]{\text{\texfamily#1}}	% NEU
+
+\newcommand{\Sp}{\hskip.33334em\relax}
+
+
+\newcommand{\Conid}[1]{\mathit{#1}}
+\newcommand{\Varid}[1]{\mathit{#1}}
+\newcommand{\anonymous}{\kern0.06em \vbox{\hrule\@width.5em}}
+\newcommand{\plus}{\mathbin{+\!\!\!+}}
+\newcommand{\bind}{\mathbin{>\!\!\!>\mkern-6.7mu=}}
+\newcommand{\rbind}{\mathbin{=\mkern-6.7mu<\!\!\!<}}% suggested by Neil Mitchell
+\newcommand{\sequ}{\mathbin{>\!\!\!>}}
+\renewcommand{\leq}{\leqslant}
+\renewcommand{\geq}{\geqslant}
+\usepackage{polytable}
+
+%mathindent has to be defined
+\@ifundefined{mathindent}%
+  {\newdimen\mathindent\mathindent\leftmargini}%
+  {}%
+
+\def\resethooks{%
+  \global\let\SaveRestoreHook\empty
+  \global\let\ColumnHook\empty}
+\newcommand*{\savecolumns}[1][default]%
+  {\g@addto@macro\SaveRestoreHook{\savecolumns[#1]}}
+\newcommand*{\restorecolumns}[1][default]%
+  {\g@addto@macro\SaveRestoreHook{\restorecolumns[#1]}}
+\newcommand*{\aligncolumn}[2]%
+  {\g@addto@macro\ColumnHook{\column{#1}{#2}}}
+
+\resethooks
+
+\newcommand{\onelinecommentchars}{\quad-{}- }
+\newcommand{\commentbeginchars}{\enskip\{-}
+\newcommand{\commentendchars}{-\}\enskip}
+
+\newcommand{\visiblecomments}{%
+  \let\onelinecomment=\onelinecommentchars
+  \let\commentbegin=\commentbeginchars
+  \let\commentend=\commentendchars}
+
+\newcommand{\invisiblecomments}{%
+  \let\onelinecomment=\empty
+  \let\commentbegin=\empty
+  \let\commentend=\empty}
+
+\visiblecomments
+
+\newlength{\blanklineskip}
+\setlength{\blanklineskip}{0.66084ex}
+
+\newcommand{\hsindent}[1]{\quad}% default is fixed indentation
+\let\hspre\empty
+\let\hspost\empty
+\newcommand{\NB}{\textbf{NB}}
+\newcommand{\Todo}[1]{$\langle$\textbf{To do:}~#1$\rangle$}
+
+\EndFmtInput
+\makeatother
+%
+%
+%
+%
+%
+%
+% This package provides two environments suitable to take the place
+% of hscode, called "plainhscode" and "arrayhscode". 
+%
+% The plain environment surrounds each code block by vertical space,
+% and it uses \abovedisplayskip and \belowdisplayskip to get spacing
+% similar to formulas. Note that if these dimensions are changed,
+% the spacing around displayed math formulas changes as well.
+% All code is indented using \leftskip.
+%
+% Changed 19.08.2004 to reflect changes in colorcode. Should work with
+% CodeGroup.sty.
+%
+\ReadOnlyOnce{polycode.fmt}%
+\makeatletter
+
+\newcommand{\hsnewpar}[1]%
+  {{\parskip=0pt\parindent=0pt\par\vskip #1\noindent}}
+
+% can be used, for instance, to redefine the code size, by setting the
+% command to \small or something alike
+\newcommand{\hscodestyle}{}
+
+% The command \sethscode can be used to switch the code formatting
+% behaviour by mapping the hscode environment in the subst directive
+% to a new LaTeX environment.
+
+\newcommand{\sethscode}[1]%
+  {\expandafter\let\expandafter\hscode\csname #1\endcsname
+   \expandafter\let\expandafter\endhscode\csname end#1\endcsname}
+
+% "compatibility" mode restores the non-polycode.fmt layout.
+
+\newenvironment{compathscode}%
+  {\par\noindent
+   \advance\leftskip\mathindent
+   \hscodestyle
+   \let\\=\@normalcr
+   \let\hspre\(\let\hspost\)%
+   \pboxed}%
+  {\endpboxed\)%
+   \par\noindent
+   \ignorespacesafterend}
+
+\newcommand{\compaths}{\sethscode{compathscode}}
+
+% "plain" mode is the proposed default.
+% It should now work with \centering.
+% This required some changes. The old version
+% is still available for reference as oldplainhscode.
+
+\newenvironment{plainhscode}%
+  {\hsnewpar\abovedisplayskip
+   \advance\leftskip\mathindent
+   \hscodestyle
+   \let\hspre\(\let\hspost\)%
+   \pboxed}%
+  {\endpboxed%
+   \hsnewpar\belowdisplayskip
+   \ignorespacesafterend}
+
+\newenvironment{oldplainhscode}%
+  {\hsnewpar\abovedisplayskip
+   \advance\leftskip\mathindent
+   \hscodestyle
+   \let\\=\@normalcr
+   \(\pboxed}%
+  {\endpboxed\)%
+   \hsnewpar\belowdisplayskip
+   \ignorespacesafterend}
+
+% Here, we make plainhscode the default environment.
+
+\newcommand{\plainhs}{\sethscode{plainhscode}}
+\newcommand{\oldplainhs}{\sethscode{oldplainhscode}}
+\plainhs
+
+% The arrayhscode is like plain, but makes use of polytable's
+% parray environment which disallows page breaks in code blocks.
+
+\newenvironment{arrayhscode}%
+  {\hsnewpar\abovedisplayskip
+   \advance\leftskip\mathindent
+   \hscodestyle
+   \let\\=\@normalcr
+   \(\parray}%
+  {\endparray\)%
+   \hsnewpar\belowdisplayskip
+   \ignorespacesafterend}
+
+\newcommand{\arrayhs}{\sethscode{arrayhscode}}
+
+% The mathhscode environment also makes use of polytable's parray 
+% environment. It is supposed to be used only inside math mode 
+% (I used it to typeset the type rules in my thesis).
+
+\newenvironment{mathhscode}%
+  {\parray}{\endparray}
+
+\newcommand{\mathhs}{\sethscode{mathhscode}}
+
+% texths is similar to mathhs, but works in text mode.
+
+\newenvironment{texthscode}%
+  {\(\parray}{\endparray\)}
+
+\newcommand{\texths}{\sethscode{texthscode}}
+
+% The framed environment places code in a framed box.
+
+\def\codeframewidth{\arrayrulewidth}
+\RequirePackage{calc}
+
+\newenvironment{framedhscode}%
+  {\parskip=\abovedisplayskip\par\noindent
+   \hscodestyle
+   \arrayrulewidth=\codeframewidth
+   \tabular{@{}|p{\linewidth-2\arraycolsep-2\arrayrulewidth-2pt}|@{}}%
+   \hline\framedhslinecorrect\\{-1.5ex}%
+   \let\endoflinesave=\\
+   \let\\=\@normalcr
+   \(\pboxed}%
+  {\endpboxed\)%
+   \framedhslinecorrect\endoflinesave{.5ex}\hline
+   \endtabular
+   \parskip=\belowdisplayskip\par\noindent
+   \ignorespacesafterend}
+
+\newcommand{\framedhslinecorrect}[2]%
+  {#1[#2]}
+
+\newcommand{\framedhs}{\sethscode{framedhscode}}
+
+% The inlinehscode environment is an experimental environment
+% that can be used to typeset displayed code inline.
+
+\newenvironment{inlinehscode}%
+  {\(\def\column##1##2{}%
+   \let\>\undefined\let\<\undefined\let\\\undefined
+   \newcommand\>[1][]{}\newcommand\<[1][]{}\newcommand\\[1][]{}%
+   \def\fromto##1##2##3{##3}%
+   \def\nextline{}}{\) }%
+
+\newcommand{\inlinehs}{\sethscode{inlinehscode}}
+
+% The joincode environment is a separate environment that
+% can be used to surround and thereby connect multiple code
+% blocks.
+
+\newenvironment{joincode}%
+  {\let\orighscode=\hscode
+   \let\origendhscode=\endhscode
+   \def\endhscode{\def\hscode{\endgroup\def\@currenvir{hscode}\\}\begingroup}
+   %\let\SaveRestoreHook=\empty
+   %\let\ColumnHook=\empty
+   %\let\resethooks=\empty
+   \orighscode\def\hscode{\endgroup\def\@currenvir{hscode}}}%
+  {\origendhscode
+   \global\let\hscode=\orighscode
+   \global\let\endhscode=\origendhscode}%
+
+\makeatother
+\EndFmtInput
+%
+
+
+%------------------------------------------------------------------------------%
+
+
+%====== DEFINIR GRUPO E ELEMENTOS =============================================%
+
+\group{G99}
+\studentA{102490}{Ana Francisca Antunes Taxa }
+\studentB{102933}{José Afonso da Silva Miranda }
+\studentC{102527}{Rafaela Antunes Pereira  }
+
+%==============================================================================%
+
+\begin{document}
+
+\sffamily
+\setlength{\parindent}{0em}
+\emergencystretch 3em
+\renewcommand{\baselinestretch}{1.25} 
+\input{Cover}
+\pagestyle{pagestyle}
+\setlength{\parindent}{1em}
+\newgeometry{left=25mm,right=20mm,top=25mm,bottom=25mm}
+
+\section*{Preâmbulo}
+
+Em \CP\ pretende-se ensinar a progra\-mação de computadores como uma disciplina
+científica. Para isso parte-se de um repertório de \emph{combinadores} que
+formam uma álgebra da programação % (conjunto de leis universais e seus corolários)
+e usam-se esses combinadores para construir programas \emph{composicionalmente},
+isto é, agregando programas já existentes.
+
+Na sequência pedagógica dos planos de estudo dos cursos que têm esta disciplina,
+opta-se pela aplicação deste método à programação em \Haskell\ (sem prejuízo
+da sua aplicação a outras linguagens funcionais). Assim, o presente trabalho
+prático coloca os alunos perante problemas concretos que deverão ser implementados
+em \Haskell. Há ainda um outro objectivo: o de ensinar a documentar programas,
+a validá-los e a produzir textos técnico-científicos de qualidade.
+
+Antes de abordarem os problemas propostos no trabalho, os grupos devem ler
+com atenção o anexo \ref{sec:documentacao} onde encontrarão as instruções
+relativas ao \emph{software} a instalar, etc.
+
+Valoriza-se a escrita de \emph{pouco} código que corresponda a soluções simples
+e elegantes que utilizem os combinadores de ordem superior estudados na disciplina.
+
+
+\Problema
+
+Esta questão aborda um problema que é conhecido pela designação '\emph{H-index of a Histogram}'
+e que se formula facilmente:
+\begin{quote}\em
+O h-index de um histograma é o maior número \ensuremath{\Varid{n}} de barras do histograma cuja altura é maior ou igual a \ensuremath{\Varid{n}}.
+\end{quote}
+Por exemplo, o histograma 
+\begin{hscode}\SaveRestoreHook
+\column{B}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{E}{@{}>{\hspre}l<{\hspost}@{}}%
+\>[B]{}\Varid{h}\mathrel{=}[\mskip1.5mu \mathrm{5},\mathrm{2},\mathrm{7},\mathrm{1},\mathrm{8},\mathrm{6},\mathrm{4},\mathrm{9}\mskip1.5mu]{}\<[E]%
+\ColumnHook
+\end{hscode}\resethooks
+que se mostra na figura
+	\histograma
+tem \ensuremath{\Varid{hindex}\;\Varid{h}\mathrel{=}\mathrm{5}}
+pois há \ensuremath{\mathrm{5}} colunas maiores que \ensuremath{\mathrm{5}}. (Não é \ensuremath{\mathrm{6}} pois maiores ou iguais que seis só há quatro.)
+
+Pretende-se definida como um catamorfismo, anamorfismo ou hilomorfismo uma função em Haskell
+\begin{hscode}\SaveRestoreHook
+\column{B}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{E}{@{}>{\hspre}l<{\hspost}@{}}%
+\>[B]{}\Varid{hindex}\mathbin{::}[\mskip1.5mu \Conid{Int}\mskip1.5mu]\to (\Conid{Int},[\mskip1.5mu \Conid{Int}\mskip1.5mu]){}\<[E]%
+\ColumnHook
+\end{hscode}\resethooks
+tal que, para \ensuremath{(\Varid{i},\Varid{x})\mathrel{=}\Varid{hindex}\;\Varid{h}}, \ensuremath{\Varid{i}} é o H-index de \ensuremath{\Varid{h}} e \ensuremath{\Varid{x}} é a lista de colunas de \ensuremath{\Varid{h}} que para ele contribuem.
+
+A proposta de \ensuremath{\Varid{hindex}} deverá vir acompanhada de um \textbf{diagrama} ilustrativo.
+
+\Problema
+
+Pelo \href{https://en.wikipedia.org/wiki/Fundamental_theorem_of_arithmetic}{teorema
+fundamental da aritmética}, todo número inteiro positivo tem uma única factorização
+prima.  For exemplo,
+\begin{tabbing}\ttfamily
+~primes~455\\
+\ttfamily ~\char91{}5\char44{}7\char44{}13\char93{}\\
+\ttfamily ~primes~433\\
+\ttfamily ~\char91{}433\char93{}\\
+\ttfamily ~primes~230\\
+\ttfamily ~\char91{}2\char44{}5\char44{}23\char93{}
+\end{tabbing}
+
+\begin{enumerate}
+
+\item	
+Implemente como anamorfismo de listas a função
+\begin{hscode}\SaveRestoreHook
+\column{B}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{E}{@{}>{\hspre}l<{\hspost}@{}}%
+\>[B]{}\Varid{primes}\mathbin{::}\mathbb{Z}\to [\mskip1.5mu \mathbb{Z}\mskip1.5mu]{}\<[E]%
+\ColumnHook
+\end{hscode}\resethooks
+que deverá, recebendo um número inteiro positivo, devolver a respectiva lista
+de factores primos.
+
+A proposta de \ensuremath{\Varid{primes}} deverá vir acompanhada de um \textbf{diagrama} ilustrativo.
+
+\item A figura mostra a ``\emph{árvore dos primos}'' dos números \ensuremath{[\mskip1.5mu \mathrm{455},\mathrm{669},\mathrm{6645},\mathrm{34},\mathrm{12},\mathrm{2}\mskip1.5mu]}.
+
+      \primes
+
+Com base na alínea anterior, implemente uma função em Haskell que faça a
+geração de uma tal árvore a partir de uma lista de inteiros:
+
+\begin{hscode}\SaveRestoreHook
+\column{B}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{E}{@{}>{\hspre}l<{\hspost}@{}}%
+\>[B]{}\Varid{prime\char95 tree}\mathbin{::}[\mskip1.5mu \mathbb{Z}\mskip1.5mu]\to \Conid{MyExp}\;\mathbb{Z}\;\mathbb{Z}{}\<[E]%
+\ColumnHook
+\end{hscode}\resethooks
+
+\textbf{Sugestão}: escreva o mínimo de código possível em \ensuremath{\Varid{prime\char95 tree}} investigando
+cuidadosamente que funções disponíveis nas bibliotecas que são dadas podem
+ser reutilizadas.%
+\footnote{Pense sempre na sua produtividade quando está a programar --- essa
+atitude será valorizada por qualquer empregador que vier a ter.}
+
+\end{enumerate}
+
+\Problema
+
+A convolução \ensuremath{\Varid{a}\star \Varid{b}} de duas listas \ensuremath{\Varid{a}} e \ensuremath{\Varid{b}} --- uma operação relevante em computação
+---  está muito bem explicada
+\href{https://www.youtube.com/watch?v=KuXjwB4LzSA}{neste vídeo} do canal
+\textbf{3Blue1Brown} do YouTube,
+a partir de \href{https://www.youtube.com/watch?v=KuXjwB4LzSA&t=390s}{\ensuremath{\Varid{t}\mathrel{=}\mathrm{6}\mathbin{:}\mathrm{30}}}.
+Aí se mostra como, por exemplo:
+\begin{quote}
+\ensuremath{[\mskip1.5mu \mathrm{1},\mathrm{2},\mathrm{3}\mskip1.5mu]\star [\mskip1.5mu \mathrm{4},\mathrm{5},\mathrm{6}\mskip1.5mu]\mathrel{=}[\mskip1.5mu \mathrm{4},\mathrm{13},\mathrm{28},\mathrm{27},\mathrm{18}\mskip1.5mu]} 
+\end{quote}
+A solução abaixo, proposta pelo chatGPT,
+\begin{hscode}\SaveRestoreHook
+\column{B}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{3}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{E}{@{}>{\hspre}l<{\hspost}@{}}%
+\>[B]{}\Varid{convolve}\mathbin{::}\Conid{Num}\;\Varid{a}\Rightarrow [\mskip1.5mu \Varid{a}\mskip1.5mu]\to [\mskip1.5mu \Varid{a}\mskip1.5mu]\to [\mskip1.5mu \Varid{a}\mskip1.5mu]{}\<[E]%
+\\
+\>[B]{}\Varid{convolve}\;\Varid{xs}\;\Varid{ys}\mathrel{=}[\mskip1.5mu \Varid{sum}\mathbin{\$}\Varid{zipWith}\;(\mathbin{*})\;(\Varid{take}\;\Varid{n}\;(\Varid{drop}\;\Varid{i}\;\Varid{xs}))\;\Varid{ys}\mid \Varid{i}\leftarrow [\mskip1.5mu \mathrm{0}\mathinner{\ldotp\ldotp}(\length \;\Varid{xs}\mathbin{-}\Varid{n})\mskip1.5mu]\mskip1.5mu]{}\<[E]%
+\\
+\>[B]{}\hsindent{3}{}\<[3]%
+\>[3]{}\mathbf{where}\;\Varid{n}\mathrel{=}\length \;\Varid{ys}{}\<[E]%
+\ColumnHook
+\end{hscode}\resethooks
+está manifestamente errada, pois \ensuremath{\Varid{convolve}\;[\mskip1.5mu \mathrm{1},\mathrm{2},\mathrm{3}\mskip1.5mu]\;[\mskip1.5mu \mathrm{4},\mathrm{5},\mathrm{6}\mskip1.5mu]\mathrel{=}[\mskip1.5mu \mathrm{32}\mskip1.5mu]} (!).
+
+Proponha, explicando-a devidamente, uma solução sua para \ensuremath{\Varid{convolve}}.
+Valorizar-se-á a economia de código e o recurso aos combinadores \emph{pointfree} estudados
+na disciplina, em particular a triologia \emph{ana-cata-hilo} de tipos disponíveis nas
+bibliotecas dadas ou a definir.
+
+\Problema
+
+Considere-se a seguinte sintaxe (abstrata e simplificada) para \textbf{expressões numéricas} (em \ensuremath{\Varid{b}}) com variáveis (em \ensuremath{\Varid{a}}),
+\begin{hscode}\SaveRestoreHook
+\column{B}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{19}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{50}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{E}{@{}>{\hspre}l<{\hspost}@{}}%
+\>[B]{}\mathbf{data}\;\Conid{Expr}\;\Varid{b}\;\Varid{a}\mathrel{=}{}\<[19]%
+\>[19]{}\Conid{V}\;\Varid{a}\mid \Conid{N}\;\Varid{b}\mid \Conid{T}\;\Conid{Op}\;[\mskip1.5mu \Conid{Expr}\;\Varid{b}\;\Varid{a}\mskip1.5mu]\;{}\<[50]%
+\>[50]{}\mathbf{deriving}\;(\Conid{Show},\Conid{Eq}){}\<[E]%
+\\[\blanklineskip]%
+\>[B]{}\mathbf{data}\;\Conid{Op}\mathrel{=}\Conid{ITE}\mid \Conid{Add}\mid \Conid{Mul}\mid \Conid{Suc}\;\mathbf{deriving}\;(\Conid{Show},\Conid{Eq}){}\<[E]%
+\ColumnHook
+\end{hscode}\resethooks
+possivelmente condicionais (cf.\ \ensuremath{\Conid{ITE}}, i.e.\ o operador condicional ``if-then-else``).
+Por exemplo, a árvore mostrada a seguir
+        \treeA
+representa a expressão
+\begin{eqnarray}
+        \ensuremath{\Varid{ite}\;(\Conid{V}\;\text{\ttfamily \char34 x\char34})\;(\Conid{N}\;\mathrm{0})\;(\Varid{multi}\;(\Conid{V}\;\text{\ttfamily \char34 y\char34})\;(\Varid{soma}\;(\Conid{N}\;\mathrm{3})\;(\Conid{V}\;\text{\ttfamily \char34 y\char34})))}
+        \label{eq:expr}
+\end{eqnarray}
+--- i.e.\ \ensuremath{\mathbf{if}\;\Varid{x}\;\mathbf{then}\;\mathrm{0}\;\mathbf{else}\;\Varid{y}\mathbin{*}(\mathrm{3}\mathbin{+}\Varid{y})} ---
+assumindo as ``helper functions'':
+\begin{hscode}\SaveRestoreHook
+\column{B}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{7}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{E}{@{}>{\hspre}l<{\hspost}@{}}%
+\>[B]{}\Varid{soma}\;{}\<[7]%
+\>[7]{}\Varid{x}\;\Varid{y}\mathrel{=}\Conid{T}\;\Conid{Add}\;[\mskip1.5mu \Varid{x},\Varid{y}\mskip1.5mu]{}\<[E]%
+\\
+\>[B]{}\Varid{multi}\;\Varid{x}\;\Varid{y}\mathrel{=}\Conid{T}\;\Conid{Mul}\;[\mskip1.5mu \Varid{x},\Varid{y}\mskip1.5mu]{}\<[E]%
+\\
+\>[B]{}\Varid{ite}\;\Varid{x}\;\Varid{y}\;\Varid{z}\mathrel{=}\Conid{T}\;\Conid{ITE}\;[\mskip1.5mu \Varid{x},\Varid{y},\Varid{z}\mskip1.5mu]{}\<[E]%
+\ColumnHook
+\end{hscode}\resethooks
+
+No anexo \ref{sec:codigo} propôe-se uma base para o tipo Expr (\ensuremath{\Varid{baseExpr}}) e a 
+correspondente algebra \ensuremath{\Varid{inExpr}} para construção do tipo \ensuremath{\Conid{Expr}}.
+
+\begin{enumerate}
+\item        Complete as restantes definições da biblioteca \ensuremath{\Conid{Expr}}  pedidas no anexo \ref{sec:resolucao}.
+\item        No mesmo anexo, declare \ensuremath{\Conid{Expr}\;\Varid{b}} como instância da classe \ensuremath{\Conid{Monad}}. \textbf{Sugestão}: relembre os exercícios da ficha 12.
+\item        Defina como um catamorfismo de \ensuremath{\Conid{Expr}} a sua versão monádia, que deverá ter o tipo:
+\begin{hscode}\SaveRestoreHook
+\column{B}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{E}{@{}>{\hspre}l<{\hspost}@{}}%
+\>[B]{}\Varid{mcataExpr}\mathbin{::}\Conid{Monad}\;\Varid{m}\Rightarrow (\Varid{a}+(\Varid{b}+(\Conid{Op},\Varid{m}\;[\mskip1.5mu \Varid{c}\mskip1.5mu]))\to \Varid{m}\;\Varid{c})\to \Conid{Expr}\;\Varid{b}\;\Varid{a}\to \Varid{m}\;\Varid{c}{}\<[E]%
+\ColumnHook
+\end{hscode}\resethooks
+\item        Para se avaliar uma expressão é preciso que todas as suas variáveis estejam instanciadas.
+Complete a definição da função
+\begin{hscode}\SaveRestoreHook
+\column{B}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{E}{@{}>{\hspre}l<{\hspost}@{}}%
+\>[B]{}\Varid{let\char95 exp}\mathbin{::}(\Conid{Num}\;\Varid{c})\Rightarrow (\Varid{a}\to \Conid{Expr}\;\Varid{c}\;\Varid{b})\to \Conid{Expr}\;\Varid{c}\;\Varid{a}\to \Conid{Expr}\;\Varid{c}\;\Varid{b}{}\<[E]%
+\ColumnHook
+\end{hscode}\resethooks
+que, dada uma expressão com variáveis em \ensuremath{\Varid{a}} e uma função que a cada uma dessas variáveis atribui uma
+expressão (\ensuremath{\Varid{a}\to \Conid{Expr}\;\Varid{c}\;\Varid{b}}), faz a correspondente substituição.\footnote{Cf.\ expressões \ensuremath{\mathbf{let}\mathbin{...}\mathbf{in}\mathbin{...}}.}
+Por exemplo, dada
+\begin{hscode}\SaveRestoreHook
+\column{B}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{7}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{E}{@{}>{\hspre}l<{\hspost}@{}}%
+\>[B]{}\Varid{f}\;\text{\ttfamily \char34 x\char34}\mathrel{=}\Conid{N}\;\mathrm{0}{}\<[E]%
+\\
+\>[B]{}\Varid{f}\;\text{\ttfamily \char34 y\char34}\mathrel{=}\Conid{N}\;\mathrm{5}{}\<[E]%
+\\
+\>[B]{}\Varid{f}\;\anonymous {}\<[7]%
+\>[7]{}\mathrel{=}\Conid{N}\;\mathrm{99}{}\<[E]%
+\ColumnHook
+\end{hscode}\resethooks
+ter-se-á
+\begin{hscode}\SaveRestoreHook
+\column{B}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{9}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{E}{@{}>{\hspre}l<{\hspost}@{}}%
+\>[9]{}\Varid{let\char95 exp}\;\Varid{f}\;\Varid{e}\mathrel{=}\Conid{T}\;\Conid{ITE}\;[\mskip1.5mu \Conid{N}\;\mathrm{1},\Conid{N}\;\mathrm{0},\Conid{T}\;\Conid{Mul}\;[\mskip1.5mu \Conid{N}\;\mathrm{5},\Conid{T}\;\Conid{Add}\;[\mskip1.5mu \Conid{N}\;\mathrm{3},\Conid{N}\;\mathrm{1}\mskip1.5mu]\mskip1.5mu]\mskip1.5mu]{}\<[E]%
+\ColumnHook
+\end{hscode}\resethooks
+isto é, a árvore da figura a seguir: 
+        \treeB
+
+\item Finalmente, defina a função de avaliação de uma expressão, com tipo
+
+\begin{hscode}\SaveRestoreHook
+\column{B}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{32}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{E}{@{}>{\hspre}l<{\hspost}@{}}%
+\>[B]{}\Varid{evaluate}\mathbin{::}(\Conid{Num}\;\Varid{a},\Conid{Ord}\;\Varid{a})\Rightarrow {}\<[32]%
+\>[32]{}\Conid{Expr}\;\Varid{a}\;\Varid{b}\to \Conid{Maybe}\;\Varid{a}{}\<[E]%
+\ColumnHook
+\end{hscode}\resethooks
+
+que deverá ter em conta as seguintes situações de erro:
+
+\begin{enumerate}
+
+\item \emph{Variáveis} --- para ser avaliada, \ensuremath{\Varid{x}} em \ensuremath{\Varid{evaluate}\;\Varid{x}} não pode conter variáveis. Assim, por exemplo,
+        \begin{hscode}\SaveRestoreHook
+\column{B}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{9}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{E}{@{}>{\hspre}l<{\hspost}@{}}%
+\>[9]{}\Varid{evaluate}\;\Varid{e}\mathrel{=}\Conid{Nothing}{}\<[E]%
+\\
+\>[9]{}\Varid{evaluate}\;(\Varid{let\char95 exp}\;\Varid{f}\;\Varid{e})\mathrel{=}\Conid{Just}\;\mathrm{40}{}\<[E]%
+\ColumnHook
+\end{hscode}\resethooks
+para \ensuremath{\Varid{f}} e \ensuremath{\Varid{e}}  dadas acima.
+
+\item \emph{Aridades} --- todas as ocorrências dos operadores deverão ter
+      o devido número de sub-expressões, por exemplo:
+        \begin{hscode}\SaveRestoreHook
+\column{B}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{9}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{E}{@{}>{\hspre}l<{\hspost}@{}}%
+\>[9]{}\Varid{evaluate}\;(\Conid{T}\;\Conid{Add}\;[\mskip1.5mu \Conid{N}\;\mathrm{2},\Conid{N}\;\mathrm{3}\mskip1.5mu])\mathrel{=}\Conid{Just}\;\mathrm{5}{}\<[E]%
+\\
+\>[9]{}\Varid{evaluate}\;(\Conid{T}\;\Conid{Mul}\;[\mskip1.5mu \Conid{N}\;\mathrm{2}\mskip1.5mu])\mathrel{=}\Conid{Nothing}{}\<[E]%
+\ColumnHook
+\end{hscode}\resethooks
+
+\end{enumerate}
+
+\end{enumerate}
+
+\noindent
+\textbf{Sugestão}: de novo se insiste na escrita do mínimo de código possível,
+tirando partido da riqueza estrutural do tipo \ensuremath{\Conid{Expr}} que é assunto desta questão.
+Sugere-se também o recurso a diagramas para explicar as soluções propostas.
+
+\part*{Anexos}
+
+\appendix
+
+\section{Natureza do trabalho a realizar}
+\label{sec:documentacao}
+Este trabalho teórico-prático deve ser realizado por grupos de 3 alunos.
+Os detalhes da avaliação (datas para submissão do relatório e sua defesa
+oral) são os que forem publicados na \cp{página da disciplina} na \emph{internet}.
+
+Recomenda-se uma abordagem participativa dos membros do grupo em \textbf{todos}
+os exercícios do trabalho, para assim poderem responder a qualquer questão
+colocada na \emph{defesa oral} do relatório.
+
+Para cumprir de forma integrada os objectivos do trabalho vamos recorrer
+a uma técnica de programa\-ção dita ``\litp{literária}'' \cite{Kn92}, cujo
+princípio base é o seguinte:
+%
+\begin{quote}\em
+	Um programa e a sua documentação devem coincidir.
+\end{quote}
+%
+Por outras palavras, o \textbf{código fonte} e a \textbf{documentação} de um
+programa deverão estar no mesmo ficheiro.
+
+O ficheiro \texttt{cp2425t.pdf} que está a ler é já um exemplo de
+\litp{programação literária}: foi gerado a partir do texto fonte
+\texttt{cp2425t.lhs}\footnote{O sufixo `lhs' quer dizer
+\emph{\lhaskell{literate Haskell}}.} que encontrará no \MaterialPedagogico\
+desta disciplina des\-com\-pactando o ficheiro \texttt{cp2425t.zip}.
+
+Como se mostra no esquema abaixo, de um único ficheiro (\ensuremath{\Varid{lhs}})
+gera-se um PDF ou faz-se a interpretação do código \Haskell\ que ele inclui:
+
+	\esquema
+
+Vê-se assim que, para além do \GHCi, serão necessários os executáveis \PdfLatex\ e
+\LhsToTeX. Para facilitar a instalação e evitar problemas de versões e
+conflitos com sistemas operativos, é recomendado o uso do \Docker\ tal como
+a seguir se descreve.
+
+\section{Docker} \label{sec:docker}
+
+Recomenda-se o uso do \container\ cuja imagem é gerada pelo \Docker\ a partir do ficheiro
+\texttt{Dockerfile} que se encontra na diretoria que resulta de descompactar
+\texttt{cp2425t.zip}. Este \container\ deverá ser usado na execução
+do \GHCi\ e dos comandos relativos ao \Latex. (Ver também a \texttt{Makefile}
+que é disponibilizada.)
+
+Após \href{https://docs.docker.com/engine/install/}{instalar o Docker} e
+descarregar o referido zip com o código fonte do trabalho,
+basta executar os seguintes comandos:
+\begin{Verbatim}[fontsize=\small]
+    $ docker build -t cp2425t .
+    $ docker run -v ${PWD}:/cp2425t -it cp2425t
+\end{Verbatim}
+\textbf{NB}: O objetivo é que o container\ seja usado \emph{apenas} 
+para executar o \GHCi\ e os comandos relativos ao \Latex.
+Deste modo, é criado um \textit{volume} (cf.\ a opção \texttt{-v \$\{PWD\}:/cp2425t}) 
+que permite que a diretoria em que se encontra na sua máquina local 
+e a diretoria \texttt{/cp2425t} no \container\ sejam partilhadas.
+
+Pretende-se então que visualize/edite os ficheiros na sua máquina local e que
+os compile no \container, executando:
+\begin{Verbatim}[fontsize=\small]
+    $ lhs2TeX cp2425t.lhs > cp2425t.tex
+    $ pdflatex cp2425t
+\end{Verbatim}
+\LhsToTeX\ é o pre-processador que faz ``pretty printing'' de código Haskell
+em \Latex\ e que faz parte já do \container. Alternativamente, basta executar
+\begin{Verbatim}[fontsize=\small]
+    $ make
+\end{Verbatim}
+para obter o mesmo efeito que acima.
+
+Por outro lado, o mesmo ficheiro \texttt{cp2425t.lhs} é executável e contém
+o ``kit'' básico, escrito em \Haskell, para realizar o trabalho. Basta executar
+\begin{Verbatim}[fontsize=\small]
+    $ ghci cp2425t.lhs
+\end{Verbatim}
+
+\noindent Abra o ficheiro \texttt{cp2425t.lhs} no seu editor de texto preferido
+e verifique que assim é: todo o texto que se encontra dentro do ambiente
+\begin{quote}\small\tt
+\text{\ttfamily \char92{}begin\char123{}code\char125{}}
+\\ ... \\
+\text{\ttfamily \char92{}end\char123{}code\char125{}}
+\end{quote}
+é seleccionado pelo \GHCi\ para ser executado.
+
+\section{Em que consiste o TP}
+
+Em que consiste, então, o \emph{relatório} a que se referiu acima?
+É a edição do texto que está a ser lido, preenchendo o anexo \ref{sec:resolucao}
+com as respostas. O relatório deverá conter ainda a identificação dos membros
+do grupo de trabalho, no local respectivo da folha de rosto.
+
+Para gerar o PDF integral do relatório deve-se ainda correr os comando seguintes,
+que actualizam a bibliografia (com \Bibtex) e o índice remissivo (com \Makeindex),
+\begin{Verbatim}[fontsize=\small]
+    $ bibtex cp2425t.aux
+    $ makeindex cp2425t.idx
+\end{Verbatim}
+e recompilar o texto como acima se indicou. (Como já se disse, pode fazê-lo
+correndo simplesmente \texttt{make} no \container.)
+
+No anexo \ref{sec:codigo} disponibiliza-se algum código \Haskell\ relativo
+aos problemas que são colocados. Esse anexo deverá ser consultado e analisado
+à medida que isso for necessário.
+
+Deve ser feito uso da \litp{programação literária} para documentar bem o código que se
+desenvolver, em particular fazendo diagramas explicativos do que foi feito e
+tal como se explica no anexo \ref{sec:diagramas} que se segue.
+
+\section{Como exprimir cálculos e diagramas em LaTeX/lhs2TeX} \label{sec:diagramas}
+
+Como primeiro exemplo, estudar o texto fonte (\lhstotex{lhs}) do que está a ler\footnote{
+Procure e.g.\ por \texttt{"sec:diagramas"}.} onde se obtém o efeito seguinte:\footnote{Exemplos
+tirados de \cite{Ol18}.}
+\begin{eqnarray*}
+\start
+\ensuremath{\Varid{id}\mathrel{=}\conj{\Varid{f}}{\Varid{g}}}
+\just\equiv{ universal property }
+\ensuremath{\begin{lcbr}\p1\comp \Varid{id}\mathrel{=}\Varid{f}\\\p2\comp \Varid{id}\mathrel{=}\Varid{g}\end{lcbr}}
+\just\equiv{ identity }
+\ensuremath{\begin{lcbr}\p1\mathrel{=}\Varid{f}\\\p2\mathrel{=}\Varid{g}\end{lcbr}}
+\qed
+\end{eqnarray*}
+
+Os diagramas podem ser produzidos recorrendo à \emph{package} \Xymatrix, por exemplo:
+\begin{eqnarray*}
+\xymatrix@C=2cm{
+    \ensuremath{\N_0}
+           \ar[d]_-{\ensuremath{\cataNat{\Varid{g}}}}
+&
+    \ensuremath{\mathrm{1}\mathbin{+}\N_0}
+           \ar[d]^{\ensuremath{\Varid{id}\mathbin{+}\cataNat{\Varid{g}}}}
+           \ar[l]_-{\ensuremath{\mathsf{in}}}
+\\
+     \ensuremath{\Conid{B}}
+&
+     \ensuremath{\mathrm{1}\mathbin{+}\Conid{B}}
+           \ar[l]^-{\ensuremath{\Varid{g}}}
+}
+\end{eqnarray*}
+
+\section{Código fornecido}\label{sec:codigo}
+
+\subsection*{Problema 1}
+
+\begin{hscode}\SaveRestoreHook
+\column{B}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{E}{@{}>{\hspre}l<{\hspost}@{}}%
+\>[B]{}\Varid{h}\mathbin{::}[\mskip1.5mu \Conid{Int}\mskip1.5mu]{}\<[E]%
+\ColumnHook
+\end{hscode}\resethooks
+
+\subsection*{Problema 4}
+Definição do tipo:
+\begin{hscode}\SaveRestoreHook
+\column{B}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{E}{@{}>{\hspre}l<{\hspost}@{}}%
+\>[B]{}\Varid{inExpr}\mathrel{=}\alt{\Conid{V}}{\alt{\Conid{N}}{\uncurry{\Conid{T}}}}{}\<[E]%
+\\[\blanklineskip]%
+\>[B]{}\Varid{baseExpr}\;\Varid{g}\;\Varid{h}\;\Varid{f}\mathrel{=}\Varid{g}+(\Varid{h}+\Varid{id}\times\map \;\Varid{f}){}\<[E]%
+\ColumnHook
+\end{hscode}\resethooks
+Exemplos de expressões:
+\begin{hscode}\SaveRestoreHook
+\column{B}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{E}{@{}>{\hspre}l<{\hspost}@{}}%
+\>[B]{}\Varid{e}\mathrel{=}\Varid{ite}\;(\Conid{V}\;\text{\ttfamily \char34 x\char34})\;(\Conid{N}\;\mathrm{0})\;(\Varid{multi}\;(\Conid{V}\;\text{\ttfamily \char34 y\char34})\;(\Varid{soma}\;(\Conid{N}\;\mathrm{3})\;(\Conid{V}\;\text{\ttfamily \char34 y\char34}))){}\<[E]%
+\\
+\>[B]{}\Varid{i}\mathrel{=}\Varid{ite}\;(\Conid{V}\;\text{\ttfamily \char34 x\char34})\;(\Conid{N}\;\mathrm{1})\;(\Varid{multi}\;(\Conid{V}\;\text{\ttfamily \char34 y\char34})\;(\Varid{soma}\;(\Conid{N}\;(\mathrm{3}\mathbin{/}\mathrm{5}))\;(\Conid{V}\;\text{\ttfamily \char34 y\char34}))){}\<[E]%
+\ColumnHook
+\end{hscode}\resethooks
+Exemplo de teste:
+\begin{hscode}\SaveRestoreHook
+\column{B}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{5}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{E}{@{}>{\hspre}l<{\hspost}@{}}%
+\>[B]{}\Varid{teste}\mathrel{=}\Varid{evaluate}\;(\Varid{let\char95 exp}\;\Varid{f}\;\Varid{i})\equiv \Conid{Just}\;(\mathrm{26}\mathbin{/}\mathrm{245}){}\<[E]%
+\\
+\>[B]{}\hsindent{5}{}\<[5]%
+\>[5]{}\mathbf{where}\;\Varid{f}\;\text{\ttfamily \char34 x\char34}\mathrel{=}\Conid{N}\;\mathrm{0};\Varid{f}\;\text{\ttfamily \char34 y\char34}\mathrel{=}\Conid{N}\;(\mathrm{1}\mathbin{/}\mathrm{7}){}\<[E]%
+\ColumnHook
+\end{hscode}\resethooks
+
+%----------------- Soluções dos alunos -----------------------------------------%
+
+\section{Soluções dos alunos}\label{sec:resolucao}
+Os alunos devem colocar neste anexo as suas soluções para os exercícios
+propostos, de acordo com o ``layout'' que se fornece.
+Não podem ser alterados os nomes ou tipos das funções dadas, mas pode ser
+adicionado texto ao anexo, bem como diagramas e/ou outras funções auxiliares
+que sejam necessárias.
+
+\noindent
+\textbf{Importante}: Não pode ser alterado o texto deste ficheiro fora deste anexo.
+
+\subsection*{Problema 1}
+
+
+A abordagem escolhida para a execução deste problema foi o catamorfismo. O catamorfismo
+é uma técnica de redução ou acumulação de uma estrutura de dados recursiva, como
+listas, num único valor, aplicando transformações aos elementos de forma sistemática.
+
+Definimos a função `hindex`, que recebe uma lista de inteiros e chama a função auxiliar
+`auxhindex`. Esta função retorna uma tupla com o valor do índice h (`valorh`) e uma lista associada.
+Após obter os resultados, a função `hindex` verifica se o índice h calculado (`valorh`) é maior do que o 
+número de elementos na lista (`length xs`). Em caso afirmativo, retorna `(0, [])`, indicando que o índice h não 
+pode ser atingido. Caso contrário, retorna o valor do índice h e a lista dos artigos ordenados.
+
+
+
+\begin{hscode}\SaveRestoreHook
+\column{B}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{3}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{6}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{E}{@{}>{\hspre}l<{\hspost}@{}}%
+\>[B]{}\Varid{hindex}\;\Varid{xs}\mathrel{=}{}\<[E]%
+\\
+\>[B]{}\hsindent{3}{}\<[3]%
+\>[3]{}\mathbf{let}\;(\Varid{valorh},\Varid{lista})\mathrel{=}\Varid{auxhindex}\;\Varid{xs}{}\<[E]%
+\\
+\>[B]{}\hsindent{3}{}\<[3]%
+\>[3]{}\mathbf{in}\;\mathbf{if}\;\Varid{valorh}\mathbin{>}\length \;\Varid{xs}{}\<[E]%
+\\
+\>[3]{}\hsindent{3}{}\<[6]%
+\>[6]{}\mathbf{then}\;(\mathrm{0},[\mskip1.5mu \mskip1.5mu]){}\<[E]%
+\\
+\>[3]{}\hsindent{3}{}\<[6]%
+\>[6]{}\mathbf{else}\;(\Varid{valorh},\Varid{lista}){}\<[E]%
+\ColumnHook
+\end{hscode}\resethooks
+
+A função `auxhindex` utiliza o catamorfismo através da função cataList. Esta função
+aplica o catamorfismo à lista de entrada, ou seja, percorre a lista recursivamente e aplica 
+a transformação definida pela função `processList`. O either é utilizado para tratar os dois
+casos possíveis: quando a lista de entrada é válida (não vazia), a função `processList` é
+aplicada, caso contrário, a função trata o caso base, retornando um valor padrão (0, []).
+
+A função `processList` recebe um elemento da lista e calcula o índice h. Primeiro, ordena
+ a lista de forma decrescente. O índice h é determinado pelo número de artigos com citações 
+maiores ou iguais à sua posição na lista ordenada. O valor do índice h (`hValue`) é definido 
+por três condições: se o artigo na posição `h-1` tem exatamente `h` citações, se o número de 
+artigos é igual a `h`, ou ajustando conforme a lista. A lista dos artigos selecionados 
+(`selectedList`) é formada com base nas mesmas condições, escolhendo os primeiros `h` ou `h+1` artigos.
+
+
+\begin{hscode}\SaveRestoreHook
+\column{B}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{3}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{5}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{7}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{11}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{17}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{23}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{42}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{58}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{E}{@{}>{\hspre}l<{\hspost}@{}}%
+\>[B]{}\Varid{auxhindex}\mathbin{::}[\mskip1.5mu \Conid{Int}\mskip1.5mu]\to (\Conid{Int},[\mskip1.5mu \Conid{Int}\mskip1.5mu]){}\<[E]%
+\\
+\>[B]{}\Varid{auxhindex}\mathrel{=}\llparenthesis\, \alt{\underline{\mathrm{0},[\mskip1.5mu \mskip1.5mu]}}{\Varid{processList}}\,\rrparenthesis{}\<[E]%
+\\
+\>[B]{}\hsindent{3}{}\<[3]%
+\>[3]{}\mathbf{where}{}\<[E]%
+\\
+\>[3]{}\hsindent{2}{}\<[5]%
+\>[5]{}\Varid{processList}\;(\Varid{x},(\Varid{h},\Varid{xs}))\mathrel{=}{}\<[E]%
+\\
+\>[5]{}\hsindent{2}{}\<[7]%
+\>[7]{}\mathbf{let}\;\Varid{sorted}\mathrel{=}\Varid{sortBy}\;(\Varid{flip}\;\Varid{compare})\;(\Varid{x}\mathbin{:}\Varid{xs}){}\<[E]%
+\\
+\>[7]{}\hsindent{4}{}\<[11]%
+\>[11]{}\Varid{h}\mathrel{=}\length \;[\mskip1.5mu \Varid{x}\mid (\Varid{x},\Varid{i})\leftarrow \Varid{zip}\;\Varid{sorted}\;[\mskip1.5mu \mathrm{1}\mathinner{\ldotp\ldotp}\mskip1.5mu],\Varid{x}\geq \Varid{i}\mskip1.5mu]{}\<[E]%
+\\
+\>[7]{}\hsindent{4}{}\<[11]%
+\>[11]{}\Varid{hValue}{}\<[E]%
+\\
+\>[11]{}\hsindent{6}{}\<[17]%
+\>[17]{}\mid \Varid{sorted}\mathbin{!!}(\Varid{h}\mathbin{-}\mathrm{1})\equiv \Varid{h}\mathrel{=}\Varid{sorted}\mathbin{!!}(\Varid{h}\mathbin{-}\mathrm{1}){}\<[E]%
+\\
+\>[11]{}\hsindent{6}{}\<[17]%
+\>[17]{}\mid \length \;\Varid{sorted}\equiv \Varid{h}{}\<[42]%
+\>[42]{}\mathrel{=}\Varid{sorted}\mathbin{!!}(\Varid{h}\mathbin{-}\mathrm{1}){}\<[E]%
+\\
+\>[11]{}\hsindent{6}{}\<[17]%
+\>[17]{}\mid \Varid{otherwise}{}\<[42]%
+\>[42]{}\mathrel{=}\Varid{sorted}\mathbin{!!}\Varid{h}{}\<[E]%
+\\[\blanklineskip]%
+\>[7]{}\hsindent{4}{}\<[11]%
+\>[11]{}\Varid{selectedList}{}\<[E]%
+\\
+\>[11]{}\hsindent{12}{}\<[23]%
+\>[23]{}\mid \length \;\Varid{sorted}\equiv \Varid{h}{}\<[58]%
+\>[58]{}\mathrel{=}\Varid{take}\;\Varid{h}\;\Varid{sorted}{}\<[E]%
+\\
+\>[11]{}\hsindent{12}{}\<[23]%
+\>[23]{}\mid \length \;\Varid{sorted}\mathbin{>}\Varid{h}\mathrel{\wedge}\Varid{sorted}\mathbin{!!}(\Varid{h}\mathbin{-}\mathrm{1})\equiv \Varid{h}\mathrel{=}\Varid{take}\;\Varid{h}\;\Varid{sorted}{}\<[E]%
+\\
+\>[11]{}\hsindent{12}{}\<[23]%
+\>[23]{}\mid \Varid{otherwise}{}\<[58]%
+\>[58]{}\mathrel{=}\Varid{take}\;(\Varid{h}\mathbin{+}\mathrm{1})\;\Varid{sorted}{}\<[E]%
+\\[\blanklineskip]%
+\>[5]{}\hsindent{2}{}\<[7]%
+\>[7]{}\mathbf{in}\;(\Varid{hValue},\Varid{selectedList}){}\<[E]%
+\ColumnHook
+\end{hscode}\resethooks
+\begin{eqnarray*}
+\xymatrix@C=2cm{
+    \ensuremath{\Conid{Int}}
+           \ar[r]^{\ensuremath{\Varid{hindex}}}
+&
+    \ensuremath{[\mskip1.5mu \Conid{Int}\mskip1.5mu]}
+}
+\end{eqnarray*}
+\begin{eqnarray*}
+\xymatrix@C=2cm{
+    \ensuremath{[\mskip1.5mu \Conid{Int}\mskip1.5mu]}
+      \ar[d]_-{\ensuremath{\llparenthesis\, \alt{\underline{\mathrm{0},[\mskip1.5mu \mskip1.5mu]}}{\Varid{processList}}\,\rrparenthesis}} 
+      \ar[r]_-{out} 
+& 
+    \ensuremath{\mathrm{1}\mathbin{+}\Conid{Int}\mathbin{*}[\mskip1.5mu \Conid{Int}\mskip1.5mu]} 
+      \ar[d]^{\ensuremath{\Varid{id}\mathbin{+}\llparenthesis\, \alt{\underline{\mathrm{0},[\mskip1.5mu \mskip1.5mu]}}{\Varid{processList}}\,\rrparenthesis}}
+\\
+    \ensuremath{(\Conid{Int},[\mskip1.5mu \Conid{Int}\mskip1.5mu])} 
+& 
+    \ensuremath{\mathrm{1}\mathbin{+}\Conid{Int}\mathbin{*}(\Conid{Int},[\mskip1.5mu \Conid{Int}\mskip1.5mu])} 
+      \ar[l]^-{\ensuremath{\alt{\underline{\mathrm{0},[\mskip1.5mu \mskip1.5mu]}}{\Varid{processList}}}}
+}
+\end{eqnarray*}
+
+
+\subsection*{Problema 2}
+Primeira parte:
+Este código define a função primes, que gera a lista de factores primos de um número utilizando um anamorfismo (anaList). A função anaList aplica o anamorfismo com base na lógica definida em decompor.
+Se o valor de x for menor ou igual a 1, a função devolve Left (), indicando que a construção da lista deve parar.
+Caso contrário, a função decompor encontra o menor divisor de x (um número y que divide x sem deixar resto), e devolve um par contendo esse factor e o valor resultante de dividir x por esse factor.
+Este par representa o próximo elemento da lista decomposta (o factor) e o valor reduzido (x dividido pelo factor), continuando o processo recursivo até que o número seja completamente decomposto.
+\begin{hscode}\SaveRestoreHook
+\column{B}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{3}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{5}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{15}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{E}{@{}>{\hspre}l<{\hspost}@{}}%
+\>[B]{}\Varid{primes}\mathrel{=}\anaList{\Varid{decompor}}{}\<[E]%
+\\[\blanklineskip]%
+\>[B]{}\Varid{decompor}\;\Varid{x}{}\<[E]%
+\\
+\>[B]{}\hsindent{3}{}\<[3]%
+\>[3]{}\mid \Varid{x}\leq \mathrm{1}{}\<[15]%
+\>[15]{}\mathrel{=}i_1\;(){}\<[E]%
+\\
+\>[B]{}\hsindent{3}{}\<[3]%
+\>[3]{}\mid \Varid{otherwise}\mathrel{=}i_2\;(\Varid{fator},\Varid{x}\mathbin{\Varid{`div`}}\Varid{fator}){}\<[E]%
+\\
+\>[B]{}\hsindent{3}{}\<[3]%
+\>[3]{}\mathbf{where}{}\<[E]%
+\\
+\>[3]{}\hsindent{2}{}\<[5]%
+\>[5]{}\Varid{fator}\mathrel{=}\Varid{head}\;[\mskip1.5mu \Varid{y}\mid \Varid{y}\leftarrow [\mskip1.5mu \mathrm{2}\mathinner{\ldotp\ldotp}\Varid{x}\mskip1.5mu],\Varid{x}\mathbin{\Varid{`mod`}}\Varid{y}\equiv \mathrm{0}\mskip1.5mu]{}\<[E]%
+\ColumnHook
+\end{hscode}\resethooks
+Segunda parte:
+A função buildTree constrói uma árvore de fatores primos para um único número, utilizando a função primes para obter os fatores primos e organizá-los numa estrutura em árvore. A função mergeNodes combina várias árvores de fatores primos numa única árvore consolidada, começando por criar um nó raiz com valor 1 (Node 1) e utilizando a função auxiliar mergeSimilar para agrupar e combinar nós semelhantes. A função mergeSimilar processa uma lista de árvores, identificando nós com o mesmo valor e fundindo as suas subárvores. Para verificar se dois nós são iguais, a função isSimilar compara os valores dos seus nós. Por fim, a função prime_tree é responsável por receber uma lista de números, remover duplicados, construir árvores individuais para cada número com buildTree e consolidá-las numa única árvore com mergeNodes.
+\begin{hscode}\SaveRestoreHook
+\column{B}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{3}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{5}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{7}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{12}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{E}{@{}>{\hspre}l<{\hspost}@{}}%
+\>[B]{}\mathbf{data}\;\Conid{MyExp}\;\Varid{a}\;\Varid{b}\mathrel{=}\Conid{MyNode}\;\Varid{a}\;[\mskip1.5mu \Conid{MyExp}\;\Varid{a}\;\Varid{b}\mskip1.5mu]\mid \Conid{MyLeaf}\;\Varid{b}\;\mathbf{deriving}\;\Conid{Show}{}\<[E]%
+\\[\blanklineskip]%
+\>[B]{}\Varid{buildTree}\;\Varid{n}\mathrel{=}{}\<[E]%
+\\
+\>[B]{}\hsindent{3}{}\<[3]%
+\>[3]{}\mathbf{case}\;\Varid{primes}\;\Varid{n}\;\mathbf{of}{}\<[E]%
+\\
+\>[3]{}\hsindent{2}{}\<[5]%
+\>[5]{}[\mskip1.5mu \mskip1.5mu]{}\<[12]%
+\>[12]{}\to \Conid{MyLeaf}\;\Varid{n}{}\<[E]%
+\\
+\>[3]{}\hsindent{2}{}\<[5]%
+\>[5]{}(\Varid{p}\mathbin{:}\Varid{ps})\to \Conid{MyNode}\;\Varid{p}\;[\mskip1.5mu \Varid{foldr}\;(\lambda \Varid{prime}\;\Varid{acc}\to \Conid{MyNode}\;\Varid{prime}\;[\mskip1.5mu \Varid{acc}\mskip1.5mu])\;(\Conid{MyLeaf}\;\Varid{n})\;\Varid{ps}\mskip1.5mu]{}\<[E]%
+\\[\blanklineskip]%
+\>[B]{}\Varid{mergeNodes}\;\Varid{trees}\mathrel{=}\Conid{MyNode}\;\mathrm{1}\;(\Varid{mergeSimilar}\;\Varid{trees}){}\<[E]%
+\\[\blanklineskip]%
+\>[B]{}\Varid{mergeSimilar}\;[\mskip1.5mu \mskip1.5mu]\mathrel{=}[\mskip1.5mu \mskip1.5mu]{}\<[E]%
+\\
+\>[B]{}\Varid{mergeSimilar}\;(\Conid{MyNode}\;\Varid{a}\;\Varid{children}\mathbin{:}\Varid{rest})\mathrel{=}{}\<[E]%
+\\
+\>[B]{}\hsindent{3}{}\<[3]%
+\>[3]{}\mathbf{let}\;(\Varid{similar},\Varid{others})\mathrel{=}\Varid{span}\;(\Varid{isSimilar}\;\Varid{a})\;\Varid{rest}{}\<[E]%
+\\
+\>[3]{}\hsindent{4}{}\<[7]%
+\>[7]{}\Varid{mergedChildren}\mathrel{=}\Varid{children}\mathbin{+\!\!+}\Varid{concatMap}\;(\lambda (\Conid{MyNode}\;\anonymous \;\Varid{c})\to \Varid{c})\;\Varid{similar}{}\<[E]%
+\\
+\>[B]{}\hsindent{3}{}\<[3]%
+\>[3]{}\mathbf{in}\;\Conid{MyNode}\;\Varid{a}\;\Varid{mergedChildren}\mathbin{:}\Varid{mergeSimilar}\;\Varid{others}{}\<[E]%
+\\
+\>[B]{}\Varid{mergeSimilar}\;(\Varid{leaf}\mathbin{:}\Varid{rest})\mathrel{=}\Varid{leaf}\mathbin{:}\Varid{mergeSimilar}\;\Varid{rest}{}\<[E]%
+\\[\blanklineskip]%
+\>[B]{}\Varid{isSimilar}\;\Varid{a}\;(\Conid{MyNode}\;\Varid{b}\;\anonymous )\mathrel{=}\Varid{a}\equiv \Varid{b}{}\<[E]%
+\\
+\>[B]{}\Varid{isSimilar}\;\anonymous \;\anonymous \mathrel{=}\Conid{False}{}\<[E]%
+\\[\blanklineskip]%
+\>[B]{}\Varid{prime\char95 tree}\;\Varid{nums}\mathrel{=}\Varid{mergeNodes}\;(\map \;\Varid{buildTree}\;(\Varid{nub}\;\Varid{nums})){}\<[E]%
+\ColumnHook
+\end{hscode}\resethooks
+
+\subsection*{Problema 3}
+
+A função `convolve` calcula a convolução entre duas listas `xs` e `ys` utilizando recursão.
+Ela aplica a função `cataList` com o parâmetro `alg`, que trata dois casos: se a lista estiver
+vazia, retorna uma lista de zeros; caso contrário, utiliza a função `step`. A função `step`
+pega um elemento `x` de `xs`, multiplica todos os elementos de `ys` por `x`, concatenando a
+lista resultante com zeros, e soma com os resultados anteriores, gerando assim a convolução.
+Por exemplo, para as listas `[1, 2, 3]` e `[4, 5, 6]`, o primeiro passo seria multiplicar
+cada elemento de `[4, 5, 6]` por `1` e somar os resultados deslocados.
+
+\begin{hscode}\SaveRestoreHook
+\column{B}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{3}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{5}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{E}{@{}>{\hspre}l<{\hspost}@{}}%
+\>[B]{}\Varid{convolve}\mathbin{::}\Conid{Num}\;\Varid{a}\Rightarrow [\mskip1.5mu \Varid{a}\mskip1.5mu]\to [\mskip1.5mu \Varid{a}\mskip1.5mu]\to [\mskip1.5mu \Varid{a}\mskip1.5mu]{}\<[E]%
+\\
+\>[B]{}\Varid{convolve}\;\Varid{xs}\;\Varid{ys}\mathrel{=}\llparenthesis\, \Varid{alg}\,\rrparenthesis\;\Varid{xs}{}\<[E]%
+\\
+\>[B]{}\hsindent{3}{}\<[3]%
+\>[3]{}\mathbf{where}{}\<[E]%
+\\
+\>[3]{}\hsindent{2}{}\<[5]%
+\>[5]{}\Varid{alg}\mathrel{=}\alt{\underline{\Varid{replicate}\;(\length \;\Varid{ys}\mathbin{-}\mathrm{1})\;\mathrm{0}}}{\uncurry{\Varid{step}}}{}\<[E]%
+\\
+\>[3]{}\hsindent{2}{}\<[5]%
+\>[5]{}\Varid{step}\;\Varid{x}\;\Varid{xs}\mathrel{=}\Varid{zipWith}\;(\mathbin{+})\;(\map \;(\mathbin{*}\Varid{x})\;\Varid{ys}\mathbin{+\!\!+}\Varid{repeat}\;\mathrm{0})\;(\mathrm{0}\mathbin{:}\Varid{xs}){}\<[E]%
+\ColumnHook
+\end{hscode}\resethooks
+
+\subsection*{Problema 4}
+Definição do tipo:
+\begin{hscode}\SaveRestoreHook
+\column{B}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{19}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{E}{@{}>{\hspre}l<{\hspost}@{}}%
+\>[B]{}\Varid{outExpr}\;(\Conid{V}\;\Varid{x}){}\<[19]%
+\>[19]{}\mathrel{=}i_1\;\Varid{x}{}\<[E]%
+\\
+\>[B]{}\Varid{outExpr}\;(\Conid{N}\;\Varid{n}){}\<[19]%
+\>[19]{}\mathrel{=}i_2\;(i_1\;\Varid{n}){}\<[E]%
+\\
+\>[B]{}\Varid{outExpr}\;(\Conid{T}\;\Varid{op}\;\Varid{es})\mathrel{=}i_2\;(i_2\;(\Varid{op},\Varid{es})){}\<[E]%
+\\[\blanklineskip]%
+\>[B]{}\Varid{recExpr}\;\Varid{f}\mathrel{=}\Varid{baseExpr}\;\Varid{id}\;\Varid{id}\;\Varid{f}{}\<[E]%
+\ColumnHook
+\end{hscode}\resethooks
+\emph{Ana + cata + hylo}:
+\begin{hscode}\SaveRestoreHook
+\column{B}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{E}{@{}>{\hspre}l<{\hspost}@{}}%
+\>[B]{}\Varid{cataExpr}\;\Varid{g}\mathrel{=}\Varid{g}\comp \Varid{baseExpr}\;\Varid{id}\;\Varid{id}\;(\Varid{cataExpr}\;\Varid{g})\comp \Varid{outExpr}{}\<[E]%
+\\[\blanklineskip]%
+\>[B]{}\Varid{anaExpr}\;\Varid{g}\mathrel{=}\Varid{inExpr}\comp \Varid{baseExpr}\;\Varid{id}\;\Varid{id}\;(\Varid{anaExpr}\;\Varid{g})\comp \Varid{g}{}\<[E]%
+\\
+\>[B]{}\Varid{hyloExpr}\;\Varid{h}\;\Varid{g}\mathrel{=}\Varid{cataExpr}\;\Varid{h}\comp \Varid{anaExpr}\;\Varid{g}{}\<[E]%
+\ColumnHook
+\end{hscode}\resethooks
+\emph{Maps}:
+\emph{Monad}:
+\emph{Let expressions}:
+\begin{hscode}\SaveRestoreHook
+\column{B}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{4}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{5}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{10}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{E}{@{}>{\hspre}l<{\hspost}@{}}%
+\>[B]{}\mathbf{instance}\;\Conid{Monad}\;(\Conid{Expr}\;\Varid{b})\;\mathbf{where}{}\<[E]%
+\\
+\>[B]{}\hsindent{5}{}\<[5]%
+\>[5]{}\Varid{return}\mathrel{=}\Conid{V}{}\<[E]%
+\\
+\>[B]{}\hsindent{5}{}\<[5]%
+\>[5]{}(\Conid{V}\;\Varid{a})\bind \Varid{f}\mathrel{=}\Varid{f}\;\Varid{a}{}\<[E]%
+\\
+\>[B]{}\hsindent{5}{}\<[5]%
+\>[5]{}(\Conid{N}\;\Varid{b})\bind \anonymous \mathrel{=}\Conid{N}\;\Varid{b}{}\<[E]%
+\\
+\>[B]{}\hsindent{5}{}\<[5]%
+\>[5]{}(\Conid{T}\;\Varid{op}\;\Varid{es})\bind \Varid{f}\mathrel{=}\Conid{T}\;\Varid{op}\;(\map \;(\bind \Varid{f})\;\Varid{es}){}\<[E]%
+\\[\blanklineskip]%
+\>[B]{}\mathbf{instance}\;\Conid{Functor}\;(\Conid{Expr}\;\Varid{s})\;\mathbf{where}{}\<[E]%
+\\
+\>[B]{}\hsindent{10}{}\<[10]%
+\>[10]{}\mathsf{fmap}\;\Varid{f}\;\Varid{t}\mathrel{=}\mathbf{do}\;\{\mskip1.5mu \Varid{a}\leftarrow \Varid{t};\Varid{return}\;(\Varid{f}\;\Varid{a})\mskip1.5mu\}{}\<[E]%
+\\[\blanklineskip]%
+\>[B]{}\mathbf{instance}\;\Conid{Applicative}\;(\Conid{Expr}\;\Varid{s})\;\mathbf{where}{}\<[E]%
+\\
+\>[B]{}\hsindent{4}{}\<[4]%
+\>[4]{}(\mathbin{<*>})\mathrel{=}\Varid{aap}{}\<[E]%
+\\
+\>[B]{}\hsindent{4}{}\<[4]%
+\>[4]{}\Varid{pure}{}\<[10]%
+\>[10]{}\mathrel{=}\Varid{return}{}\<[E]%
+\\[\blanklineskip]%
+\>[B]{}\Varid{let\char95 exp}\;\Varid{f}\mathrel{=}\Varid{cataExpr}\;\alt{\Varid{f}}{\alt{\Conid{N}}{\uncurry{\Conid{T}}}}{}\<[E]%
+\ColumnHook
+\end{hscode}\resethooks
+Catamorfismo monádico:
+\begin{hscode}\SaveRestoreHook
+\column{B}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{3}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{5}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{E}{@{}>{\hspre}l<{\hspost}@{}}%
+\>[B]{}\Varid{mcataExpr}\;\Varid{g}\mathrel{=}\Varid{k}\;\mathbf{where}{}\<[E]%
+\\
+\>[B]{}\hsindent{3}{}\<[3]%
+\>[3]{}\Varid{k}\;(\Conid{V}\;\Varid{a})\mathrel{=}\Varid{g}\;(i_1\;\Varid{a}){}\<[E]%
+\\
+\>[B]{}\hsindent{3}{}\<[3]%
+\>[3]{}\Varid{k}\;(\Conid{N}\;\Varid{b})\mathrel{=}\Varid{g}\;(i_2\;(i_1\;\Varid{b})){}\<[E]%
+\\
+\>[B]{}\hsindent{3}{}\<[3]%
+\>[3]{}\Varid{k}\;(\Conid{T}\;\Varid{op}\;\Varid{xs})\mathrel{=}\mathbf{do}{}\<[E]%
+\\
+\>[3]{}\hsindent{2}{}\<[5]%
+\>[5]{}\Varid{ys}\leftarrow \Varid{sequence}\;(\map \;\Varid{k}\;\Varid{xs}){}\<[E]%
+\\
+\>[3]{}\hsindent{2}{}\<[5]%
+\>[5]{}\Varid{g}\;(i_2\;(i_2\;(\Varid{op},\Varid{return}\;\Varid{ys}))){}\<[E]%
+\ColumnHook
+\end{hscode}\resethooks
+Avaliação de expressões:
+\begin{hscode}\SaveRestoreHook
+\column{B}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{3}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{5}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{7}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{9}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{E}{@{}>{\hspre}l<{\hspost}@{}}%
+\>[B]{}\Varid{evaluate}\mathrel{=}\Varid{cataExpr}\;\Varid{eval}{}\<[E]%
+\\
+\>[B]{}\hsindent{3}{}\<[3]%
+\>[3]{}\mathbf{where}{}\<[E]%
+\\
+\>[3]{}\hsindent{2}{}\<[5]%
+\>[5]{}\Varid{eval}\mathbin{::}(\Conid{Num}\;\Varid{a},\Conid{Ord}\;\Varid{a})\Rightarrow \Varid{b}+(\Varid{a}+(\Conid{Op},[\mskip1.5mu \Conid{Maybe}\;\Varid{a}\mskip1.5mu]))\to \Conid{Maybe}\;\Varid{a}{}\<[E]%
+\\
+\>[3]{}\hsindent{2}{}\<[5]%
+\>[5]{}\Varid{eval}\;(i_1\;\anonymous )\mathrel{=}\Conid{Nothing}{}\<[E]%
+\\
+\>[3]{}\hsindent{2}{}\<[5]%
+\>[5]{}\Varid{eval}\;(i_2\;(i_1\;\Varid{n}))\mathrel{=}\Conid{Just}\;\Varid{n}{}\<[E]%
+\\
+\>[3]{}\hsindent{2}{}\<[5]%
+\>[5]{}\Varid{eval}\;(i_2\;(i_2\;(\Varid{op},\Varid{args})))\mathrel{=}{}\<[E]%
+\\
+\>[5]{}\hsindent{2}{}\<[7]%
+\>[7]{}\mathbf{case}\;(\Varid{op},\Varid{args})\;\mathbf{of}{}\<[E]%
+\\
+\>[7]{}\hsindent{2}{}\<[9]%
+\>[9]{}(\Conid{Add},[\mskip1.5mu \Conid{Just}\;\Varid{x},\Conid{Just}\;\Varid{y}\mskip1.5mu])\to \Conid{Just}\;(\Varid{x}\mathbin{+}\Varid{y}){}\<[E]%
+\\
+\>[7]{}\hsindent{2}{}\<[9]%
+\>[9]{}(\Conid{Mul},[\mskip1.5mu \Conid{Just}\;\Varid{x},\Conid{Just}\;\Varid{y}\mskip1.5mu])\to \Conid{Just}\;(\Varid{x}\mathbin{*}\Varid{y}){}\<[E]%
+\\
+\>[7]{}\hsindent{2}{}\<[9]%
+\>[9]{}(\Conid{Suc},[\mskip1.5mu \Conid{Just}\;\Varid{x}\mskip1.5mu])\to \Conid{Just}\;(\Varid{x}\mathbin{+}\mathrm{1}){}\<[E]%
+\\
+\>[7]{}\hsindent{2}{}\<[9]%
+\>[9]{}(\Conid{ITE},[\mskip1.5mu \Conid{Just}\;\Varid{cond},\Varid{tBranch},\Varid{fBranch}\mskip1.5mu])\to \mathbf{if}\;\Varid{cond}\not\equiv \mathrm{0}\;\mathbf{then}\;\Varid{tBranch}\;\mathbf{else}\;\Varid{fBranch}{}\<[E]%
+\\
+\>[7]{}\hsindent{2}{}\<[9]%
+\>[9]{}\anonymous \to \Conid{Nothing}{}\<[E]%
+\ColumnHook
+\end{hscode}\resethooks
+
+%----------------- Índice remissivo (exige makeindex) -------------------------%
+
+\printindex
+
+%----------------- Bibliografia (exige bibtex) --------------------------------%
+
+\bibliographystyle{plain}
+\bibliography{cp2425t}
+
+%----------------- Fim do documento -------------------------------------------%
+\end{document}
