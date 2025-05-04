@@ -1,0 +1,9 @@
+int conta();
+void verifica_posicao();
+void muda_mapa_p();
+void muda_mapa_s();
+void limite_horizontal();
+void limite_vertical();
+void gerar_mapas();
+int ver_cor();
+void imprimir_mapa();
