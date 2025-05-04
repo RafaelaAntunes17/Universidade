@@ -1,2 +1,2 @@
-Nota Final - 17
-
+- **Nota Final Trabalho**: ⭐️ **17 valores**
+- **Linguagem**: Haskell
