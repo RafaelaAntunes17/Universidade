@@ -1,0 +1,7 @@
+inteiro x
+inteiro y
+
+x = 5
+y = 10
+
+imprimir(x + y)

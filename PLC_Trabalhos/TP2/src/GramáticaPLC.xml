@@ -1,0 +1,72 @@
+
+<programa> ::= <declaracoes> <corpo>
+            | <corpo>
+
+<corpo> ::= <processo> 
+          | <corpo> <processo> 
+
+<processo> ::= <processo_entrada>
+             | <processo_imprimir>
+             | <processo_se>
+             | <processo_enquanto>
+             | <incremento>  
+             | <decremento> 
+             | <expressao>
+             | <atribuicao>
+
+<processo_se> ::= SE ABREPARENTESES <expressao> FECHAPARENTESES ABRECHAVETAS <corpo> FECHACHAVETAS 
+               
+<processo_se_senao> ::= SE ABREPARENTESES <expressao> FECHAPARENTESES ABRECHAVETAS <corpo> FECHACHAVETAS SENAO ABRECHAVETAS <corpo> FECHACHAVETAS
+
+<processo_enquanto> ::= ENQUANTO ABREPARENTESES <expressao> FECHAPARENTESES ABRECHAVETAS <corpo> FECHACHAVETAS
+
+<processo_imprimir> ::= IMPRIMIR ABREPARENTESES <expressao> FECHAPARENTESES
+                     | IMPRIMIR ABREPARENTESES CITACAO FECHAPARENTESES
+
+<processo_entrada> ::= ENTRADA ABREPARENTESES <variavel> FECHAPARENTESES
+
+
+<declaracoes> ::= <declaracao> 
+               | <declaracao> <declaracoes>
+
+<declaracao> ::= INTEIRO <variaveis>
+               
+<variaveis> ::= <variavel> 
+              | <variaveis> VIRGULA <variavel>
+
+<variavel> ::= <identificador>
+            | <identificador> ABREPARENTESESET <numero> FECHAPARENTESESRET
+            | <identificador> ABREPARENTESESET <numero> FECHAPARENTESESRET ABREPARENTESESET <numero> FECHAPARENTESESRET
+
+<atribuicao> ::= <identificador> IGUAL <expressao>
+              | <identificador> ABREPARENTESESET <fator> FECHAPARENTESESRET IGUAL <expressao>
+              | <identificador> ABREPARENTESESET <fator> FECHAPARENTESESRET ABREPARENTESESET <fator> FECHAPARENTESESRET IGUAL <expressao>
+
+<incremento> ::= ID INCREMENTO
+
+<decremento> ::= ID DECREMENTO
+
+<expressao> ::= <expressao> ADICAO <termo>
+              | <expressao> SUBTRACAO <termo>
+              | <termo>
+              | <expressao> EQUIVALENTE <expressao>
+              | <expressao> MENOR <expressao>
+              | <expressao> MAIOR <expressao>
+              | <expressao> MENORIGUAL <expressao>
+              | <expressao> MAIORIGUAL <expressao>
+              | <expressao> E <expressao>
+              | <expressao> OU <expressao>
+              | NAO <expressao>
+
+<termo> ::= <termo> MULTIPLICACAO <fator>
+          | <termo> DIVISAO <fator>
+          | <termo> RESTO <fator>
+          | <fator>
+
+<fator> ::= <numero>
+          | <identificador>
+          | <identificador> ABREPARENTESESET <expressao> FECHAPARENTESESRET
+          | <identificador> ABREPARENTESESET <expressao> FECHAPARENTESESRET ABREPARENTESESET <expressao> FECHAPARENTESESRET
+
+<identificador> ::= [a-zA-Z_][a-zA-Z_0-9]*
+<numero> ::= [0-9]+

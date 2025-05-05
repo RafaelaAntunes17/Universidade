@@ -1,0 +1,119 @@
+
+    <!DOCTYPE html>
+    <html lang="pt">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Resultados da Análise de Doenças Cardíacas</title>
+        <style>
+            /* CSS Estilizado */
+            body {
+                font-family: 'Arial', sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #f0f4f8;
+                color: #333;
+            }
+
+            h1, h2, h3 {
+                color: #2E8B57;
+                text-align: center;
+            }
+
+            .section {
+                background-color: #ffffff;
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+                margin: 20px 0;
+            }
+
+            ul {
+                list-style-type: none;
+                padding: 0;
+            }
+
+            li {
+                background: #e2f0d9;
+                margin: 10px 0;
+                padding: 15px;
+                border-radius: 6px;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            }
+
+            .container {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                margin: 20px 0;
+            }
+
+            .grafico {
+                flex: 1 1 45%;
+                margin: 10px;
+                text-align: center;
+            }
+
+            .grafico img {
+                max-width: 100%;
+                border-radius: 8px;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            }
+
+            @media (max-width: 768px) {
+                .grafico {
+                    flex: 1 1 100%;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Resultados da Análise de Doenças Cardíacas</h1>
+        <div class="section">
+            <h2>Percentagem de Doentes</h2>
+            <p>Percentagem total de doentes: 55.78%</p>
+        </div>
+        <div class="section">
+            <h2>Percentagem de Doentes por Género</h2>
+            <ul>
+                <li>Género M: 63.88%</li><li>Género F: 23.67%</li>
+            </ul>
+        </div>
+        <div class="section">
+            <h2>Percentagem de Doentes por Escalão Etário</h2>
+            <ul>
+                <li>Escalão Etário 30-34: 35.29%</li><li>Escalão Etário 35-39: 35.85%</li><li>Escalão Etário 40-44: 30.68%</li><li>Escalão Etário 45-49: 47.66%</li><li>Escalão Etário 50-54: 49.40%</li><li>Escalão Etário 55-59: 66.28%</li><li>Escalão Etário 60-64: 74.81%</li><li>Escalão Etário 65-69: 69.23%</li><li>Escalão Etário 70-74: 73.91%</li><li>Escalão Etário 75-79: 71.43%</li>
+            </ul>
+        </div>
+        <div class="section">
+            <h2>Percentagem de Doentes por Nível de Colesterol</h2>
+            <ul>
+                <li>Nível de Colesterol 0-9: 88.37%</li><li>Nível de Colesterol 80-89: 0.00%</li><li>Nível de Colesterol 100-109: 50.00%</li><li>Nível de Colesterol 110-119: 100.00%</li><li>Nível de Colesterol 120-129: 50.00%</li><li>Nível de Colesterol 130-139: 33.33%</li><li>Nível de Colesterol 140-149: 33.33%</li><li>Nível de Colesterol 150-159: 75.00%</li><li>Nível de Colesterol 160-169: 27.27%</li><li>Nível de Colesterol 170-179: 50.00%</li><li>Nível de Colesterol 180-189: 32.00%</li><li>Nível de Colesterol 190-199: 29.73%</li><li>Nível de Colesterol 200-209: 40.43%</li><li>Nível de Colesterol 210-219: 47.54%</li><li>Nível de Colesterol 220-229: 42.86%</li><li>Nível de Colesterol 230-239: 49.02%</li><li>Nível de Colesterol 240-249: 44.68%</li><li>Nível de Colesterol 250-259: 45.00%</li><li>Nível de Colesterol 260-269: 57.14%</li><li>Nível de Colesterol 270-279: 45.00%</li><li>Nível de Colesterol 280-289: 74.29%</li><li>Nível de Colesterol 290-299: 50.00%</li><li>Nível de Colesterol 300-309: 46.15%</li><li>Nível de Colesterol 310-319: 53.33%</li><li>Nível de Colesterol 320-329: 44.44%</li><li>Nível de Colesterol 330-339: 88.89%</li><li>Nível de Colesterol 340-349: 62.50%</li><li>Nível de Colesterol 350-359: 33.33%</li><li>Nível de Colesterol 360-369: 33.33%</li><li>Nível de Colesterol 380-389: 66.67%</li><li>Nível de Colesterol 390-399: 50.00%</li><li>Nível de Colesterol 400-409: 100.00%</li><li>Nível de Colesterol 410-419: 0.00%</li><li>Nível de Colesterol 450-459: 0.00%</li><li>Nível de Colesterol 460-469: 50.00%</li><li>Nível de Colesterol 490-499: 100.00%</li><li>Nível de Colesterol 510-519: 100.00%</li><li>Nível de Colesterol 520-529: 100.00%</li><li>Nível de Colesterol 560-569: 0.00%</li>
+            </ul>
+        </div>
+        <div class="section">
+            <h2>Correlação</h2>
+            <p>Correlação entre Tensão e Doença: 0.12</p>
+            <p>Correlação entre Batimento e Doença: -0.40</p>
+        </div>
+        <div class="container">
+            <div class="grafico">
+                <h3>Distribuição da Doença por Escalões Etários</h3>
+                <img src="distribuicao_idade.png" alt="Distribuição da Doença por Escalões Etários">
+            </div>
+            <div class="grafico">
+                <h3>Distribuição da Doença por Níveis de Colesterol</h3>
+                <img src="distribuicao_colesterol.png" alt="Distribuição da Doença por Níveis de Colesterol">
+            </div>
+            <div class="grafico">
+                <h3>Correlação entre Tensão e Doença</h3>
+                <img src="correlacao_tensao.png" alt="Correlação entre Tensão e Doença">
+            </div>
+            <div class="grafico">
+                <h3>Correlação entre Batimento e Doença</h3>
+                <img src="correlacao_batimento.png" alt="Correlação entre Batimento e Doença">
+            </div>
+        </div>
+    </body>
+    </html>
+    

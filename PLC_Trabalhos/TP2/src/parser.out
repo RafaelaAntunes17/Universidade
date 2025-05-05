@@ -1,0 +1,3115 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    ARRAY
+    DEFINIR
+    DOISPONTOS
+    FAZ
+    RETORNAR
+
+Grammar
+
+Rule 0     S' -> Programa
+Rule 1     Programa -> Declaracoes Corpo
+Rule 2     Programa -> Corpo
+Rule 3     Corpo -> Processo
+Rule 4     Corpo -> Corpo Processo
+Rule 5     Declaracoes -> Declaracao
+Rule 6     Declaracoes -> Declaracoes Declaracao
+Rule 7     Declaracao -> INTEIRO Variaveis
+Rule 8     Variaveis -> Variavel
+Rule 9     Variaveis -> Variaveis VIRGULA Variavel
+Rule 10    Variavel -> ID
+Rule 11    Variavel -> ID ABREPARENTESESRET NUMERO FECHAPARENTESESRET
+Rule 12    Variavel -> ID ABREPARENTESESRET NUMERO FECHAPARENTESESRET ABREPARENTESESRET NUMERO FECHAPARENTESESRET
+Rule 13    Processo -> Processo_Imprimir
+Rule 14    Processo -> Processo_Entrada
+Rule 15    Processo -> Processo_Se
+Rule 16    Processo -> Processo_Enquanto
+Rule 17    Processo -> Incremento
+Rule 18    Processo -> Decremento
+Rule 19    Processo -> Expressao
+Rule 20    Processo -> Atribuicao
+Rule 21    Processo_Se -> SE ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS
+Rule 22    Processo_Se -> SE ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS SENAO ABRECHAVETAS Corpo FECHACHAVETAS
+Rule 23    Processo_Enquanto -> ENQUANTO ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS
+Rule 24    Atribuicao -> ID IGUAL Expressao
+Rule 25    Atribuicao -> ID ABREPARENTESESRET Fator FECHAPARENTESESRET IGUAL Expressao
+Rule 26    Atribuicao -> ID ABREPARENTESESRET Fator FECHAPARENTESESRET ABREPARENTESESRET Fator FECHAPARENTESESRET IGUAL Expressao
+Rule 27    Processo_Imprimir -> IMPRIMIR ABREPARENTESES Expressao FECHAPARENTESES
+Rule 28    Processo_Imprimir -> IMPRIMIR ABREPARENTESES CITACAO FECHAPARENTESES
+Rule 29    Processo_Entrada -> ENTRADA ABREPARENTESES Variavel FECHAPARENTESES
+Rule 30    Incremento -> ID INCREMENTO
+Rule 31    Decremento -> ID DECREMENTO
+Rule 32    Expressao -> Termo
+Rule 33    Expressao -> Expressao ADICAO Termo
+Rule 34    Expressao -> Expressao SUBTRACAO Termo
+Rule 35    Expressao -> Expressao EQUIVALENTE Expressao
+Rule 36    Expressao -> Expressao MAIOR Expressao
+Rule 37    Expressao -> Expressao MENOR Expressao
+Rule 38    Expressao -> Expressao MAIORIGUAL Expressao
+Rule 39    Expressao -> Expressao MENORIGUAL Expressao
+Rule 40    Expressao -> Expressao E Expressao
+Rule 41    Expressao -> Expressao OU Expressao
+Rule 42    Expressao -> NAO Expressao
+Rule 43    Termo -> Fator
+Rule 44    Termo -> Termo MULTIPLICACAO Fator
+Rule 45    Termo -> Termo DIVISAO Fator
+Rule 46    Termo -> Termo RESTO Fator
+Rule 47    Fator -> ID
+Rule 48    Fator -> NUMERO
+Rule 49    Fator -> ID ABREPARENTESESRET Expressao FECHAPARENTESESRET
+Rule 50    Fator -> ID ABREPARENTESESRET Expressao FECHAPARENTESESRET ABREPARENTESESRET Expressao FECHAPARENTESESRET
+
+Terminals, with rules where they appear
+
+ABRECHAVETAS         : 21 22 22 23
+ABREPARENTESES       : 21 22 23 27 28 29
+ABREPARENTESESRET    : 11 12 12 25 26 26 49 50 50
+ADICAO               : 33
+ARRAY                : 
+CITACAO              : 28
+DECREMENTO           : 31
+DEFINIR              : 
+DIVISAO              : 45
+DOISPONTOS           : 
+E                    : 40
+ENQUANTO             : 23
+ENTRADA              : 29
+EQUIVALENTE          : 35
+FAZ                  : 
+FECHACHAVETAS        : 21 22 22 23
+FECHAPARENTESES      : 21 22 23 27 28 29
+FECHAPARENTESESRET   : 11 12 12 25 26 26 49 50 50
+ID                   : 10 11 12 24 25 26 30 31 47 49 50
+IGUAL                : 24 25 26
+IMPRIMIR             : 27 28
+INCREMENTO           : 30
+INTEIRO              : 7
+MAIOR                : 36
+MAIORIGUAL           : 38
+MENOR                : 37
+MENORIGUAL           : 39
+MULTIPLICACAO        : 44
+NAO                  : 42
+NUMERO               : 11 12 12 48
+OU                   : 41
+RESTO                : 46
+RETORNAR             : 
+SE                   : 21 22
+SENAO                : 22
+SUBTRACAO            : 34
+VIRGULA              : 9
+error                : 
+
+Nonterminals, with rules where they appear
+
+Atribuicao           : 20
+Corpo                : 1 2 4 21 22 22 23
+Declaracao           : 5 6
+Declaracoes          : 1 6
+Decremento           : 18
+Expressao            : 19 21 22 23 24 25 26 27 33 34 35 35 36 36 37 37 38 38 39 39 40 40 41 41 42 49 50 50
+Fator                : 25 26 26 43 44 45 46
+Incremento           : 17
+Processo             : 3 4
+Processo_Enquanto    : 16
+Processo_Entrada     : 14
+Processo_Imprimir    : 13
+Processo_Se          : 15
+Programa             : 0
+Termo                : 32 33 34 44 45 46
+Variaveis            : 7 9
+Variavel             : 8 9 29
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . Programa
+    (1) Programa -> . Declaracoes Corpo
+    (2) Programa -> . Corpo
+    (5) Declaracoes -> . Declaracao
+    (6) Declaracoes -> . Declaracoes Declaracao
+    (3) Corpo -> . Processo
+    (4) Corpo -> . Corpo Processo
+    (7) Declaracao -> . INTEIRO Variaveis
+    (13) Processo -> . Processo_Imprimir
+    (14) Processo -> . Processo_Entrada
+    (15) Processo -> . Processo_Se
+    (16) Processo -> . Processo_Enquanto
+    (17) Processo -> . Incremento
+    (18) Processo -> . Decremento
+    (19) Processo -> . Expressao
+    (20) Processo -> . Atribuicao
+    (27) Processo_Imprimir -> . IMPRIMIR ABREPARENTESES Expressao FECHAPARENTESES
+    (28) Processo_Imprimir -> . IMPRIMIR ABREPARENTESES CITACAO FECHAPARENTESES
+    (29) Processo_Entrada -> . ENTRADA ABREPARENTESES Variavel FECHAPARENTESES
+    (21) Processo_Se -> . SE ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS
+    (22) Processo_Se -> . SE ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS SENAO ABRECHAVETAS Corpo FECHACHAVETAS
+    (23) Processo_Enquanto -> . ENQUANTO ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS
+    (30) Incremento -> . ID INCREMENTO
+    (31) Decremento -> . ID DECREMENTO
+    (32) Expressao -> . Termo
+    (33) Expressao -> . Expressao ADICAO Termo
+    (34) Expressao -> . Expressao SUBTRACAO Termo
+    (35) Expressao -> . Expressao EQUIVALENTE Expressao
+    (36) Expressao -> . Expressao MAIOR Expressao
+    (37) Expressao -> . Expressao MENOR Expressao
+    (38) Expressao -> . Expressao MAIORIGUAL Expressao
+    (39) Expressao -> . Expressao MENORIGUAL Expressao
+    (40) Expressao -> . Expressao E Expressao
+    (41) Expressao -> . Expressao OU Expressao
+    (42) Expressao -> . NAO Expressao
+    (24) Atribuicao -> . ID IGUAL Expressao
+    (25) Atribuicao -> . ID ABREPARENTESESRET Fator FECHAPARENTESESRET IGUAL Expressao
+    (26) Atribuicao -> . ID ABREPARENTESESRET Fator FECHAPARENTESESRET ABREPARENTESESRET Fator FECHAPARENTESESRET IGUAL Expressao
+    (43) Termo -> . Fator
+    (44) Termo -> . Termo MULTIPLICACAO Fator
+    (45) Termo -> . Termo DIVISAO Fator
+    (46) Termo -> . Termo RESTO Fator
+    (47) Fator -> . ID
+    (48) Fator -> . NUMERO
+    (49) Fator -> . ID ABREPARENTESESRET Expressao FECHAPARENTESESRET
+    (50) Fator -> . ID ABREPARENTESESRET Expressao FECHAPARENTESESRET ABREPARENTESESRET Expressao FECHAPARENTESESRET
+
+    INTEIRO         shift and go to state 6
+    IMPRIMIR        shift and go to state 15
+    ENTRADA         shift and go to state 16
+    SE              shift and go to state 17
+    ENQUANTO        shift and go to state 18
+    ID              shift and go to state 19
+    NAO             shift and go to state 21
+    NUMERO          shift and go to state 23
+
+    Programa                       shift and go to state 1
+    Declaracoes                    shift and go to state 2
+    Corpo                          shift and go to state 3
+    Declaracao                     shift and go to state 4
+    Processo                       shift and go to state 5
+    Processo_Imprimir              shift and go to state 7
+    Processo_Entrada               shift and go to state 8
+    Processo_Se                    shift and go to state 9
+    Processo_Enquanto              shift and go to state 10
+    Incremento                     shift and go to state 11
+    Decremento                     shift and go to state 12
+    Expressao                      shift and go to state 13
+    Atribuicao                     shift and go to state 14
+    Termo                          shift and go to state 20
+    Fator                          shift and go to state 22
+
+state 1
+
+    (0) S' -> Programa .
+
+
+
+state 2
+
+    (1) Programa -> Declaracoes . Corpo
+    (6) Declaracoes -> Declaracoes . Declaracao
+    (3) Corpo -> . Processo
+    (4) Corpo -> . Corpo Processo
+    (7) Declaracao -> . INTEIRO Variaveis
+    (13) Processo -> . Processo_Imprimir
+    (14) Processo -> . Processo_Entrada
+    (15) Processo -> . Processo_Se
+    (16) Processo -> . Processo_Enquanto
+    (17) Processo -> . Incremento
+    (18) Processo -> . Decremento
+    (19) Processo -> . Expressao
+    (20) Processo -> . Atribuicao
+    (27) Processo_Imprimir -> . IMPRIMIR ABREPARENTESES Expressao FECHAPARENTESES
+    (28) Processo_Imprimir -> . IMPRIMIR ABREPARENTESES CITACAO FECHAPARENTESES
+    (29) Processo_Entrada -> . ENTRADA ABREPARENTESES Variavel FECHAPARENTESES
+    (21) Processo_Se -> . SE ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS
+    (22) Processo_Se -> . SE ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS SENAO ABRECHAVETAS Corpo FECHACHAVETAS
+    (23) Processo_Enquanto -> . ENQUANTO ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS
+    (30) Incremento -> . ID INCREMENTO
+    (31) Decremento -> . ID DECREMENTO
+    (32) Expressao -> . Termo
+    (33) Expressao -> . Expressao ADICAO Termo
+    (34) Expressao -> . Expressao SUBTRACAO Termo
+    (35) Expressao -> . Expressao EQUIVALENTE Expressao
+    (36) Expressao -> . Expressao MAIOR Expressao
+    (37) Expressao -> . Expressao MENOR Expressao
+    (38) Expressao -> . Expressao MAIORIGUAL Expressao
+    (39) Expressao -> . Expressao MENORIGUAL Expressao
+    (40) Expressao -> . Expressao E Expressao
+    (41) Expressao -> . Expressao OU Expressao
+    (42) Expressao -> . NAO Expressao
+    (24) Atribuicao -> . ID IGUAL Expressao
+    (25) Atribuicao -> . ID ABREPARENTESESRET Fator FECHAPARENTESESRET IGUAL Expressao
+    (26) Atribuicao -> . ID ABREPARENTESESRET Fator FECHAPARENTESESRET ABREPARENTESESRET Fator FECHAPARENTESESRET IGUAL Expressao
+    (43) Termo -> . Fator
+    (44) Termo -> . Termo MULTIPLICACAO Fator
+    (45) Termo -> . Termo DIVISAO Fator
+    (46) Termo -> . Termo RESTO Fator
+    (47) Fator -> . ID
+    (48) Fator -> . NUMERO
+    (49) Fator -> . ID ABREPARENTESESRET Expressao FECHAPARENTESESRET
+    (50) Fator -> . ID ABREPARENTESESRET Expressao FECHAPARENTESESRET ABREPARENTESESRET Expressao FECHAPARENTESESRET
+
+    INTEIRO         shift and go to state 6
+    IMPRIMIR        shift and go to state 15
+    ENTRADA         shift and go to state 16
+    SE              shift and go to state 17
+    ENQUANTO        shift and go to state 18
+    ID              shift and go to state 19
+    NAO             shift and go to state 21
+    NUMERO          shift and go to state 23
+
+    Corpo                          shift and go to state 24
+    Declaracao                     shift and go to state 25
+    Processo                       shift and go to state 5
+    Processo_Imprimir              shift and go to state 7
+    Processo_Entrada               shift and go to state 8
+    Processo_Se                    shift and go to state 9
+    Processo_Enquanto              shift and go to state 10
+    Incremento                     shift and go to state 11
+    Decremento                     shift and go to state 12
+    Expressao                      shift and go to state 13
+    Atribuicao                     shift and go to state 14
+    Termo                          shift and go to state 20
+    Fator                          shift and go to state 22
+
+state 3
+
+    (2) Programa -> Corpo .
+    (4) Corpo -> Corpo . Processo
+    (13) Processo -> . Processo_Imprimir
+    (14) Processo -> . Processo_Entrada
+    (15) Processo -> . Processo_Se
+    (16) Processo -> . Processo_Enquanto
+    (17) Processo -> . Incremento
+    (18) Processo -> . Decremento
+    (19) Processo -> . Expressao
+    (20) Processo -> . Atribuicao
+    (27) Processo_Imprimir -> . IMPRIMIR ABREPARENTESES Expressao FECHAPARENTESES
+    (28) Processo_Imprimir -> . IMPRIMIR ABREPARENTESES CITACAO FECHAPARENTESES
+    (29) Processo_Entrada -> . ENTRADA ABREPARENTESES Variavel FECHAPARENTESES
+    (21) Processo_Se -> . SE ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS
+    (22) Processo_Se -> . SE ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS SENAO ABRECHAVETAS Corpo FECHACHAVETAS
+    (23) Processo_Enquanto -> . ENQUANTO ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS
+    (30) Incremento -> . ID INCREMENTO
+    (31) Decremento -> . ID DECREMENTO
+    (32) Expressao -> . Termo
+    (33) Expressao -> . Expressao ADICAO Termo
+    (34) Expressao -> . Expressao SUBTRACAO Termo
+    (35) Expressao -> . Expressao EQUIVALENTE Expressao
+    (36) Expressao -> . Expressao MAIOR Expressao
+    (37) Expressao -> . Expressao MENOR Expressao
+    (38) Expressao -> . Expressao MAIORIGUAL Expressao
+    (39) Expressao -> . Expressao MENORIGUAL Expressao
+    (40) Expressao -> . Expressao E Expressao
+    (41) Expressao -> . Expressao OU Expressao
+    (42) Expressao -> . NAO Expressao
+    (24) Atribuicao -> . ID IGUAL Expressao
+    (25) Atribuicao -> . ID ABREPARENTESESRET Fator FECHAPARENTESESRET IGUAL Expressao
+    (26) Atribuicao -> . ID ABREPARENTESESRET Fator FECHAPARENTESESRET ABREPARENTESESRET Fator FECHAPARENTESESRET IGUAL Expressao
+    (43) Termo -> . Fator
+    (44) Termo -> . Termo MULTIPLICACAO Fator
+    (45) Termo -> . Termo DIVISAO Fator
+    (46) Termo -> . Termo RESTO Fator
+    (47) Fator -> . ID
+    (48) Fator -> . NUMERO
+    (49) Fator -> . ID ABREPARENTESESRET Expressao FECHAPARENTESESRET
+    (50) Fator -> . ID ABREPARENTESESRET Expressao FECHAPARENTESESRET ABREPARENTESESRET Expressao FECHAPARENTESESRET
+
+    $end            reduce using rule 2 (Programa -> Corpo .)
+    IMPRIMIR        shift and go to state 15
+    ENTRADA         shift and go to state 16
+    SE              shift and go to state 17
+    ENQUANTO        shift and go to state 18
+    ID              shift and go to state 19
+    NAO             shift and go to state 21
+    NUMERO          shift and go to state 23
+
+    Processo                       shift and go to state 26
+    Processo_Imprimir              shift and go to state 7
+    Processo_Entrada               shift and go to state 8
+    Processo_Se                    shift and go to state 9
+    Processo_Enquanto              shift and go to state 10
+    Incremento                     shift and go to state 11
+    Decremento                     shift and go to state 12
+    Expressao                      shift and go to state 13
+    Atribuicao                     shift and go to state 14
+    Termo                          shift and go to state 20
+    Fator                          shift and go to state 22
+
+state 4
+
+    (5) Declaracoes -> Declaracao .
+
+    INTEIRO         reduce using rule 5 (Declaracoes -> Declaracao .)
+    IMPRIMIR        reduce using rule 5 (Declaracoes -> Declaracao .)
+    ENTRADA         reduce using rule 5 (Declaracoes -> Declaracao .)
+    SE              reduce using rule 5 (Declaracoes -> Declaracao .)
+    ENQUANTO        reduce using rule 5 (Declaracoes -> Declaracao .)
+    ID              reduce using rule 5 (Declaracoes -> Declaracao .)
+    NAO             reduce using rule 5 (Declaracoes -> Declaracao .)
+    NUMERO          reduce using rule 5 (Declaracoes -> Declaracao .)
+
+
+state 5
+
+    (3) Corpo -> Processo .
+
+    IMPRIMIR        reduce using rule 3 (Corpo -> Processo .)
+    ENTRADA         reduce using rule 3 (Corpo -> Processo .)
+    SE              reduce using rule 3 (Corpo -> Processo .)
+    ENQUANTO        reduce using rule 3 (Corpo -> Processo .)
+    ID              reduce using rule 3 (Corpo -> Processo .)
+    NAO             reduce using rule 3 (Corpo -> Processo .)
+    NUMERO          reduce using rule 3 (Corpo -> Processo .)
+    $end            reduce using rule 3 (Corpo -> Processo .)
+    FECHACHAVETAS   reduce using rule 3 (Corpo -> Processo .)
+
+
+state 6
+
+    (7) Declaracao -> INTEIRO . Variaveis
+    (8) Variaveis -> . Variavel
+    (9) Variaveis -> . Variaveis VIRGULA Variavel
+    (10) Variavel -> . ID
+    (11) Variavel -> . ID ABREPARENTESESRET NUMERO FECHAPARENTESESRET
+    (12) Variavel -> . ID ABREPARENTESESRET NUMERO FECHAPARENTESESRET ABREPARENTESESRET NUMERO FECHAPARENTESESRET
+
+    ID              shift and go to state 29
+
+    Variaveis                      shift and go to state 27
+    Variavel                       shift and go to state 28
+
+state 7
+
+    (13) Processo -> Processo_Imprimir .
+
+    IMPRIMIR        reduce using rule 13 (Processo -> Processo_Imprimir .)
+    ENTRADA         reduce using rule 13 (Processo -> Processo_Imprimir .)
+    SE              reduce using rule 13 (Processo -> Processo_Imprimir .)
+    ENQUANTO        reduce using rule 13 (Processo -> Processo_Imprimir .)
+    ID              reduce using rule 13 (Processo -> Processo_Imprimir .)
+    NAO             reduce using rule 13 (Processo -> Processo_Imprimir .)
+    NUMERO          reduce using rule 13 (Processo -> Processo_Imprimir .)
+    $end            reduce using rule 13 (Processo -> Processo_Imprimir .)
+    FECHACHAVETAS   reduce using rule 13 (Processo -> Processo_Imprimir .)
+
+
+state 8
+
+    (14) Processo -> Processo_Entrada .
+
+    IMPRIMIR        reduce using rule 14 (Processo -> Processo_Entrada .)
+    ENTRADA         reduce using rule 14 (Processo -> Processo_Entrada .)
+    SE              reduce using rule 14 (Processo -> Processo_Entrada .)
+    ENQUANTO        reduce using rule 14 (Processo -> Processo_Entrada .)
+    ID              reduce using rule 14 (Processo -> Processo_Entrada .)
+    NAO             reduce using rule 14 (Processo -> Processo_Entrada .)
+    NUMERO          reduce using rule 14 (Processo -> Processo_Entrada .)
+    $end            reduce using rule 14 (Processo -> Processo_Entrada .)
+    FECHACHAVETAS   reduce using rule 14 (Processo -> Processo_Entrada .)
+
+
+state 9
+
+    (15) Processo -> Processo_Se .
+
+    IMPRIMIR        reduce using rule 15 (Processo -> Processo_Se .)
+    ENTRADA         reduce using rule 15 (Processo -> Processo_Se .)
+    SE              reduce using rule 15 (Processo -> Processo_Se .)
+    ENQUANTO        reduce using rule 15 (Processo -> Processo_Se .)
+    ID              reduce using rule 15 (Processo -> Processo_Se .)
+    NAO             reduce using rule 15 (Processo -> Processo_Se .)
+    NUMERO          reduce using rule 15 (Processo -> Processo_Se .)
+    $end            reduce using rule 15 (Processo -> Processo_Se .)
+    FECHACHAVETAS   reduce using rule 15 (Processo -> Processo_Se .)
+
+
+state 10
+
+    (16) Processo -> Processo_Enquanto .
+
+    IMPRIMIR        reduce using rule 16 (Processo -> Processo_Enquanto .)
+    ENTRADA         reduce using rule 16 (Processo -> Processo_Enquanto .)
+    SE              reduce using rule 16 (Processo -> Processo_Enquanto .)
+    ENQUANTO        reduce using rule 16 (Processo -> Processo_Enquanto .)
+    ID              reduce using rule 16 (Processo -> Processo_Enquanto .)
+    NAO             reduce using rule 16 (Processo -> Processo_Enquanto .)
+    NUMERO          reduce using rule 16 (Processo -> Processo_Enquanto .)
+    $end            reduce using rule 16 (Processo -> Processo_Enquanto .)
+    FECHACHAVETAS   reduce using rule 16 (Processo -> Processo_Enquanto .)
+
+
+state 11
+
+    (17) Processo -> Incremento .
+
+    IMPRIMIR        reduce using rule 17 (Processo -> Incremento .)
+    ENTRADA         reduce using rule 17 (Processo -> Incremento .)
+    SE              reduce using rule 17 (Processo -> Incremento .)
+    ENQUANTO        reduce using rule 17 (Processo -> Incremento .)
+    ID              reduce using rule 17 (Processo -> Incremento .)
+    NAO             reduce using rule 17 (Processo -> Incremento .)
+    NUMERO          reduce using rule 17 (Processo -> Incremento .)
+    $end            reduce using rule 17 (Processo -> Incremento .)
+    FECHACHAVETAS   reduce using rule 17 (Processo -> Incremento .)
+
+
+state 12
+
+    (18) Processo -> Decremento .
+
+    IMPRIMIR        reduce using rule 18 (Processo -> Decremento .)
+    ENTRADA         reduce using rule 18 (Processo -> Decremento .)
+    SE              reduce using rule 18 (Processo -> Decremento .)
+    ENQUANTO        reduce using rule 18 (Processo -> Decremento .)
+    ID              reduce using rule 18 (Processo -> Decremento .)
+    NAO             reduce using rule 18 (Processo -> Decremento .)
+    NUMERO          reduce using rule 18 (Processo -> Decremento .)
+    $end            reduce using rule 18 (Processo -> Decremento .)
+    FECHACHAVETAS   reduce using rule 18 (Processo -> Decremento .)
+
+
+state 13
+
+    (19) Processo -> Expressao .
+    (33) Expressao -> Expressao . ADICAO Termo
+    (34) Expressao -> Expressao . SUBTRACAO Termo
+    (35) Expressao -> Expressao . EQUIVALENTE Expressao
+    (36) Expressao -> Expressao . MAIOR Expressao
+    (37) Expressao -> Expressao . MENOR Expressao
+    (38) Expressao -> Expressao . MAIORIGUAL Expressao
+    (39) Expressao -> Expressao . MENORIGUAL Expressao
+    (40) Expressao -> Expressao . E Expressao
+    (41) Expressao -> Expressao . OU Expressao
+
+    IMPRIMIR        reduce using rule 19 (Processo -> Expressao .)
+    ENTRADA         reduce using rule 19 (Processo -> Expressao .)
+    SE              reduce using rule 19 (Processo -> Expressao .)
+    ENQUANTO        reduce using rule 19 (Processo -> Expressao .)
+    ID              reduce using rule 19 (Processo -> Expressao .)
+    NAO             reduce using rule 19 (Processo -> Expressao .)
+    NUMERO          reduce using rule 19 (Processo -> Expressao .)
+    $end            reduce using rule 19 (Processo -> Expressao .)
+    FECHACHAVETAS   reduce using rule 19 (Processo -> Expressao .)
+    ADICAO          shift and go to state 30
+    SUBTRACAO       shift and go to state 31
+    EQUIVALENTE     shift and go to state 32
+    MAIOR           shift and go to state 33
+    MENOR           shift and go to state 34
+    MAIORIGUAL      shift and go to state 35
+    MENORIGUAL      shift and go to state 36
+    E               shift and go to state 37
+    OU              shift and go to state 38
+
+
+state 14
+
+    (20) Processo -> Atribuicao .
+
+    IMPRIMIR        reduce using rule 20 (Processo -> Atribuicao .)
+    ENTRADA         reduce using rule 20 (Processo -> Atribuicao .)
+    SE              reduce using rule 20 (Processo -> Atribuicao .)
+    ENQUANTO        reduce using rule 20 (Processo -> Atribuicao .)
+    ID              reduce using rule 20 (Processo -> Atribuicao .)
+    NAO             reduce using rule 20 (Processo -> Atribuicao .)
+    NUMERO          reduce using rule 20 (Processo -> Atribuicao .)
+    $end            reduce using rule 20 (Processo -> Atribuicao .)
+    FECHACHAVETAS   reduce using rule 20 (Processo -> Atribuicao .)
+
+
+state 15
+
+    (27) Processo_Imprimir -> IMPRIMIR . ABREPARENTESES Expressao FECHAPARENTESES
+    (28) Processo_Imprimir -> IMPRIMIR . ABREPARENTESES CITACAO FECHAPARENTESES
+
+    ABREPARENTESES  shift and go to state 39
+
+
+state 16
+
+    (29) Processo_Entrada -> ENTRADA . ABREPARENTESES Variavel FECHAPARENTESES
+
+    ABREPARENTESES  shift and go to state 40
+
+
+state 17
+
+    (21) Processo_Se -> SE . ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS
+    (22) Processo_Se -> SE . ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS SENAO ABRECHAVETAS Corpo FECHACHAVETAS
+
+    ABREPARENTESES  shift and go to state 41
+
+
+state 18
+
+    (23) Processo_Enquanto -> ENQUANTO . ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS
+
+    ABREPARENTESES  shift and go to state 42
+
+
+state 19
+
+    (30) Incremento -> ID . INCREMENTO
+    (31) Decremento -> ID . DECREMENTO
+    (24) Atribuicao -> ID . IGUAL Expressao
+    (25) Atribuicao -> ID . ABREPARENTESESRET Fator FECHAPARENTESESRET IGUAL Expressao
+    (26) Atribuicao -> ID . ABREPARENTESESRET Fator FECHAPARENTESESRET ABREPARENTESESRET Fator FECHAPARENTESESRET IGUAL Expressao
+    (47) Fator -> ID .
+    (49) Fator -> ID . ABREPARENTESESRET Expressao FECHAPARENTESESRET
+    (50) Fator -> ID . ABREPARENTESESRET Expressao FECHAPARENTESESRET ABREPARENTESESRET Expressao FECHAPARENTESESRET
+
+    INCREMENTO      shift and go to state 43
+    DECREMENTO      shift and go to state 44
+    IGUAL           shift and go to state 45
+    ABREPARENTESESRET shift and go to state 46
+    MULTIPLICACAO   reduce using rule 47 (Fator -> ID .)
+    DIVISAO         reduce using rule 47 (Fator -> ID .)
+    RESTO           reduce using rule 47 (Fator -> ID .)
+    ADICAO          reduce using rule 47 (Fator -> ID .)
+    SUBTRACAO       reduce using rule 47 (Fator -> ID .)
+    EQUIVALENTE     reduce using rule 47 (Fator -> ID .)
+    MAIOR           reduce using rule 47 (Fator -> ID .)
+    MENOR           reduce using rule 47 (Fator -> ID .)
+    MAIORIGUAL      reduce using rule 47 (Fator -> ID .)
+    MENORIGUAL      reduce using rule 47 (Fator -> ID .)
+    E               reduce using rule 47 (Fator -> ID .)
+    OU              reduce using rule 47 (Fator -> ID .)
+    IMPRIMIR        reduce using rule 47 (Fator -> ID .)
+    ENTRADA         reduce using rule 47 (Fator -> ID .)
+    SE              reduce using rule 47 (Fator -> ID .)
+    ENQUANTO        reduce using rule 47 (Fator -> ID .)
+    ID              reduce using rule 47 (Fator -> ID .)
+    NAO             reduce using rule 47 (Fator -> ID .)
+    NUMERO          reduce using rule 47 (Fator -> ID .)
+    $end            reduce using rule 47 (Fator -> ID .)
+    FECHACHAVETAS   reduce using rule 47 (Fator -> ID .)
+
+
+state 20
+
+    (32) Expressao -> Termo .
+    (44) Termo -> Termo . MULTIPLICACAO Fator
+    (45) Termo -> Termo . DIVISAO Fator
+    (46) Termo -> Termo . RESTO Fator
+
+    ADICAO          reduce using rule 32 (Expressao -> Termo .)
+    SUBTRACAO       reduce using rule 32 (Expressao -> Termo .)
+    EQUIVALENTE     reduce using rule 32 (Expressao -> Termo .)
+    MAIOR           reduce using rule 32 (Expressao -> Termo .)
+    MENOR           reduce using rule 32 (Expressao -> Termo .)
+    MAIORIGUAL      reduce using rule 32 (Expressao -> Termo .)
+    MENORIGUAL      reduce using rule 32 (Expressao -> Termo .)
+    E               reduce using rule 32 (Expressao -> Termo .)
+    OU              reduce using rule 32 (Expressao -> Termo .)
+    IMPRIMIR        reduce using rule 32 (Expressao -> Termo .)
+    ENTRADA         reduce using rule 32 (Expressao -> Termo .)
+    SE              reduce using rule 32 (Expressao -> Termo .)
+    ENQUANTO        reduce using rule 32 (Expressao -> Termo .)
+    ID              reduce using rule 32 (Expressao -> Termo .)
+    NAO             reduce using rule 32 (Expressao -> Termo .)
+    NUMERO          reduce using rule 32 (Expressao -> Termo .)
+    $end            reduce using rule 32 (Expressao -> Termo .)
+    FECHAPARENTESES reduce using rule 32 (Expressao -> Termo .)
+    FECHACHAVETAS   reduce using rule 32 (Expressao -> Termo .)
+    FECHAPARENTESESRET reduce using rule 32 (Expressao -> Termo .)
+    MULTIPLICACAO   shift and go to state 47
+    DIVISAO         shift and go to state 48
+    RESTO           shift and go to state 49
+
+
+state 21
+
+    (42) Expressao -> NAO . Expressao
+    (32) Expressao -> . Termo
+    (33) Expressao -> . Expressao ADICAO Termo
+    (34) Expressao -> . Expressao SUBTRACAO Termo
+    (35) Expressao -> . Expressao EQUIVALENTE Expressao
+    (36) Expressao -> . Expressao MAIOR Expressao
+    (37) Expressao -> . Expressao MENOR Expressao
+    (38) Expressao -> . Expressao MAIORIGUAL Expressao
+    (39) Expressao -> . Expressao MENORIGUAL Expressao
+    (40) Expressao -> . Expressao E Expressao
+    (41) Expressao -> . Expressao OU Expressao
+    (42) Expressao -> . NAO Expressao
+    (43) Termo -> . Fator
+    (44) Termo -> . Termo MULTIPLICACAO Fator
+    (45) Termo -> . Termo DIVISAO Fator
+    (46) Termo -> . Termo RESTO Fator
+    (47) Fator -> . ID
+    (48) Fator -> . NUMERO
+    (49) Fator -> . ID ABREPARENTESESRET Expressao FECHAPARENTESESRET
+    (50) Fator -> . ID ABREPARENTESESRET Expressao FECHAPARENTESESRET ABREPARENTESESRET Expressao FECHAPARENTESESRET
+
+    NAO             shift and go to state 21
+    ID              shift and go to state 51
+    NUMERO          shift and go to state 23
+
+    Expressao                      shift and go to state 50
+    Termo                          shift and go to state 20
+    Fator                          shift and go to state 22
+
+state 22
+
+    (43) Termo -> Fator .
+
+    MULTIPLICACAO   reduce using rule 43 (Termo -> Fator .)
+    DIVISAO         reduce using rule 43 (Termo -> Fator .)
+    RESTO           reduce using rule 43 (Termo -> Fator .)
+    ADICAO          reduce using rule 43 (Termo -> Fator .)
+    SUBTRACAO       reduce using rule 43 (Termo -> Fator .)
+    EQUIVALENTE     reduce using rule 43 (Termo -> Fator .)
+    MAIOR           reduce using rule 43 (Termo -> Fator .)
+    MENOR           reduce using rule 43 (Termo -> Fator .)
+    MAIORIGUAL      reduce using rule 43 (Termo -> Fator .)
+    MENORIGUAL      reduce using rule 43 (Termo -> Fator .)
+    E               reduce using rule 43 (Termo -> Fator .)
+    OU              reduce using rule 43 (Termo -> Fator .)
+    IMPRIMIR        reduce using rule 43 (Termo -> Fator .)
+    ENTRADA         reduce using rule 43 (Termo -> Fator .)
+    SE              reduce using rule 43 (Termo -> Fator .)
+    ENQUANTO        reduce using rule 43 (Termo -> Fator .)
+    ID              reduce using rule 43 (Termo -> Fator .)
+    NAO             reduce using rule 43 (Termo -> Fator .)
+    NUMERO          reduce using rule 43 (Termo -> Fator .)
+    $end            reduce using rule 43 (Termo -> Fator .)
+    FECHAPARENTESES reduce using rule 43 (Termo -> Fator .)
+    FECHACHAVETAS   reduce using rule 43 (Termo -> Fator .)
+    FECHAPARENTESESRET reduce using rule 43 (Termo -> Fator .)
+
+
+state 23
+
+    (48) Fator -> NUMERO .
+
+    MULTIPLICACAO   reduce using rule 48 (Fator -> NUMERO .)
+    DIVISAO         reduce using rule 48 (Fator -> NUMERO .)
+    RESTO           reduce using rule 48 (Fator -> NUMERO .)
+    ADICAO          reduce using rule 48 (Fator -> NUMERO .)
+    SUBTRACAO       reduce using rule 48 (Fator -> NUMERO .)
+    EQUIVALENTE     reduce using rule 48 (Fator -> NUMERO .)
+    MAIOR           reduce using rule 48 (Fator -> NUMERO .)
+    MENOR           reduce using rule 48 (Fator -> NUMERO .)
+    MAIORIGUAL      reduce using rule 48 (Fator -> NUMERO .)
+    MENORIGUAL      reduce using rule 48 (Fator -> NUMERO .)
+    E               reduce using rule 48 (Fator -> NUMERO .)
+    OU              reduce using rule 48 (Fator -> NUMERO .)
+    IMPRIMIR        reduce using rule 48 (Fator -> NUMERO .)
+    ENTRADA         reduce using rule 48 (Fator -> NUMERO .)
+    SE              reduce using rule 48 (Fator -> NUMERO .)
+    ENQUANTO        reduce using rule 48 (Fator -> NUMERO .)
+    ID              reduce using rule 48 (Fator -> NUMERO .)
+    NAO             reduce using rule 48 (Fator -> NUMERO .)
+    NUMERO          reduce using rule 48 (Fator -> NUMERO .)
+    $end            reduce using rule 48 (Fator -> NUMERO .)
+    FECHAPARENTESES reduce using rule 48 (Fator -> NUMERO .)
+    FECHACHAVETAS   reduce using rule 48 (Fator -> NUMERO .)
+    FECHAPARENTESESRET reduce using rule 48 (Fator -> NUMERO .)
+
+
+state 24
+
+    (1) Programa -> Declaracoes Corpo .
+    (4) Corpo -> Corpo . Processo
+    (13) Processo -> . Processo_Imprimir
+    (14) Processo -> . Processo_Entrada
+    (15) Processo -> . Processo_Se
+    (16) Processo -> . Processo_Enquanto
+    (17) Processo -> . Incremento
+    (18) Processo -> . Decremento
+    (19) Processo -> . Expressao
+    (20) Processo -> . Atribuicao
+    (27) Processo_Imprimir -> . IMPRIMIR ABREPARENTESES Expressao FECHAPARENTESES
+    (28) Processo_Imprimir -> . IMPRIMIR ABREPARENTESES CITACAO FECHAPARENTESES
+    (29) Processo_Entrada -> . ENTRADA ABREPARENTESES Variavel FECHAPARENTESES
+    (21) Processo_Se -> . SE ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS
+    (22) Processo_Se -> . SE ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS SENAO ABRECHAVETAS Corpo FECHACHAVETAS
+    (23) Processo_Enquanto -> . ENQUANTO ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS
+    (30) Incremento -> . ID INCREMENTO
+    (31) Decremento -> . ID DECREMENTO
+    (32) Expressao -> . Termo
+    (33) Expressao -> . Expressao ADICAO Termo
+    (34) Expressao -> . Expressao SUBTRACAO Termo
+    (35) Expressao -> . Expressao EQUIVALENTE Expressao
+    (36) Expressao -> . Expressao MAIOR Expressao
+    (37) Expressao -> . Expressao MENOR Expressao
+    (38) Expressao -> . Expressao MAIORIGUAL Expressao
+    (39) Expressao -> . Expressao MENORIGUAL Expressao
+    (40) Expressao -> . Expressao E Expressao
+    (41) Expressao -> . Expressao OU Expressao
+    (42) Expressao -> . NAO Expressao
+    (24) Atribuicao -> . ID IGUAL Expressao
+    (25) Atribuicao -> . ID ABREPARENTESESRET Fator FECHAPARENTESESRET IGUAL Expressao
+    (26) Atribuicao -> . ID ABREPARENTESESRET Fator FECHAPARENTESESRET ABREPARENTESESRET Fator FECHAPARENTESESRET IGUAL Expressao
+    (43) Termo -> . Fator
+    (44) Termo -> . Termo MULTIPLICACAO Fator
+    (45) Termo -> . Termo DIVISAO Fator
+    (46) Termo -> . Termo RESTO Fator
+    (47) Fator -> . ID
+    (48) Fator -> . NUMERO
+    (49) Fator -> . ID ABREPARENTESESRET Expressao FECHAPARENTESESRET
+    (50) Fator -> . ID ABREPARENTESESRET Expressao FECHAPARENTESESRET ABREPARENTESESRET Expressao FECHAPARENTESESRET
+
+    $end            reduce using rule 1 (Programa -> Declaracoes Corpo .)
+    IMPRIMIR        shift and go to state 15
+    ENTRADA         shift and go to state 16
+    SE              shift and go to state 17
+    ENQUANTO        shift and go to state 18
+    ID              shift and go to state 19
+    NAO             shift and go to state 21
+    NUMERO          shift and go to state 23
+
+    Processo                       shift and go to state 26
+    Processo_Imprimir              shift and go to state 7
+    Processo_Entrada               shift and go to state 8
+    Processo_Se                    shift and go to state 9
+    Processo_Enquanto              shift and go to state 10
+    Incremento                     shift and go to state 11
+    Decremento                     shift and go to state 12
+    Expressao                      shift and go to state 13
+    Atribuicao                     shift and go to state 14
+    Termo                          shift and go to state 20
+    Fator                          shift and go to state 22
+
+state 25
+
+    (6) Declaracoes -> Declaracoes Declaracao .
+
+    INTEIRO         reduce using rule 6 (Declaracoes -> Declaracoes Declaracao .)
+    IMPRIMIR        reduce using rule 6 (Declaracoes -> Declaracoes Declaracao .)
+    ENTRADA         reduce using rule 6 (Declaracoes -> Declaracoes Declaracao .)
+    SE              reduce using rule 6 (Declaracoes -> Declaracoes Declaracao .)
+    ENQUANTO        reduce using rule 6 (Declaracoes -> Declaracoes Declaracao .)
+    ID              reduce using rule 6 (Declaracoes -> Declaracoes Declaracao .)
+    NAO             reduce using rule 6 (Declaracoes -> Declaracoes Declaracao .)
+    NUMERO          reduce using rule 6 (Declaracoes -> Declaracoes Declaracao .)
+
+
+state 26
+
+    (4) Corpo -> Corpo Processo .
+
+    IMPRIMIR        reduce using rule 4 (Corpo -> Corpo Processo .)
+    ENTRADA         reduce using rule 4 (Corpo -> Corpo Processo .)
+    SE              reduce using rule 4 (Corpo -> Corpo Processo .)
+    ENQUANTO        reduce using rule 4 (Corpo -> Corpo Processo .)
+    ID              reduce using rule 4 (Corpo -> Corpo Processo .)
+    NAO             reduce using rule 4 (Corpo -> Corpo Processo .)
+    NUMERO          reduce using rule 4 (Corpo -> Corpo Processo .)
+    $end            reduce using rule 4 (Corpo -> Corpo Processo .)
+    FECHACHAVETAS   reduce using rule 4 (Corpo -> Corpo Processo .)
+
+
+state 27
+
+    (7) Declaracao -> INTEIRO Variaveis .
+    (9) Variaveis -> Variaveis . VIRGULA Variavel
+
+    INTEIRO         reduce using rule 7 (Declaracao -> INTEIRO Variaveis .)
+    IMPRIMIR        reduce using rule 7 (Declaracao -> INTEIRO Variaveis .)
+    ENTRADA         reduce using rule 7 (Declaracao -> INTEIRO Variaveis .)
+    SE              reduce using rule 7 (Declaracao -> INTEIRO Variaveis .)
+    ENQUANTO        reduce using rule 7 (Declaracao -> INTEIRO Variaveis .)
+    ID              reduce using rule 7 (Declaracao -> INTEIRO Variaveis .)
+    NAO             reduce using rule 7 (Declaracao -> INTEIRO Variaveis .)
+    NUMERO          reduce using rule 7 (Declaracao -> INTEIRO Variaveis .)
+    VIRGULA         shift and go to state 52
+
+
+state 28
+
+    (8) Variaveis -> Variavel .
+
+    VIRGULA         reduce using rule 8 (Variaveis -> Variavel .)
+    INTEIRO         reduce using rule 8 (Variaveis -> Variavel .)
+    IMPRIMIR        reduce using rule 8 (Variaveis -> Variavel .)
+    ENTRADA         reduce using rule 8 (Variaveis -> Variavel .)
+    SE              reduce using rule 8 (Variaveis -> Variavel .)
+    ENQUANTO        reduce using rule 8 (Variaveis -> Variavel .)
+    ID              reduce using rule 8 (Variaveis -> Variavel .)
+    NAO             reduce using rule 8 (Variaveis -> Variavel .)
+    NUMERO          reduce using rule 8 (Variaveis -> Variavel .)
+
+
+state 29
+
+    (10) Variavel -> ID .
+    (11) Variavel -> ID . ABREPARENTESESRET NUMERO FECHAPARENTESESRET
+    (12) Variavel -> ID . ABREPARENTESESRET NUMERO FECHAPARENTESESRET ABREPARENTESESRET NUMERO FECHAPARENTESESRET
+
+    VIRGULA         reduce using rule 10 (Variavel -> ID .)
+    INTEIRO         reduce using rule 10 (Variavel -> ID .)
+    IMPRIMIR        reduce using rule 10 (Variavel -> ID .)
+    ENTRADA         reduce using rule 10 (Variavel -> ID .)
+    SE              reduce using rule 10 (Variavel -> ID .)
+    ENQUANTO        reduce using rule 10 (Variavel -> ID .)
+    ID              reduce using rule 10 (Variavel -> ID .)
+    NAO             reduce using rule 10 (Variavel -> ID .)
+    NUMERO          reduce using rule 10 (Variavel -> ID .)
+    FECHAPARENTESES reduce using rule 10 (Variavel -> ID .)
+    ABREPARENTESESRET shift and go to state 53
+
+
+state 30
+
+    (33) Expressao -> Expressao ADICAO . Termo
+    (43) Termo -> . Fator
+    (44) Termo -> . Termo MULTIPLICACAO Fator
+    (45) Termo -> . Termo DIVISAO Fator
+    (46) Termo -> . Termo RESTO Fator
+    (47) Fator -> . ID
+    (48) Fator -> . NUMERO
+    (49) Fator -> . ID ABREPARENTESESRET Expressao FECHAPARENTESESRET
+    (50) Fator -> . ID ABREPARENTESESRET Expressao FECHAPARENTESESRET ABREPARENTESESRET Expressao FECHAPARENTESESRET
+
+    ID              shift and go to state 51
+    NUMERO          shift and go to state 23
+
+    Termo                          shift and go to state 54
+    Fator                          shift and go to state 22
+
+state 31
+
+    (34) Expressao -> Expressao SUBTRACAO . Termo
+    (43) Termo -> . Fator
+    (44) Termo -> . Termo MULTIPLICACAO Fator
+    (45) Termo -> . Termo DIVISAO Fator
+    (46) Termo -> . Termo RESTO Fator
+    (47) Fator -> . ID
+    (48) Fator -> . NUMERO
+    (49) Fator -> . ID ABREPARENTESESRET Expressao FECHAPARENTESESRET
+    (50) Fator -> . ID ABREPARENTESESRET Expressao FECHAPARENTESESRET ABREPARENTESESRET Expressao FECHAPARENTESESRET
+
+    ID              shift and go to state 51
+    NUMERO          shift and go to state 23
+
+    Termo                          shift and go to state 55
+    Fator                          shift and go to state 22
+
+state 32
+
+    (35) Expressao -> Expressao EQUIVALENTE . Expressao
+    (32) Expressao -> . Termo
+    (33) Expressao -> . Expressao ADICAO Termo
+    (34) Expressao -> . Expressao SUBTRACAO Termo
+    (35) Expressao -> . Expressao EQUIVALENTE Expressao
+    (36) Expressao -> . Expressao MAIOR Expressao
+    (37) Expressao -> . Expressao MENOR Expressao
+    (38) Expressao -> . Expressao MAIORIGUAL Expressao
+    (39) Expressao -> . Expressao MENORIGUAL Expressao
+    (40) Expressao -> . Expressao E Expressao
+    (41) Expressao -> . Expressao OU Expressao
+    (42) Expressao -> . NAO Expressao
+    (43) Termo -> . Fator
+    (44) Termo -> . Termo MULTIPLICACAO Fator
+    (45) Termo -> . Termo DIVISAO Fator
+    (46) Termo -> . Termo RESTO Fator
+    (47) Fator -> . ID
+    (48) Fator -> . NUMERO
+    (49) Fator -> . ID ABREPARENTESESRET Expressao FECHAPARENTESESRET
+    (50) Fator -> . ID ABREPARENTESESRET Expressao FECHAPARENTESESRET ABREPARENTESESRET Expressao FECHAPARENTESESRET
+
+    NAO             shift and go to state 21
+    ID              shift and go to state 51
+    NUMERO          shift and go to state 23
+
+    Expressao                      shift and go to state 56
+    Termo                          shift and go to state 20
+    Fator                          shift and go to state 22
+
+state 33
+
+    (36) Expressao -> Expressao MAIOR . Expressao
+    (32) Expressao -> . Termo
+    (33) Expressao -> . Expressao ADICAO Termo
+    (34) Expressao -> . Expressao SUBTRACAO Termo
+    (35) Expressao -> . Expressao EQUIVALENTE Expressao
+    (36) Expressao -> . Expressao MAIOR Expressao
+    (37) Expressao -> . Expressao MENOR Expressao
+    (38) Expressao -> . Expressao MAIORIGUAL Expressao
+    (39) Expressao -> . Expressao MENORIGUAL Expressao
+    (40) Expressao -> . Expressao E Expressao
+    (41) Expressao -> . Expressao OU Expressao
+    (42) Expressao -> . NAO Expressao
+    (43) Termo -> . Fator
+    (44) Termo -> . Termo MULTIPLICACAO Fator
+    (45) Termo -> . Termo DIVISAO Fator
+    (46) Termo -> . Termo RESTO Fator
+    (47) Fator -> . ID
+    (48) Fator -> . NUMERO
+    (49) Fator -> . ID ABREPARENTESESRET Expressao FECHAPARENTESESRET
+    (50) Fator -> . ID ABREPARENTESESRET Expressao FECHAPARENTESESRET ABREPARENTESESRET Expressao FECHAPARENTESESRET
+
+    NAO             shift and go to state 21
+    ID              shift and go to state 51
+    NUMERO          shift and go to state 23
+
+    Expressao                      shift and go to state 57
+    Termo                          shift and go to state 20
+    Fator                          shift and go to state 22
+
+state 34
+
+    (37) Expressao -> Expressao MENOR . Expressao
+    (32) Expressao -> . Termo
+    (33) Expressao -> . Expressao ADICAO Termo
+    (34) Expressao -> . Expressao SUBTRACAO Termo
+    (35) Expressao -> . Expressao EQUIVALENTE Expressao
+    (36) Expressao -> . Expressao MAIOR Expressao
+    (37) Expressao -> . Expressao MENOR Expressao
+    (38) Expressao -> . Expressao MAIORIGUAL Expressao
+    (39) Expressao -> . Expressao MENORIGUAL Expressao
+    (40) Expressao -> . Expressao E Expressao
+    (41) Expressao -> . Expressao OU Expressao
+    (42) Expressao -> . NAO Expressao
+    (43) Termo -> . Fator
+    (44) Termo -> . Termo MULTIPLICACAO Fator
+    (45) Termo -> . Termo DIVISAO Fator
+    (46) Termo -> . Termo RESTO Fator
+    (47) Fator -> . ID
+    (48) Fator -> . NUMERO
+    (49) Fator -> . ID ABREPARENTESESRET Expressao FECHAPARENTESESRET
+    (50) Fator -> . ID ABREPARENTESESRET Expressao FECHAPARENTESESRET ABREPARENTESESRET Expressao FECHAPARENTESESRET
+
+    NAO             shift and go to state 21
+    ID              shift and go to state 51
+    NUMERO          shift and go to state 23
+
+    Expressao                      shift and go to state 58
+    Termo                          shift and go to state 20
+    Fator                          shift and go to state 22
+
+state 35
+
+    (38) Expressao -> Expressao MAIORIGUAL . Expressao
+    (32) Expressao -> . Termo
+    (33) Expressao -> . Expressao ADICAO Termo
+    (34) Expressao -> . Expressao SUBTRACAO Termo
+    (35) Expressao -> . Expressao EQUIVALENTE Expressao
+    (36) Expressao -> . Expressao MAIOR Expressao
+    (37) Expressao -> . Expressao MENOR Expressao
+    (38) Expressao -> . Expressao MAIORIGUAL Expressao
+    (39) Expressao -> . Expressao MENORIGUAL Expressao
+    (40) Expressao -> . Expressao E Expressao
+    (41) Expressao -> . Expressao OU Expressao
+    (42) Expressao -> . NAO Expressao
+    (43) Termo -> . Fator
+    (44) Termo -> . Termo MULTIPLICACAO Fator
+    (45) Termo -> . Termo DIVISAO Fator
+    (46) Termo -> . Termo RESTO Fator
+    (47) Fator -> . ID
+    (48) Fator -> . NUMERO
+    (49) Fator -> . ID ABREPARENTESESRET Expressao FECHAPARENTESESRET
+    (50) Fator -> . ID ABREPARENTESESRET Expressao FECHAPARENTESESRET ABREPARENTESESRET Expressao FECHAPARENTESESRET
+
+    NAO             shift and go to state 21
+    ID              shift and go to state 51
+    NUMERO          shift and go to state 23
+
+    Expressao                      shift and go to state 59
+    Termo                          shift and go to state 20
+    Fator                          shift and go to state 22
+
+state 36
+
+    (39) Expressao -> Expressao MENORIGUAL . Expressao
+    (32) Expressao -> . Termo
+    (33) Expressao -> . Expressao ADICAO Termo
+    (34) Expressao -> . Expressao SUBTRACAO Termo
+    (35) Expressao -> . Expressao EQUIVALENTE Expressao
+    (36) Expressao -> . Expressao MAIOR Expressao
+    (37) Expressao -> . Expressao MENOR Expressao
+    (38) Expressao -> . Expressao MAIORIGUAL Expressao
+    (39) Expressao -> . Expressao MENORIGUAL Expressao
+    (40) Expressao -> . Expressao E Expressao
+    (41) Expressao -> . Expressao OU Expressao
+    (42) Expressao -> . NAO Expressao
+    (43) Termo -> . Fator
+    (44) Termo -> . Termo MULTIPLICACAO Fator
+    (45) Termo -> . Termo DIVISAO Fator
+    (46) Termo -> . Termo RESTO Fator
+    (47) Fator -> . ID
+    (48) Fator -> . NUMERO
+    (49) Fator -> . ID ABREPARENTESESRET Expressao FECHAPARENTESESRET
+    (50) Fator -> . ID ABREPARENTESESRET Expressao FECHAPARENTESESRET ABREPARENTESESRET Expressao FECHAPARENTESESRET
+
+    NAO             shift and go to state 21
+    ID              shift and go to state 51
+    NUMERO          shift and go to state 23
+
+    Expressao                      shift and go to state 60
+    Termo                          shift and go to state 20
+    Fator                          shift and go to state 22
+
+state 37
+
+    (40) Expressao -> Expressao E . Expressao
+    (32) Expressao -> . Termo
+    (33) Expressao -> . Expressao ADICAO Termo
+    (34) Expressao -> . Expressao SUBTRACAO Termo
+    (35) Expressao -> . Expressao EQUIVALENTE Expressao
+    (36) Expressao -> . Expressao MAIOR Expressao
+    (37) Expressao -> . Expressao MENOR Expressao
+    (38) Expressao -> . Expressao MAIORIGUAL Expressao
+    (39) Expressao -> . Expressao MENORIGUAL Expressao
+    (40) Expressao -> . Expressao E Expressao
+    (41) Expressao -> . Expressao OU Expressao
+    (42) Expressao -> . NAO Expressao
+    (43) Termo -> . Fator
+    (44) Termo -> . Termo MULTIPLICACAO Fator
+    (45) Termo -> . Termo DIVISAO Fator
+    (46) Termo -> . Termo RESTO Fator
+    (47) Fator -> . ID
+    (48) Fator -> . NUMERO
+    (49) Fator -> . ID ABREPARENTESESRET Expressao FECHAPARENTESESRET
+    (50) Fator -> . ID ABREPARENTESESRET Expressao FECHAPARENTESESRET ABREPARENTESESRET Expressao FECHAPARENTESESRET
+
+    NAO             shift and go to state 21
+    ID              shift and go to state 51
+    NUMERO          shift and go to state 23
+
+    Expressao                      shift and go to state 61
+    Termo                          shift and go to state 20
+    Fator                          shift and go to state 22
+
+state 38
+
+    (41) Expressao -> Expressao OU . Expressao
+    (32) Expressao -> . Termo
+    (33) Expressao -> . Expressao ADICAO Termo
+    (34) Expressao -> . Expressao SUBTRACAO Termo
+    (35) Expressao -> . Expressao EQUIVALENTE Expressao
+    (36) Expressao -> . Expressao MAIOR Expressao
+    (37) Expressao -> . Expressao MENOR Expressao
+    (38) Expressao -> . Expressao MAIORIGUAL Expressao
+    (39) Expressao -> . Expressao MENORIGUAL Expressao
+    (40) Expressao -> . Expressao E Expressao
+    (41) Expressao -> . Expressao OU Expressao
+    (42) Expressao -> . NAO Expressao
+    (43) Termo -> . Fator
+    (44) Termo -> . Termo MULTIPLICACAO Fator
+    (45) Termo -> . Termo DIVISAO Fator
+    (46) Termo -> . Termo RESTO Fator
+    (47) Fator -> . ID
+    (48) Fator -> . NUMERO
+    (49) Fator -> . ID ABREPARENTESESRET Expressao FECHAPARENTESESRET
+    (50) Fator -> . ID ABREPARENTESESRET Expressao FECHAPARENTESESRET ABREPARENTESESRET Expressao FECHAPARENTESESRET
+
+    NAO             shift and go to state 21
+    ID              shift and go to state 51
+    NUMERO          shift and go to state 23
+
+    Expressao                      shift and go to state 62
+    Termo                          shift and go to state 20
+    Fator                          shift and go to state 22
+
+state 39
+
+    (27) Processo_Imprimir -> IMPRIMIR ABREPARENTESES . Expressao FECHAPARENTESES
+    (28) Processo_Imprimir -> IMPRIMIR ABREPARENTESES . CITACAO FECHAPARENTESES
+    (32) Expressao -> . Termo
+    (33) Expressao -> . Expressao ADICAO Termo
+    (34) Expressao -> . Expressao SUBTRACAO Termo
+    (35) Expressao -> . Expressao EQUIVALENTE Expressao
+    (36) Expressao -> . Expressao MAIOR Expressao
+    (37) Expressao -> . Expressao MENOR Expressao
+    (38) Expressao -> . Expressao MAIORIGUAL Expressao
+    (39) Expressao -> . Expressao MENORIGUAL Expressao
+    (40) Expressao -> . Expressao E Expressao
+    (41) Expressao -> . Expressao OU Expressao
+    (42) Expressao -> . NAO Expressao
+    (43) Termo -> . Fator
+    (44) Termo -> . Termo MULTIPLICACAO Fator
+    (45) Termo -> . Termo DIVISAO Fator
+    (46) Termo -> . Termo RESTO Fator
+    (47) Fator -> . ID
+    (48) Fator -> . NUMERO
+    (49) Fator -> . ID ABREPARENTESESRET Expressao FECHAPARENTESESRET
+    (50) Fator -> . ID ABREPARENTESESRET Expressao FECHAPARENTESESRET ABREPARENTESESRET Expressao FECHAPARENTESESRET
+
+    CITACAO         shift and go to state 64
+    NAO             shift and go to state 21
+    ID              shift and go to state 51
+    NUMERO          shift and go to state 23
+
+    Expressao                      shift and go to state 63
+    Termo                          shift and go to state 20
+    Fator                          shift and go to state 22
+
+state 40
+
+    (29) Processo_Entrada -> ENTRADA ABREPARENTESES . Variavel FECHAPARENTESES
+    (10) Variavel -> . ID
+    (11) Variavel -> . ID ABREPARENTESESRET NUMERO FECHAPARENTESESRET
+    (12) Variavel -> . ID ABREPARENTESESRET NUMERO FECHAPARENTESESRET ABREPARENTESESRET NUMERO FECHAPARENTESESRET
+
+    ID              shift and go to state 29
+
+    Variavel                       shift and go to state 65
+
+state 41
+
+    (21) Processo_Se -> SE ABREPARENTESES . Expressao FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS
+    (22) Processo_Se -> SE ABREPARENTESES . Expressao FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS SENAO ABRECHAVETAS Corpo FECHACHAVETAS
+    (32) Expressao -> . Termo
+    (33) Expressao -> . Expressao ADICAO Termo
+    (34) Expressao -> . Expressao SUBTRACAO Termo
+    (35) Expressao -> . Expressao EQUIVALENTE Expressao
+    (36) Expressao -> . Expressao MAIOR Expressao
+    (37) Expressao -> . Expressao MENOR Expressao
+    (38) Expressao -> . Expressao MAIORIGUAL Expressao
+    (39) Expressao -> . Expressao MENORIGUAL Expressao
+    (40) Expressao -> . Expressao E Expressao
+    (41) Expressao -> . Expressao OU Expressao
+    (42) Expressao -> . NAO Expressao
+    (43) Termo -> . Fator
+    (44) Termo -> . Termo MULTIPLICACAO Fator
+    (45) Termo -> . Termo DIVISAO Fator
+    (46) Termo -> . Termo RESTO Fator
+    (47) Fator -> . ID
+    (48) Fator -> . NUMERO
+    (49) Fator -> . ID ABREPARENTESESRET Expressao FECHAPARENTESESRET
+    (50) Fator -> . ID ABREPARENTESESRET Expressao FECHAPARENTESESRET ABREPARENTESESRET Expressao FECHAPARENTESESRET
+
+    NAO             shift and go to state 21
+    ID              shift and go to state 51
+    NUMERO          shift and go to state 23
+
+    Expressao                      shift and go to state 66
+    Termo                          shift and go to state 20
+    Fator                          shift and go to state 22
+
+state 42
+
+    (23) Processo_Enquanto -> ENQUANTO ABREPARENTESES . Expressao FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS
+    (32) Expressao -> . Termo
+    (33) Expressao -> . Expressao ADICAO Termo
+    (34) Expressao -> . Expressao SUBTRACAO Termo
+    (35) Expressao -> . Expressao EQUIVALENTE Expressao
+    (36) Expressao -> . Expressao MAIOR Expressao
+    (37) Expressao -> . Expressao MENOR Expressao
+    (38) Expressao -> . Expressao MAIORIGUAL Expressao
+    (39) Expressao -> . Expressao MENORIGUAL Expressao
+    (40) Expressao -> . Expressao E Expressao
+    (41) Expressao -> . Expressao OU Expressao
+    (42) Expressao -> . NAO Expressao
+    (43) Termo -> . Fator
+    (44) Termo -> . Termo MULTIPLICACAO Fator
+    (45) Termo -> . Termo DIVISAO Fator
+    (46) Termo -> . Termo RESTO Fator
+    (47) Fator -> . ID
+    (48) Fator -> . NUMERO
+    (49) Fator -> . ID ABREPARENTESESRET Expressao FECHAPARENTESESRET
+    (50) Fator -> . ID ABREPARENTESESRET Expressao FECHAPARENTESESRET ABREPARENTESESRET Expressao FECHAPARENTESESRET
+
+    NAO             shift and go to state 21
+    ID              shift and go to state 51
+    NUMERO          shift and go to state 23
+
+    Expressao                      shift and go to state 67
+    Termo                          shift and go to state 20
+    Fator                          shift and go to state 22
+
+state 43
+
+    (30) Incremento -> ID INCREMENTO .
+
+    IMPRIMIR        reduce using rule 30 (Incremento -> ID INCREMENTO .)
+    ENTRADA         reduce using rule 30 (Incremento -> ID INCREMENTO .)
+    SE              reduce using rule 30 (Incremento -> ID INCREMENTO .)
+    ENQUANTO        reduce using rule 30 (Incremento -> ID INCREMENTO .)
+    ID              reduce using rule 30 (Incremento -> ID INCREMENTO .)
+    NAO             reduce using rule 30 (Incremento -> ID INCREMENTO .)
+    NUMERO          reduce using rule 30 (Incremento -> ID INCREMENTO .)
+    $end            reduce using rule 30 (Incremento -> ID INCREMENTO .)
+    FECHACHAVETAS   reduce using rule 30 (Incremento -> ID INCREMENTO .)
+
+
+state 44
+
+    (31) Decremento -> ID DECREMENTO .
+
+    IMPRIMIR        reduce using rule 31 (Decremento -> ID DECREMENTO .)
+    ENTRADA         reduce using rule 31 (Decremento -> ID DECREMENTO .)
+    SE              reduce using rule 31 (Decremento -> ID DECREMENTO .)
+    ENQUANTO        reduce using rule 31 (Decremento -> ID DECREMENTO .)
+    ID              reduce using rule 31 (Decremento -> ID DECREMENTO .)
+    NAO             reduce using rule 31 (Decremento -> ID DECREMENTO .)
+    NUMERO          reduce using rule 31 (Decremento -> ID DECREMENTO .)
+    $end            reduce using rule 31 (Decremento -> ID DECREMENTO .)
+    FECHACHAVETAS   reduce using rule 31 (Decremento -> ID DECREMENTO .)
+
+
+state 45
+
+    (24) Atribuicao -> ID IGUAL . Expressao
+    (32) Expressao -> . Termo
+    (33) Expressao -> . Expressao ADICAO Termo
+    (34) Expressao -> . Expressao SUBTRACAO Termo
+    (35) Expressao -> . Expressao EQUIVALENTE Expressao
+    (36) Expressao -> . Expressao MAIOR Expressao
+    (37) Expressao -> . Expressao MENOR Expressao
+    (38) Expressao -> . Expressao MAIORIGUAL Expressao
+    (39) Expressao -> . Expressao MENORIGUAL Expressao
+    (40) Expressao -> . Expressao E Expressao
+    (41) Expressao -> . Expressao OU Expressao
+    (42) Expressao -> . NAO Expressao
+    (43) Termo -> . Fator
+    (44) Termo -> . Termo MULTIPLICACAO Fator
+    (45) Termo -> . Termo DIVISAO Fator
+    (46) Termo -> . Termo RESTO Fator
+    (47) Fator -> . ID
+    (48) Fator -> . NUMERO
+    (49) Fator -> . ID ABREPARENTESESRET Expressao FECHAPARENTESESRET
+    (50) Fator -> . ID ABREPARENTESESRET Expressao FECHAPARENTESESRET ABREPARENTESESRET Expressao FECHAPARENTESESRET
+
+    NAO             shift and go to state 21
+    ID              shift and go to state 51
+    NUMERO          shift and go to state 23
+
+    Expressao                      shift and go to state 68
+    Termo                          shift and go to state 20
+    Fator                          shift and go to state 22
+
+state 46
+
+    (25) Atribuicao -> ID ABREPARENTESESRET . Fator FECHAPARENTESESRET IGUAL Expressao
+    (26) Atribuicao -> ID ABREPARENTESESRET . Fator FECHAPARENTESESRET ABREPARENTESESRET Fator FECHAPARENTESESRET IGUAL Expressao
+    (49) Fator -> ID ABREPARENTESESRET . Expressao FECHAPARENTESESRET
+    (50) Fator -> ID ABREPARENTESESRET . Expressao FECHAPARENTESESRET ABREPARENTESESRET Expressao FECHAPARENTESESRET
+    (47) Fator -> . ID
+    (48) Fator -> . NUMERO
+    (49) Fator -> . ID ABREPARENTESESRET Expressao FECHAPARENTESESRET
+    (50) Fator -> . ID ABREPARENTESESRET Expressao FECHAPARENTESESRET ABREPARENTESESRET Expressao FECHAPARENTESESRET
+    (32) Expressao -> . Termo
+    (33) Expressao -> . Expressao ADICAO Termo
+    (34) Expressao -> . Expressao SUBTRACAO Termo
+    (35) Expressao -> . Expressao EQUIVALENTE Expressao
+    (36) Expressao -> . Expressao MAIOR Expressao
+    (37) Expressao -> . Expressao MENOR Expressao
+    (38) Expressao -> . Expressao MAIORIGUAL Expressao
+    (39) Expressao -> . Expressao MENORIGUAL Expressao
+    (40) Expressao -> . Expressao E Expressao
+    (41) Expressao -> . Expressao OU Expressao
+    (42) Expressao -> . NAO Expressao
+    (43) Termo -> . Fator
+    (44) Termo -> . Termo MULTIPLICACAO Fator
+    (45) Termo -> . Termo DIVISAO Fator
+    (46) Termo -> . Termo RESTO Fator
+
+    ID              shift and go to state 51
+    NUMERO          shift and go to state 23
+    NAO             shift and go to state 21
+
+    Fator                          shift and go to state 69
+    Expressao                      shift and go to state 70
+    Termo                          shift and go to state 20
+
+state 47
+
+    (44) Termo -> Termo MULTIPLICACAO . Fator
+    (47) Fator -> . ID
+    (48) Fator -> . NUMERO
+    (49) Fator -> . ID ABREPARENTESESRET Expressao FECHAPARENTESESRET
+    (50) Fator -> . ID ABREPARENTESESRET Expressao FECHAPARENTESESRET ABREPARENTESESRET Expressao FECHAPARENTESESRET
+
+    ID              shift and go to state 51
+    NUMERO          shift and go to state 23
+
+    Fator                          shift and go to state 71
+
+state 48
+
+    (45) Termo -> Termo DIVISAO . Fator
+    (47) Fator -> . ID
+    (48) Fator -> . NUMERO
+    (49) Fator -> . ID ABREPARENTESESRET Expressao FECHAPARENTESESRET
+    (50) Fator -> . ID ABREPARENTESESRET Expressao FECHAPARENTESESRET ABREPARENTESESRET Expressao FECHAPARENTESESRET
+
+    ID              shift and go to state 51
+    NUMERO          shift and go to state 23
+
+    Fator                          shift and go to state 72
+
+state 49
+
+    (46) Termo -> Termo RESTO . Fator
+    (47) Fator -> . ID
+    (48) Fator -> . NUMERO
+    (49) Fator -> . ID ABREPARENTESESRET Expressao FECHAPARENTESESRET
+    (50) Fator -> . ID ABREPARENTESESRET Expressao FECHAPARENTESESRET ABREPARENTESESRET Expressao FECHAPARENTESESRET
+
+    ID              shift and go to state 51
+    NUMERO          shift and go to state 23
+
+    Fator                          shift and go to state 73
+
+state 50
+
+    (42) Expressao -> NAO Expressao .
+    (33) Expressao -> Expressao . ADICAO Termo
+    (34) Expressao -> Expressao . SUBTRACAO Termo
+    (35) Expressao -> Expressao . EQUIVALENTE Expressao
+    (36) Expressao -> Expressao . MAIOR Expressao
+    (37) Expressao -> Expressao . MENOR Expressao
+    (38) Expressao -> Expressao . MAIORIGUAL Expressao
+    (39) Expressao -> Expressao . MENORIGUAL Expressao
+    (40) Expressao -> Expressao . E Expressao
+    (41) Expressao -> Expressao . OU Expressao
+
+  ! shift/reduce conflict for ADICAO resolved as shift
+  ! shift/reduce conflict for SUBTRACAO resolved as shift
+  ! shift/reduce conflict for EQUIVALENTE resolved as shift
+  ! shift/reduce conflict for MAIOR resolved as shift
+  ! shift/reduce conflict for MENOR resolved as shift
+  ! shift/reduce conflict for MAIORIGUAL resolved as shift
+  ! shift/reduce conflict for MENORIGUAL resolved as shift
+  ! shift/reduce conflict for E resolved as shift
+  ! shift/reduce conflict for OU resolved as shift
+    IMPRIMIR        reduce using rule 42 (Expressao -> NAO Expressao .)
+    ENTRADA         reduce using rule 42 (Expressao -> NAO Expressao .)
+    SE              reduce using rule 42 (Expressao -> NAO Expressao .)
+    ENQUANTO        reduce using rule 42 (Expressao -> NAO Expressao .)
+    ID              reduce using rule 42 (Expressao -> NAO Expressao .)
+    NAO             reduce using rule 42 (Expressao -> NAO Expressao .)
+    NUMERO          reduce using rule 42 (Expressao -> NAO Expressao .)
+    $end            reduce using rule 42 (Expressao -> NAO Expressao .)
+    FECHAPARENTESES reduce using rule 42 (Expressao -> NAO Expressao .)
+    FECHACHAVETAS   reduce using rule 42 (Expressao -> NAO Expressao .)
+    FECHAPARENTESESRET reduce using rule 42 (Expressao -> NAO Expressao .)
+    ADICAO          shift and go to state 30
+    SUBTRACAO       shift and go to state 31
+    EQUIVALENTE     shift and go to state 32
+    MAIOR           shift and go to state 33
+    MENOR           shift and go to state 34
+    MAIORIGUAL      shift and go to state 35
+    MENORIGUAL      shift and go to state 36
+    E               shift and go to state 37
+    OU              shift and go to state 38
+
+  ! ADICAO          [ reduce using rule 42 (Expressao -> NAO Expressao .) ]
+  ! SUBTRACAO       [ reduce using rule 42 (Expressao -> NAO Expressao .) ]
+  ! EQUIVALENTE     [ reduce using rule 42 (Expressao -> NAO Expressao .) ]
+  ! MAIOR           [ reduce using rule 42 (Expressao -> NAO Expressao .) ]
+  ! MENOR           [ reduce using rule 42 (Expressao -> NAO Expressao .) ]
+  ! MAIORIGUAL      [ reduce using rule 42 (Expressao -> NAO Expressao .) ]
+  ! MENORIGUAL      [ reduce using rule 42 (Expressao -> NAO Expressao .) ]
+  ! E               [ reduce using rule 42 (Expressao -> NAO Expressao .) ]
+  ! OU              [ reduce using rule 42 (Expressao -> NAO Expressao .) ]
+
+
+state 51
+
+    (47) Fator -> ID .
+    (49) Fator -> ID . ABREPARENTESESRET Expressao FECHAPARENTESESRET
+    (50) Fator -> ID . ABREPARENTESESRET Expressao FECHAPARENTESESRET ABREPARENTESESRET Expressao FECHAPARENTESESRET
+
+    MULTIPLICACAO   reduce using rule 47 (Fator -> ID .)
+    DIVISAO         reduce using rule 47 (Fator -> ID .)
+    RESTO           reduce using rule 47 (Fator -> ID .)
+    ADICAO          reduce using rule 47 (Fator -> ID .)
+    SUBTRACAO       reduce using rule 47 (Fator -> ID .)
+    EQUIVALENTE     reduce using rule 47 (Fator -> ID .)
+    MAIOR           reduce using rule 47 (Fator -> ID .)
+    MENOR           reduce using rule 47 (Fator -> ID .)
+    MAIORIGUAL      reduce using rule 47 (Fator -> ID .)
+    MENORIGUAL      reduce using rule 47 (Fator -> ID .)
+    E               reduce using rule 47 (Fator -> ID .)
+    OU              reduce using rule 47 (Fator -> ID .)
+    IMPRIMIR        reduce using rule 47 (Fator -> ID .)
+    ENTRADA         reduce using rule 47 (Fator -> ID .)
+    SE              reduce using rule 47 (Fator -> ID .)
+    ENQUANTO        reduce using rule 47 (Fator -> ID .)
+    ID              reduce using rule 47 (Fator -> ID .)
+    NAO             reduce using rule 47 (Fator -> ID .)
+    NUMERO          reduce using rule 47 (Fator -> ID .)
+    $end            reduce using rule 47 (Fator -> ID .)
+    FECHAPARENTESES reduce using rule 47 (Fator -> ID .)
+    FECHACHAVETAS   reduce using rule 47 (Fator -> ID .)
+    FECHAPARENTESESRET reduce using rule 47 (Fator -> ID .)
+    ABREPARENTESESRET shift and go to state 74
+
+
+state 52
+
+    (9) Variaveis -> Variaveis VIRGULA . Variavel
+    (10) Variavel -> . ID
+    (11) Variavel -> . ID ABREPARENTESESRET NUMERO FECHAPARENTESESRET
+    (12) Variavel -> . ID ABREPARENTESESRET NUMERO FECHAPARENTESESRET ABREPARENTESESRET NUMERO FECHAPARENTESESRET
+
+    ID              shift and go to state 29
+
+    Variavel                       shift and go to state 75
+
+state 53
+
+    (11) Variavel -> ID ABREPARENTESESRET . NUMERO FECHAPARENTESESRET
+    (12) Variavel -> ID ABREPARENTESESRET . NUMERO FECHAPARENTESESRET ABREPARENTESESRET NUMERO FECHAPARENTESESRET
+
+    NUMERO          shift and go to state 76
+
+
+state 54
+
+    (33) Expressao -> Expressao ADICAO Termo .
+    (44) Termo -> Termo . MULTIPLICACAO Fator
+    (45) Termo -> Termo . DIVISAO Fator
+    (46) Termo -> Termo . RESTO Fator
+
+    ADICAO          reduce using rule 33 (Expressao -> Expressao ADICAO Termo .)
+    SUBTRACAO       reduce using rule 33 (Expressao -> Expressao ADICAO Termo .)
+    EQUIVALENTE     reduce using rule 33 (Expressao -> Expressao ADICAO Termo .)
+    MAIOR           reduce using rule 33 (Expressao -> Expressao ADICAO Termo .)
+    MENOR           reduce using rule 33 (Expressao -> Expressao ADICAO Termo .)
+    MAIORIGUAL      reduce using rule 33 (Expressao -> Expressao ADICAO Termo .)
+    MENORIGUAL      reduce using rule 33 (Expressao -> Expressao ADICAO Termo .)
+    E               reduce using rule 33 (Expressao -> Expressao ADICAO Termo .)
+    OU              reduce using rule 33 (Expressao -> Expressao ADICAO Termo .)
+    IMPRIMIR        reduce using rule 33 (Expressao -> Expressao ADICAO Termo .)
+    ENTRADA         reduce using rule 33 (Expressao -> Expressao ADICAO Termo .)
+    SE              reduce using rule 33 (Expressao -> Expressao ADICAO Termo .)
+    ENQUANTO        reduce using rule 33 (Expressao -> Expressao ADICAO Termo .)
+    ID              reduce using rule 33 (Expressao -> Expressao ADICAO Termo .)
+    NAO             reduce using rule 33 (Expressao -> Expressao ADICAO Termo .)
+    NUMERO          reduce using rule 33 (Expressao -> Expressao ADICAO Termo .)
+    $end            reduce using rule 33 (Expressao -> Expressao ADICAO Termo .)
+    FECHAPARENTESES reduce using rule 33 (Expressao -> Expressao ADICAO Termo .)
+    FECHACHAVETAS   reduce using rule 33 (Expressao -> Expressao ADICAO Termo .)
+    FECHAPARENTESESRET reduce using rule 33 (Expressao -> Expressao ADICAO Termo .)
+    MULTIPLICACAO   shift and go to state 47
+    DIVISAO         shift and go to state 48
+    RESTO           shift and go to state 49
+
+
+state 55
+
+    (34) Expressao -> Expressao SUBTRACAO Termo .
+    (44) Termo -> Termo . MULTIPLICACAO Fator
+    (45) Termo -> Termo . DIVISAO Fator
+    (46) Termo -> Termo . RESTO Fator
+
+    ADICAO          reduce using rule 34 (Expressao -> Expressao SUBTRACAO Termo .)
+    SUBTRACAO       reduce using rule 34 (Expressao -> Expressao SUBTRACAO Termo .)
+    EQUIVALENTE     reduce using rule 34 (Expressao -> Expressao SUBTRACAO Termo .)
+    MAIOR           reduce using rule 34 (Expressao -> Expressao SUBTRACAO Termo .)
+    MENOR           reduce using rule 34 (Expressao -> Expressao SUBTRACAO Termo .)
+    MAIORIGUAL      reduce using rule 34 (Expressao -> Expressao SUBTRACAO Termo .)
+    MENORIGUAL      reduce using rule 34 (Expressao -> Expressao SUBTRACAO Termo .)
+    E               reduce using rule 34 (Expressao -> Expressao SUBTRACAO Termo .)
+    OU              reduce using rule 34 (Expressao -> Expressao SUBTRACAO Termo .)
+    IMPRIMIR        reduce using rule 34 (Expressao -> Expressao SUBTRACAO Termo .)
+    ENTRADA         reduce using rule 34 (Expressao -> Expressao SUBTRACAO Termo .)
+    SE              reduce using rule 34 (Expressao -> Expressao SUBTRACAO Termo .)
+    ENQUANTO        reduce using rule 34 (Expressao -> Expressao SUBTRACAO Termo .)
+    ID              reduce using rule 34 (Expressao -> Expressao SUBTRACAO Termo .)
+    NAO             reduce using rule 34 (Expressao -> Expressao SUBTRACAO Termo .)
+    NUMERO          reduce using rule 34 (Expressao -> Expressao SUBTRACAO Termo .)
+    $end            reduce using rule 34 (Expressao -> Expressao SUBTRACAO Termo .)
+    FECHAPARENTESES reduce using rule 34 (Expressao -> Expressao SUBTRACAO Termo .)
+    FECHACHAVETAS   reduce using rule 34 (Expressao -> Expressao SUBTRACAO Termo .)
+    FECHAPARENTESESRET reduce using rule 34 (Expressao -> Expressao SUBTRACAO Termo .)
+    MULTIPLICACAO   shift and go to state 47
+    DIVISAO         shift and go to state 48
+    RESTO           shift and go to state 49
+
+
+state 56
+
+    (35) Expressao -> Expressao EQUIVALENTE Expressao .
+    (33) Expressao -> Expressao . ADICAO Termo
+    (34) Expressao -> Expressao . SUBTRACAO Termo
+    (35) Expressao -> Expressao . EQUIVALENTE Expressao
+    (36) Expressao -> Expressao . MAIOR Expressao
+    (37) Expressao -> Expressao . MENOR Expressao
+    (38) Expressao -> Expressao . MAIORIGUAL Expressao
+    (39) Expressao -> Expressao . MENORIGUAL Expressao
+    (40) Expressao -> Expressao . E Expressao
+    (41) Expressao -> Expressao . OU Expressao
+
+  ! shift/reduce conflict for ADICAO resolved as shift
+  ! shift/reduce conflict for SUBTRACAO resolved as shift
+  ! shift/reduce conflict for EQUIVALENTE resolved as shift
+  ! shift/reduce conflict for MAIOR resolved as shift
+  ! shift/reduce conflict for MENOR resolved as shift
+  ! shift/reduce conflict for MAIORIGUAL resolved as shift
+  ! shift/reduce conflict for MENORIGUAL resolved as shift
+  ! shift/reduce conflict for E resolved as shift
+  ! shift/reduce conflict for OU resolved as shift
+    IMPRIMIR        reduce using rule 35 (Expressao -> Expressao EQUIVALENTE Expressao .)
+    ENTRADA         reduce using rule 35 (Expressao -> Expressao EQUIVALENTE Expressao .)
+    SE              reduce using rule 35 (Expressao -> Expressao EQUIVALENTE Expressao .)
+    ENQUANTO        reduce using rule 35 (Expressao -> Expressao EQUIVALENTE Expressao .)
+    ID              reduce using rule 35 (Expressao -> Expressao EQUIVALENTE Expressao .)
+    NAO             reduce using rule 35 (Expressao -> Expressao EQUIVALENTE Expressao .)
+    NUMERO          reduce using rule 35 (Expressao -> Expressao EQUIVALENTE Expressao .)
+    $end            reduce using rule 35 (Expressao -> Expressao EQUIVALENTE Expressao .)
+    FECHAPARENTESES reduce using rule 35 (Expressao -> Expressao EQUIVALENTE Expressao .)
+    FECHACHAVETAS   reduce using rule 35 (Expressao -> Expressao EQUIVALENTE Expressao .)
+    FECHAPARENTESESRET reduce using rule 35 (Expressao -> Expressao EQUIVALENTE Expressao .)
+    ADICAO          shift and go to state 30
+    SUBTRACAO       shift and go to state 31
+    EQUIVALENTE     shift and go to state 32
+    MAIOR           shift and go to state 33
+    MENOR           shift and go to state 34
+    MAIORIGUAL      shift and go to state 35
+    MENORIGUAL      shift and go to state 36
+    E               shift and go to state 37
+    OU              shift and go to state 38
+
+  ! ADICAO          [ reduce using rule 35 (Expressao -> Expressao EQUIVALENTE Expressao .) ]
+  ! SUBTRACAO       [ reduce using rule 35 (Expressao -> Expressao EQUIVALENTE Expressao .) ]
+  ! EQUIVALENTE     [ reduce using rule 35 (Expressao -> Expressao EQUIVALENTE Expressao .) ]
+  ! MAIOR           [ reduce using rule 35 (Expressao -> Expressao EQUIVALENTE Expressao .) ]
+  ! MENOR           [ reduce using rule 35 (Expressao -> Expressao EQUIVALENTE Expressao .) ]
+  ! MAIORIGUAL      [ reduce using rule 35 (Expressao -> Expressao EQUIVALENTE Expressao .) ]
+  ! MENORIGUAL      [ reduce using rule 35 (Expressao -> Expressao EQUIVALENTE Expressao .) ]
+  ! E               [ reduce using rule 35 (Expressao -> Expressao EQUIVALENTE Expressao .) ]
+  ! OU              [ reduce using rule 35 (Expressao -> Expressao EQUIVALENTE Expressao .) ]
+
+
+state 57
+
+    (36) Expressao -> Expressao MAIOR Expressao .
+    (33) Expressao -> Expressao . ADICAO Termo
+    (34) Expressao -> Expressao . SUBTRACAO Termo
+    (35) Expressao -> Expressao . EQUIVALENTE Expressao
+    (36) Expressao -> Expressao . MAIOR Expressao
+    (37) Expressao -> Expressao . MENOR Expressao
+    (38) Expressao -> Expressao . MAIORIGUAL Expressao
+    (39) Expressao -> Expressao . MENORIGUAL Expressao
+    (40) Expressao -> Expressao . E Expressao
+    (41) Expressao -> Expressao . OU Expressao
+
+  ! shift/reduce conflict for ADICAO resolved as shift
+  ! shift/reduce conflict for SUBTRACAO resolved as shift
+  ! shift/reduce conflict for EQUIVALENTE resolved as shift
+  ! shift/reduce conflict for MAIOR resolved as shift
+  ! shift/reduce conflict for MENOR resolved as shift
+  ! shift/reduce conflict for MAIORIGUAL resolved as shift
+  ! shift/reduce conflict for MENORIGUAL resolved as shift
+  ! shift/reduce conflict for E resolved as shift
+  ! shift/reduce conflict for OU resolved as shift
+    IMPRIMIR        reduce using rule 36 (Expressao -> Expressao MAIOR Expressao .)
+    ENTRADA         reduce using rule 36 (Expressao -> Expressao MAIOR Expressao .)
+    SE              reduce using rule 36 (Expressao -> Expressao MAIOR Expressao .)
+    ENQUANTO        reduce using rule 36 (Expressao -> Expressao MAIOR Expressao .)
+    ID              reduce using rule 36 (Expressao -> Expressao MAIOR Expressao .)
+    NAO             reduce using rule 36 (Expressao -> Expressao MAIOR Expressao .)
+    NUMERO          reduce using rule 36 (Expressao -> Expressao MAIOR Expressao .)
+    $end            reduce using rule 36 (Expressao -> Expressao MAIOR Expressao .)
+    FECHAPARENTESES reduce using rule 36 (Expressao -> Expressao MAIOR Expressao .)
+    FECHACHAVETAS   reduce using rule 36 (Expressao -> Expressao MAIOR Expressao .)
+    FECHAPARENTESESRET reduce using rule 36 (Expressao -> Expressao MAIOR Expressao .)
+    ADICAO          shift and go to state 30
+    SUBTRACAO       shift and go to state 31
+    EQUIVALENTE     shift and go to state 32
+    MAIOR           shift and go to state 33
+    MENOR           shift and go to state 34
+    MAIORIGUAL      shift and go to state 35
+    MENORIGUAL      shift and go to state 36
+    E               shift and go to state 37
+    OU              shift and go to state 38
+
+  ! ADICAO          [ reduce using rule 36 (Expressao -> Expressao MAIOR Expressao .) ]
+  ! SUBTRACAO       [ reduce using rule 36 (Expressao -> Expressao MAIOR Expressao .) ]
+  ! EQUIVALENTE     [ reduce using rule 36 (Expressao -> Expressao MAIOR Expressao .) ]
+  ! MAIOR           [ reduce using rule 36 (Expressao -> Expressao MAIOR Expressao .) ]
+  ! MENOR           [ reduce using rule 36 (Expressao -> Expressao MAIOR Expressao .) ]
+  ! MAIORIGUAL      [ reduce using rule 36 (Expressao -> Expressao MAIOR Expressao .) ]
+  ! MENORIGUAL      [ reduce using rule 36 (Expressao -> Expressao MAIOR Expressao .) ]
+  ! E               [ reduce using rule 36 (Expressao -> Expressao MAIOR Expressao .) ]
+  ! OU              [ reduce using rule 36 (Expressao -> Expressao MAIOR Expressao .) ]
+
+
+state 58
+
+    (37) Expressao -> Expressao MENOR Expressao .
+    (33) Expressao -> Expressao . ADICAO Termo
+    (34) Expressao -> Expressao . SUBTRACAO Termo
+    (35) Expressao -> Expressao . EQUIVALENTE Expressao
+    (36) Expressao -> Expressao . MAIOR Expressao
+    (37) Expressao -> Expressao . MENOR Expressao
+    (38) Expressao -> Expressao . MAIORIGUAL Expressao
+    (39) Expressao -> Expressao . MENORIGUAL Expressao
+    (40) Expressao -> Expressao . E Expressao
+    (41) Expressao -> Expressao . OU Expressao
+
+  ! shift/reduce conflict for ADICAO resolved as shift
+  ! shift/reduce conflict for SUBTRACAO resolved as shift
+  ! shift/reduce conflict for EQUIVALENTE resolved as shift
+  ! shift/reduce conflict for MAIOR resolved as shift
+  ! shift/reduce conflict for MENOR resolved as shift
+  ! shift/reduce conflict for MAIORIGUAL resolved as shift
+  ! shift/reduce conflict for MENORIGUAL resolved as shift
+  ! shift/reduce conflict for E resolved as shift
+  ! shift/reduce conflict for OU resolved as shift
+    IMPRIMIR        reduce using rule 37 (Expressao -> Expressao MENOR Expressao .)
+    ENTRADA         reduce using rule 37 (Expressao -> Expressao MENOR Expressao .)
+    SE              reduce using rule 37 (Expressao -> Expressao MENOR Expressao .)
+    ENQUANTO        reduce using rule 37 (Expressao -> Expressao MENOR Expressao .)
+    ID              reduce using rule 37 (Expressao -> Expressao MENOR Expressao .)
+    NAO             reduce using rule 37 (Expressao -> Expressao MENOR Expressao .)
+    NUMERO          reduce using rule 37 (Expressao -> Expressao MENOR Expressao .)
+    $end            reduce using rule 37 (Expressao -> Expressao MENOR Expressao .)
+    FECHAPARENTESES reduce using rule 37 (Expressao -> Expressao MENOR Expressao .)
+    FECHACHAVETAS   reduce using rule 37 (Expressao -> Expressao MENOR Expressao .)
+    FECHAPARENTESESRET reduce using rule 37 (Expressao -> Expressao MENOR Expressao .)
+    ADICAO          shift and go to state 30
+    SUBTRACAO       shift and go to state 31
+    EQUIVALENTE     shift and go to state 32
+    MAIOR           shift and go to state 33
+    MENOR           shift and go to state 34
+    MAIORIGUAL      shift and go to state 35
+    MENORIGUAL      shift and go to state 36
+    E               shift and go to state 37
+    OU              shift and go to state 38
+
+  ! ADICAO          [ reduce using rule 37 (Expressao -> Expressao MENOR Expressao .) ]
+  ! SUBTRACAO       [ reduce using rule 37 (Expressao -> Expressao MENOR Expressao .) ]
+  ! EQUIVALENTE     [ reduce using rule 37 (Expressao -> Expressao MENOR Expressao .) ]
+  ! MAIOR           [ reduce using rule 37 (Expressao -> Expressao MENOR Expressao .) ]
+  ! MENOR           [ reduce using rule 37 (Expressao -> Expressao MENOR Expressao .) ]
+  ! MAIORIGUAL      [ reduce using rule 37 (Expressao -> Expressao MENOR Expressao .) ]
+  ! MENORIGUAL      [ reduce using rule 37 (Expressao -> Expressao MENOR Expressao .) ]
+  ! E               [ reduce using rule 37 (Expressao -> Expressao MENOR Expressao .) ]
+  ! OU              [ reduce using rule 37 (Expressao -> Expressao MENOR Expressao .) ]
+
+
+state 59
+
+    (38) Expressao -> Expressao MAIORIGUAL Expressao .
+    (33) Expressao -> Expressao . ADICAO Termo
+    (34) Expressao -> Expressao . SUBTRACAO Termo
+    (35) Expressao -> Expressao . EQUIVALENTE Expressao
+    (36) Expressao -> Expressao . MAIOR Expressao
+    (37) Expressao -> Expressao . MENOR Expressao
+    (38) Expressao -> Expressao . MAIORIGUAL Expressao
+    (39) Expressao -> Expressao . MENORIGUAL Expressao
+    (40) Expressao -> Expressao . E Expressao
+    (41) Expressao -> Expressao . OU Expressao
+
+  ! shift/reduce conflict for ADICAO resolved as shift
+  ! shift/reduce conflict for SUBTRACAO resolved as shift
+  ! shift/reduce conflict for EQUIVALENTE resolved as shift
+  ! shift/reduce conflict for MAIOR resolved as shift
+  ! shift/reduce conflict for MENOR resolved as shift
+  ! shift/reduce conflict for MAIORIGUAL resolved as shift
+  ! shift/reduce conflict for MENORIGUAL resolved as shift
+  ! shift/reduce conflict for E resolved as shift
+  ! shift/reduce conflict for OU resolved as shift
+    IMPRIMIR        reduce using rule 38 (Expressao -> Expressao MAIORIGUAL Expressao .)
+    ENTRADA         reduce using rule 38 (Expressao -> Expressao MAIORIGUAL Expressao .)
+    SE              reduce using rule 38 (Expressao -> Expressao MAIORIGUAL Expressao .)
+    ENQUANTO        reduce using rule 38 (Expressao -> Expressao MAIORIGUAL Expressao .)
+    ID              reduce using rule 38 (Expressao -> Expressao MAIORIGUAL Expressao .)
+    NAO             reduce using rule 38 (Expressao -> Expressao MAIORIGUAL Expressao .)
+    NUMERO          reduce using rule 38 (Expressao -> Expressao MAIORIGUAL Expressao .)
+    $end            reduce using rule 38 (Expressao -> Expressao MAIORIGUAL Expressao .)
+    FECHAPARENTESES reduce using rule 38 (Expressao -> Expressao MAIORIGUAL Expressao .)
+    FECHACHAVETAS   reduce using rule 38 (Expressao -> Expressao MAIORIGUAL Expressao .)
+    FECHAPARENTESESRET reduce using rule 38 (Expressao -> Expressao MAIORIGUAL Expressao .)
+    ADICAO          shift and go to state 30
+    SUBTRACAO       shift and go to state 31
+    EQUIVALENTE     shift and go to state 32
+    MAIOR           shift and go to state 33
+    MENOR           shift and go to state 34
+    MAIORIGUAL      shift and go to state 35
+    MENORIGUAL      shift and go to state 36
+    E               shift and go to state 37
+    OU              shift and go to state 38
+
+  ! ADICAO          [ reduce using rule 38 (Expressao -> Expressao MAIORIGUAL Expressao .) ]
+  ! SUBTRACAO       [ reduce using rule 38 (Expressao -> Expressao MAIORIGUAL Expressao .) ]
+  ! EQUIVALENTE     [ reduce using rule 38 (Expressao -> Expressao MAIORIGUAL Expressao .) ]
+  ! MAIOR           [ reduce using rule 38 (Expressao -> Expressao MAIORIGUAL Expressao .) ]
+  ! MENOR           [ reduce using rule 38 (Expressao -> Expressao MAIORIGUAL Expressao .) ]
+  ! MAIORIGUAL      [ reduce using rule 38 (Expressao -> Expressao MAIORIGUAL Expressao .) ]
+  ! MENORIGUAL      [ reduce using rule 38 (Expressao -> Expressao MAIORIGUAL Expressao .) ]
+  ! E               [ reduce using rule 38 (Expressao -> Expressao MAIORIGUAL Expressao .) ]
+  ! OU              [ reduce using rule 38 (Expressao -> Expressao MAIORIGUAL Expressao .) ]
+
+
+state 60
+
+    (39) Expressao -> Expressao MENORIGUAL Expressao .
+    (33) Expressao -> Expressao . ADICAO Termo
+    (34) Expressao -> Expressao . SUBTRACAO Termo
+    (35) Expressao -> Expressao . EQUIVALENTE Expressao
+    (36) Expressao -> Expressao . MAIOR Expressao
+    (37) Expressao -> Expressao . MENOR Expressao
+    (38) Expressao -> Expressao . MAIORIGUAL Expressao
+    (39) Expressao -> Expressao . MENORIGUAL Expressao
+    (40) Expressao -> Expressao . E Expressao
+    (41) Expressao -> Expressao . OU Expressao
+
+  ! shift/reduce conflict for ADICAO resolved as shift
+  ! shift/reduce conflict for SUBTRACAO resolved as shift
+  ! shift/reduce conflict for EQUIVALENTE resolved as shift
+  ! shift/reduce conflict for MAIOR resolved as shift
+  ! shift/reduce conflict for MENOR resolved as shift
+  ! shift/reduce conflict for MAIORIGUAL resolved as shift
+  ! shift/reduce conflict for MENORIGUAL resolved as shift
+  ! shift/reduce conflict for E resolved as shift
+  ! shift/reduce conflict for OU resolved as shift
+    IMPRIMIR        reduce using rule 39 (Expressao -> Expressao MENORIGUAL Expressao .)
+    ENTRADA         reduce using rule 39 (Expressao -> Expressao MENORIGUAL Expressao .)
+    SE              reduce using rule 39 (Expressao -> Expressao MENORIGUAL Expressao .)
+    ENQUANTO        reduce using rule 39 (Expressao -> Expressao MENORIGUAL Expressao .)
+    ID              reduce using rule 39 (Expressao -> Expressao MENORIGUAL Expressao .)
+    NAO             reduce using rule 39 (Expressao -> Expressao MENORIGUAL Expressao .)
+    NUMERO          reduce using rule 39 (Expressao -> Expressao MENORIGUAL Expressao .)
+    $end            reduce using rule 39 (Expressao -> Expressao MENORIGUAL Expressao .)
+    FECHAPARENTESES reduce using rule 39 (Expressao -> Expressao MENORIGUAL Expressao .)
+    FECHACHAVETAS   reduce using rule 39 (Expressao -> Expressao MENORIGUAL Expressao .)
+    FECHAPARENTESESRET reduce using rule 39 (Expressao -> Expressao MENORIGUAL Expressao .)
+    ADICAO          shift and go to state 30
+    SUBTRACAO       shift and go to state 31
+    EQUIVALENTE     shift and go to state 32
+    MAIOR           shift and go to state 33
+    MENOR           shift and go to state 34
+    MAIORIGUAL      shift and go to state 35
+    MENORIGUAL      shift and go to state 36
+    E               shift and go to state 37
+    OU              shift and go to state 38
+
+  ! ADICAO          [ reduce using rule 39 (Expressao -> Expressao MENORIGUAL Expressao .) ]
+  ! SUBTRACAO       [ reduce using rule 39 (Expressao -> Expressao MENORIGUAL Expressao .) ]
+  ! EQUIVALENTE     [ reduce using rule 39 (Expressao -> Expressao MENORIGUAL Expressao .) ]
+  ! MAIOR           [ reduce using rule 39 (Expressao -> Expressao MENORIGUAL Expressao .) ]
+  ! MENOR           [ reduce using rule 39 (Expressao -> Expressao MENORIGUAL Expressao .) ]
+  ! MAIORIGUAL      [ reduce using rule 39 (Expressao -> Expressao MENORIGUAL Expressao .) ]
+  ! MENORIGUAL      [ reduce using rule 39 (Expressao -> Expressao MENORIGUAL Expressao .) ]
+  ! E               [ reduce using rule 39 (Expressao -> Expressao MENORIGUAL Expressao .) ]
+  ! OU              [ reduce using rule 39 (Expressao -> Expressao MENORIGUAL Expressao .) ]
+
+
+state 61
+
+    (40) Expressao -> Expressao E Expressao .
+    (33) Expressao -> Expressao . ADICAO Termo
+    (34) Expressao -> Expressao . SUBTRACAO Termo
+    (35) Expressao -> Expressao . EQUIVALENTE Expressao
+    (36) Expressao -> Expressao . MAIOR Expressao
+    (37) Expressao -> Expressao . MENOR Expressao
+    (38) Expressao -> Expressao . MAIORIGUAL Expressao
+    (39) Expressao -> Expressao . MENORIGUAL Expressao
+    (40) Expressao -> Expressao . E Expressao
+    (41) Expressao -> Expressao . OU Expressao
+
+  ! shift/reduce conflict for ADICAO resolved as shift
+  ! shift/reduce conflict for SUBTRACAO resolved as shift
+  ! shift/reduce conflict for EQUIVALENTE resolved as shift
+  ! shift/reduce conflict for MAIOR resolved as shift
+  ! shift/reduce conflict for MENOR resolved as shift
+  ! shift/reduce conflict for MAIORIGUAL resolved as shift
+  ! shift/reduce conflict for MENORIGUAL resolved as shift
+  ! shift/reduce conflict for E resolved as shift
+  ! shift/reduce conflict for OU resolved as shift
+    IMPRIMIR        reduce using rule 40 (Expressao -> Expressao E Expressao .)
+    ENTRADA         reduce using rule 40 (Expressao -> Expressao E Expressao .)
+    SE              reduce using rule 40 (Expressao -> Expressao E Expressao .)
+    ENQUANTO        reduce using rule 40 (Expressao -> Expressao E Expressao .)
+    ID              reduce using rule 40 (Expressao -> Expressao E Expressao .)
+    NAO             reduce using rule 40 (Expressao -> Expressao E Expressao .)
+    NUMERO          reduce using rule 40 (Expressao -> Expressao E Expressao .)
+    $end            reduce using rule 40 (Expressao -> Expressao E Expressao .)
+    FECHAPARENTESES reduce using rule 40 (Expressao -> Expressao E Expressao .)
+    FECHACHAVETAS   reduce using rule 40 (Expressao -> Expressao E Expressao .)
+    FECHAPARENTESESRET reduce using rule 40 (Expressao -> Expressao E Expressao .)
+    ADICAO          shift and go to state 30
+    SUBTRACAO       shift and go to state 31
+    EQUIVALENTE     shift and go to state 32
+    MAIOR           shift and go to state 33
+    MENOR           shift and go to state 34
+    MAIORIGUAL      shift and go to state 35
+    MENORIGUAL      shift and go to state 36
+    E               shift and go to state 37
+    OU              shift and go to state 38
+
+  ! ADICAO          [ reduce using rule 40 (Expressao -> Expressao E Expressao .) ]
+  ! SUBTRACAO       [ reduce using rule 40 (Expressao -> Expressao E Expressao .) ]
+  ! EQUIVALENTE     [ reduce using rule 40 (Expressao -> Expressao E Expressao .) ]
+  ! MAIOR           [ reduce using rule 40 (Expressao -> Expressao E Expressao .) ]
+  ! MENOR           [ reduce using rule 40 (Expressao -> Expressao E Expressao .) ]
+  ! MAIORIGUAL      [ reduce using rule 40 (Expressao -> Expressao E Expressao .) ]
+  ! MENORIGUAL      [ reduce using rule 40 (Expressao -> Expressao E Expressao .) ]
+  ! E               [ reduce using rule 40 (Expressao -> Expressao E Expressao .) ]
+  ! OU              [ reduce using rule 40 (Expressao -> Expressao E Expressao .) ]
+
+
+state 62
+
+    (41) Expressao -> Expressao OU Expressao .
+    (33) Expressao -> Expressao . ADICAO Termo
+    (34) Expressao -> Expressao . SUBTRACAO Termo
+    (35) Expressao -> Expressao . EQUIVALENTE Expressao
+    (36) Expressao -> Expressao . MAIOR Expressao
+    (37) Expressao -> Expressao . MENOR Expressao
+    (38) Expressao -> Expressao . MAIORIGUAL Expressao
+    (39) Expressao -> Expressao . MENORIGUAL Expressao
+    (40) Expressao -> Expressao . E Expressao
+    (41) Expressao -> Expressao . OU Expressao
+
+  ! shift/reduce conflict for ADICAO resolved as shift
+  ! shift/reduce conflict for SUBTRACAO resolved as shift
+  ! shift/reduce conflict for EQUIVALENTE resolved as shift
+  ! shift/reduce conflict for MAIOR resolved as shift
+  ! shift/reduce conflict for MENOR resolved as shift
+  ! shift/reduce conflict for MAIORIGUAL resolved as shift
+  ! shift/reduce conflict for MENORIGUAL resolved as shift
+  ! shift/reduce conflict for E resolved as shift
+  ! shift/reduce conflict for OU resolved as shift
+    IMPRIMIR        reduce using rule 41 (Expressao -> Expressao OU Expressao .)
+    ENTRADA         reduce using rule 41 (Expressao -> Expressao OU Expressao .)
+    SE              reduce using rule 41 (Expressao -> Expressao OU Expressao .)
+    ENQUANTO        reduce using rule 41 (Expressao -> Expressao OU Expressao .)
+    ID              reduce using rule 41 (Expressao -> Expressao OU Expressao .)
+    NAO             reduce using rule 41 (Expressao -> Expressao OU Expressao .)
+    NUMERO          reduce using rule 41 (Expressao -> Expressao OU Expressao .)
+    $end            reduce using rule 41 (Expressao -> Expressao OU Expressao .)
+    FECHAPARENTESES reduce using rule 41 (Expressao -> Expressao OU Expressao .)
+    FECHACHAVETAS   reduce using rule 41 (Expressao -> Expressao OU Expressao .)
+    FECHAPARENTESESRET reduce using rule 41 (Expressao -> Expressao OU Expressao .)
+    ADICAO          shift and go to state 30
+    SUBTRACAO       shift and go to state 31
+    EQUIVALENTE     shift and go to state 32
+    MAIOR           shift and go to state 33
+    MENOR           shift and go to state 34
+    MAIORIGUAL      shift and go to state 35
+    MENORIGUAL      shift and go to state 36
+    E               shift and go to state 37
+    OU              shift and go to state 38
+
+  ! ADICAO          [ reduce using rule 41 (Expressao -> Expressao OU Expressao .) ]
+  ! SUBTRACAO       [ reduce using rule 41 (Expressao -> Expressao OU Expressao .) ]
+  ! EQUIVALENTE     [ reduce using rule 41 (Expressao -> Expressao OU Expressao .) ]
+  ! MAIOR           [ reduce using rule 41 (Expressao -> Expressao OU Expressao .) ]
+  ! MENOR           [ reduce using rule 41 (Expressao -> Expressao OU Expressao .) ]
+  ! MAIORIGUAL      [ reduce using rule 41 (Expressao -> Expressao OU Expressao .) ]
+  ! MENORIGUAL      [ reduce using rule 41 (Expressao -> Expressao OU Expressao .) ]
+  ! E               [ reduce using rule 41 (Expressao -> Expressao OU Expressao .) ]
+  ! OU              [ reduce using rule 41 (Expressao -> Expressao OU Expressao .) ]
+
+
+state 63
+
+    (27) Processo_Imprimir -> IMPRIMIR ABREPARENTESES Expressao . FECHAPARENTESES
+    (33) Expressao -> Expressao . ADICAO Termo
+    (34) Expressao -> Expressao . SUBTRACAO Termo
+    (35) Expressao -> Expressao . EQUIVALENTE Expressao
+    (36) Expressao -> Expressao . MAIOR Expressao
+    (37) Expressao -> Expressao . MENOR Expressao
+    (38) Expressao -> Expressao . MAIORIGUAL Expressao
+    (39) Expressao -> Expressao . MENORIGUAL Expressao
+    (40) Expressao -> Expressao . E Expressao
+    (41) Expressao -> Expressao . OU Expressao
+
+    FECHAPARENTESES shift and go to state 77
+    ADICAO          shift and go to state 30
+    SUBTRACAO       shift and go to state 31
+    EQUIVALENTE     shift and go to state 32
+    MAIOR           shift and go to state 33
+    MENOR           shift and go to state 34
+    MAIORIGUAL      shift and go to state 35
+    MENORIGUAL      shift and go to state 36
+    E               shift and go to state 37
+    OU              shift and go to state 38
+
+
+state 64
+
+    (28) Processo_Imprimir -> IMPRIMIR ABREPARENTESES CITACAO . FECHAPARENTESES
+
+    FECHAPARENTESES shift and go to state 78
+
+
+state 65
+
+    (29) Processo_Entrada -> ENTRADA ABREPARENTESES Variavel . FECHAPARENTESES
+
+    FECHAPARENTESES shift and go to state 79
+
+
+state 66
+
+    (21) Processo_Se -> SE ABREPARENTESES Expressao . FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS
+    (22) Processo_Se -> SE ABREPARENTESES Expressao . FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS SENAO ABRECHAVETAS Corpo FECHACHAVETAS
+    (33) Expressao -> Expressao . ADICAO Termo
+    (34) Expressao -> Expressao . SUBTRACAO Termo
+    (35) Expressao -> Expressao . EQUIVALENTE Expressao
+    (36) Expressao -> Expressao . MAIOR Expressao
+    (37) Expressao -> Expressao . MENOR Expressao
+    (38) Expressao -> Expressao . MAIORIGUAL Expressao
+    (39) Expressao -> Expressao . MENORIGUAL Expressao
+    (40) Expressao -> Expressao . E Expressao
+    (41) Expressao -> Expressao . OU Expressao
+
+    FECHAPARENTESES shift and go to state 80
+    ADICAO          shift and go to state 30
+    SUBTRACAO       shift and go to state 31
+    EQUIVALENTE     shift and go to state 32
+    MAIOR           shift and go to state 33
+    MENOR           shift and go to state 34
+    MAIORIGUAL      shift and go to state 35
+    MENORIGUAL      shift and go to state 36
+    E               shift and go to state 37
+    OU              shift and go to state 38
+
+
+state 67
+
+    (23) Processo_Enquanto -> ENQUANTO ABREPARENTESES Expressao . FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS
+    (33) Expressao -> Expressao . ADICAO Termo
+    (34) Expressao -> Expressao . SUBTRACAO Termo
+    (35) Expressao -> Expressao . EQUIVALENTE Expressao
+    (36) Expressao -> Expressao . MAIOR Expressao
+    (37) Expressao -> Expressao . MENOR Expressao
+    (38) Expressao -> Expressao . MAIORIGUAL Expressao
+    (39) Expressao -> Expressao . MENORIGUAL Expressao
+    (40) Expressao -> Expressao . E Expressao
+    (41) Expressao -> Expressao . OU Expressao
+
+    FECHAPARENTESES shift and go to state 81
+    ADICAO          shift and go to state 30
+    SUBTRACAO       shift and go to state 31
+    EQUIVALENTE     shift and go to state 32
+    MAIOR           shift and go to state 33
+    MENOR           shift and go to state 34
+    MAIORIGUAL      shift and go to state 35
+    MENORIGUAL      shift and go to state 36
+    E               shift and go to state 37
+    OU              shift and go to state 38
+
+
+state 68
+
+    (24) Atribuicao -> ID IGUAL Expressao .
+    (33) Expressao -> Expressao . ADICAO Termo
+    (34) Expressao -> Expressao . SUBTRACAO Termo
+    (35) Expressao -> Expressao . EQUIVALENTE Expressao
+    (36) Expressao -> Expressao . MAIOR Expressao
+    (37) Expressao -> Expressao . MENOR Expressao
+    (38) Expressao -> Expressao . MAIORIGUAL Expressao
+    (39) Expressao -> Expressao . MENORIGUAL Expressao
+    (40) Expressao -> Expressao . E Expressao
+    (41) Expressao -> Expressao . OU Expressao
+
+    IMPRIMIR        reduce using rule 24 (Atribuicao -> ID IGUAL Expressao .)
+    ENTRADA         reduce using rule 24 (Atribuicao -> ID IGUAL Expressao .)
+    SE              reduce using rule 24 (Atribuicao -> ID IGUAL Expressao .)
+    ENQUANTO        reduce using rule 24 (Atribuicao -> ID IGUAL Expressao .)
+    ID              reduce using rule 24 (Atribuicao -> ID IGUAL Expressao .)
+    NAO             reduce using rule 24 (Atribuicao -> ID IGUAL Expressao .)
+    NUMERO          reduce using rule 24 (Atribuicao -> ID IGUAL Expressao .)
+    $end            reduce using rule 24 (Atribuicao -> ID IGUAL Expressao .)
+    FECHACHAVETAS   reduce using rule 24 (Atribuicao -> ID IGUAL Expressao .)
+    ADICAO          shift and go to state 30
+    SUBTRACAO       shift and go to state 31
+    EQUIVALENTE     shift and go to state 32
+    MAIOR           shift and go to state 33
+    MENOR           shift and go to state 34
+    MAIORIGUAL      shift and go to state 35
+    MENORIGUAL      shift and go to state 36
+    E               shift and go to state 37
+    OU              shift and go to state 38
+
+
+state 69
+
+    (25) Atribuicao -> ID ABREPARENTESESRET Fator . FECHAPARENTESESRET IGUAL Expressao
+    (26) Atribuicao -> ID ABREPARENTESESRET Fator . FECHAPARENTESESRET ABREPARENTESESRET Fator FECHAPARENTESESRET IGUAL Expressao
+    (43) Termo -> Fator .
+
+  ! shift/reduce conflict for FECHAPARENTESESRET resolved as shift
+    FECHAPARENTESESRET shift and go to state 82
+    MULTIPLICACAO   reduce using rule 43 (Termo -> Fator .)
+    DIVISAO         reduce using rule 43 (Termo -> Fator .)
+    RESTO           reduce using rule 43 (Termo -> Fator .)
+    ADICAO          reduce using rule 43 (Termo -> Fator .)
+    SUBTRACAO       reduce using rule 43 (Termo -> Fator .)
+    EQUIVALENTE     reduce using rule 43 (Termo -> Fator .)
+    MAIOR           reduce using rule 43 (Termo -> Fator .)
+    MENOR           reduce using rule 43 (Termo -> Fator .)
+    MAIORIGUAL      reduce using rule 43 (Termo -> Fator .)
+    MENORIGUAL      reduce using rule 43 (Termo -> Fator .)
+    E               reduce using rule 43 (Termo -> Fator .)
+    OU              reduce using rule 43 (Termo -> Fator .)
+
+  ! FECHAPARENTESESRET [ reduce using rule 43 (Termo -> Fator .) ]
+
+
+state 70
+
+    (49) Fator -> ID ABREPARENTESESRET Expressao . FECHAPARENTESESRET
+    (50) Fator -> ID ABREPARENTESESRET Expressao . FECHAPARENTESESRET ABREPARENTESESRET Expressao FECHAPARENTESESRET
+    (33) Expressao -> Expressao . ADICAO Termo
+    (34) Expressao -> Expressao . SUBTRACAO Termo
+    (35) Expressao -> Expressao . EQUIVALENTE Expressao
+    (36) Expressao -> Expressao . MAIOR Expressao
+    (37) Expressao -> Expressao . MENOR Expressao
+    (38) Expressao -> Expressao . MAIORIGUAL Expressao
+    (39) Expressao -> Expressao . MENORIGUAL Expressao
+    (40) Expressao -> Expressao . E Expressao
+    (41) Expressao -> Expressao . OU Expressao
+
+    FECHAPARENTESESRET shift and go to state 83
+    ADICAO          shift and go to state 30
+    SUBTRACAO       shift and go to state 31
+    EQUIVALENTE     shift and go to state 32
+    MAIOR           shift and go to state 33
+    MENOR           shift and go to state 34
+    MAIORIGUAL      shift and go to state 35
+    MENORIGUAL      shift and go to state 36
+    E               shift and go to state 37
+    OU              shift and go to state 38
+
+
+state 71
+
+    (44) Termo -> Termo MULTIPLICACAO Fator .
+
+    MULTIPLICACAO   reduce using rule 44 (Termo -> Termo MULTIPLICACAO Fator .)
+    DIVISAO         reduce using rule 44 (Termo -> Termo MULTIPLICACAO Fator .)
+    RESTO           reduce using rule 44 (Termo -> Termo MULTIPLICACAO Fator .)
+    ADICAO          reduce using rule 44 (Termo -> Termo MULTIPLICACAO Fator .)
+    SUBTRACAO       reduce using rule 44 (Termo -> Termo MULTIPLICACAO Fator .)
+    EQUIVALENTE     reduce using rule 44 (Termo -> Termo MULTIPLICACAO Fator .)
+    MAIOR           reduce using rule 44 (Termo -> Termo MULTIPLICACAO Fator .)
+    MENOR           reduce using rule 44 (Termo -> Termo MULTIPLICACAO Fator .)
+    MAIORIGUAL      reduce using rule 44 (Termo -> Termo MULTIPLICACAO Fator .)
+    MENORIGUAL      reduce using rule 44 (Termo -> Termo MULTIPLICACAO Fator .)
+    E               reduce using rule 44 (Termo -> Termo MULTIPLICACAO Fator .)
+    OU              reduce using rule 44 (Termo -> Termo MULTIPLICACAO Fator .)
+    IMPRIMIR        reduce using rule 44 (Termo -> Termo MULTIPLICACAO Fator .)
+    ENTRADA         reduce using rule 44 (Termo -> Termo MULTIPLICACAO Fator .)
+    SE              reduce using rule 44 (Termo -> Termo MULTIPLICACAO Fator .)
+    ENQUANTO        reduce using rule 44 (Termo -> Termo MULTIPLICACAO Fator .)
+    ID              reduce using rule 44 (Termo -> Termo MULTIPLICACAO Fator .)
+    NAO             reduce using rule 44 (Termo -> Termo MULTIPLICACAO Fator .)
+    NUMERO          reduce using rule 44 (Termo -> Termo MULTIPLICACAO Fator .)
+    $end            reduce using rule 44 (Termo -> Termo MULTIPLICACAO Fator .)
+    FECHAPARENTESES reduce using rule 44 (Termo -> Termo MULTIPLICACAO Fator .)
+    FECHACHAVETAS   reduce using rule 44 (Termo -> Termo MULTIPLICACAO Fator .)
+    FECHAPARENTESESRET reduce using rule 44 (Termo -> Termo MULTIPLICACAO Fator .)
+
+
+state 72
+
+    (45) Termo -> Termo DIVISAO Fator .
+
+    MULTIPLICACAO   reduce using rule 45 (Termo -> Termo DIVISAO Fator .)
+    DIVISAO         reduce using rule 45 (Termo -> Termo DIVISAO Fator .)
+    RESTO           reduce using rule 45 (Termo -> Termo DIVISAO Fator .)
+    ADICAO          reduce using rule 45 (Termo -> Termo DIVISAO Fator .)
+    SUBTRACAO       reduce using rule 45 (Termo -> Termo DIVISAO Fator .)
+    EQUIVALENTE     reduce using rule 45 (Termo -> Termo DIVISAO Fator .)
+    MAIOR           reduce using rule 45 (Termo -> Termo DIVISAO Fator .)
+    MENOR           reduce using rule 45 (Termo -> Termo DIVISAO Fator .)
+    MAIORIGUAL      reduce using rule 45 (Termo -> Termo DIVISAO Fator .)
+    MENORIGUAL      reduce using rule 45 (Termo -> Termo DIVISAO Fator .)
+    E               reduce using rule 45 (Termo -> Termo DIVISAO Fator .)
+    OU              reduce using rule 45 (Termo -> Termo DIVISAO Fator .)
+    IMPRIMIR        reduce using rule 45 (Termo -> Termo DIVISAO Fator .)
+    ENTRADA         reduce using rule 45 (Termo -> Termo DIVISAO Fator .)
+    SE              reduce using rule 45 (Termo -> Termo DIVISAO Fator .)
+    ENQUANTO        reduce using rule 45 (Termo -> Termo DIVISAO Fator .)
+    ID              reduce using rule 45 (Termo -> Termo DIVISAO Fator .)
+    NAO             reduce using rule 45 (Termo -> Termo DIVISAO Fator .)
+    NUMERO          reduce using rule 45 (Termo -> Termo DIVISAO Fator .)
+    $end            reduce using rule 45 (Termo -> Termo DIVISAO Fator .)
+    FECHAPARENTESES reduce using rule 45 (Termo -> Termo DIVISAO Fator .)
+    FECHACHAVETAS   reduce using rule 45 (Termo -> Termo DIVISAO Fator .)
+    FECHAPARENTESESRET reduce using rule 45 (Termo -> Termo DIVISAO Fator .)
+
+
+state 73
+
+    (46) Termo -> Termo RESTO Fator .
+
+    MULTIPLICACAO   reduce using rule 46 (Termo -> Termo RESTO Fator .)
+    DIVISAO         reduce using rule 46 (Termo -> Termo RESTO Fator .)
+    RESTO           reduce using rule 46 (Termo -> Termo RESTO Fator .)
+    ADICAO          reduce using rule 46 (Termo -> Termo RESTO Fator .)
+    SUBTRACAO       reduce using rule 46 (Termo -> Termo RESTO Fator .)
+    EQUIVALENTE     reduce using rule 46 (Termo -> Termo RESTO Fator .)
+    MAIOR           reduce using rule 46 (Termo -> Termo RESTO Fator .)
+    MENOR           reduce using rule 46 (Termo -> Termo RESTO Fator .)
+    MAIORIGUAL      reduce using rule 46 (Termo -> Termo RESTO Fator .)
+    MENORIGUAL      reduce using rule 46 (Termo -> Termo RESTO Fator .)
+    E               reduce using rule 46 (Termo -> Termo RESTO Fator .)
+    OU              reduce using rule 46 (Termo -> Termo RESTO Fator .)
+    IMPRIMIR        reduce using rule 46 (Termo -> Termo RESTO Fator .)
+    ENTRADA         reduce using rule 46 (Termo -> Termo RESTO Fator .)
+    SE              reduce using rule 46 (Termo -> Termo RESTO Fator .)
+    ENQUANTO        reduce using rule 46 (Termo -> Termo RESTO Fator .)
+    ID              reduce using rule 46 (Termo -> Termo RESTO Fator .)
+    NAO             reduce using rule 46 (Termo -> Termo RESTO Fator .)
+    NUMERO          reduce using rule 46 (Termo -> Termo RESTO Fator .)
+    $end            reduce using rule 46 (Termo -> Termo RESTO Fator .)
+    FECHAPARENTESES reduce using rule 46 (Termo -> Termo RESTO Fator .)
+    FECHACHAVETAS   reduce using rule 46 (Termo -> Termo RESTO Fator .)
+    FECHAPARENTESESRET reduce using rule 46 (Termo -> Termo RESTO Fator .)
+
+
+state 74
+
+    (49) Fator -> ID ABREPARENTESESRET . Expressao FECHAPARENTESESRET
+    (50) Fator -> ID ABREPARENTESESRET . Expressao FECHAPARENTESESRET ABREPARENTESESRET Expressao FECHAPARENTESESRET
+    (32) Expressao -> . Termo
+    (33) Expressao -> . Expressao ADICAO Termo
+    (34) Expressao -> . Expressao SUBTRACAO Termo
+    (35) Expressao -> . Expressao EQUIVALENTE Expressao
+    (36) Expressao -> . Expressao MAIOR Expressao
+    (37) Expressao -> . Expressao MENOR Expressao
+    (38) Expressao -> . Expressao MAIORIGUAL Expressao
+    (39) Expressao -> . Expressao MENORIGUAL Expressao
+    (40) Expressao -> . Expressao E Expressao
+    (41) Expressao -> . Expressao OU Expressao
+    (42) Expressao -> . NAO Expressao
+    (43) Termo -> . Fator
+    (44) Termo -> . Termo MULTIPLICACAO Fator
+    (45) Termo -> . Termo DIVISAO Fator
+    (46) Termo -> . Termo RESTO Fator
+    (47) Fator -> . ID
+    (48) Fator -> . NUMERO
+    (49) Fator -> . ID ABREPARENTESESRET Expressao FECHAPARENTESESRET
+    (50) Fator -> . ID ABREPARENTESESRET Expressao FECHAPARENTESESRET ABREPARENTESESRET Expressao FECHAPARENTESESRET
+
+    NAO             shift and go to state 21
+    ID              shift and go to state 51
+    NUMERO          shift and go to state 23
+
+    Expressao                      shift and go to state 70
+    Termo                          shift and go to state 20
+    Fator                          shift and go to state 22
+
+state 75
+
+    (9) Variaveis -> Variaveis VIRGULA Variavel .
+
+    VIRGULA         reduce using rule 9 (Variaveis -> Variaveis VIRGULA Variavel .)
+    INTEIRO         reduce using rule 9 (Variaveis -> Variaveis VIRGULA Variavel .)
+    IMPRIMIR        reduce using rule 9 (Variaveis -> Variaveis VIRGULA Variavel .)
+    ENTRADA         reduce using rule 9 (Variaveis -> Variaveis VIRGULA Variavel .)
+    SE              reduce using rule 9 (Variaveis -> Variaveis VIRGULA Variavel .)
+    ENQUANTO        reduce using rule 9 (Variaveis -> Variaveis VIRGULA Variavel .)
+    ID              reduce using rule 9 (Variaveis -> Variaveis VIRGULA Variavel .)
+    NAO             reduce using rule 9 (Variaveis -> Variaveis VIRGULA Variavel .)
+    NUMERO          reduce using rule 9 (Variaveis -> Variaveis VIRGULA Variavel .)
+
+
+state 76
+
+    (11) Variavel -> ID ABREPARENTESESRET NUMERO . FECHAPARENTESESRET
+    (12) Variavel -> ID ABREPARENTESESRET NUMERO . FECHAPARENTESESRET ABREPARENTESESRET NUMERO FECHAPARENTESESRET
+
+    FECHAPARENTESESRET shift and go to state 84
+
+
+state 77
+
+    (27) Processo_Imprimir -> IMPRIMIR ABREPARENTESES Expressao FECHAPARENTESES .
+
+    IMPRIMIR        reduce using rule 27 (Processo_Imprimir -> IMPRIMIR ABREPARENTESES Expressao FECHAPARENTESES .)
+    ENTRADA         reduce using rule 27 (Processo_Imprimir -> IMPRIMIR ABREPARENTESES Expressao FECHAPARENTESES .)
+    SE              reduce using rule 27 (Processo_Imprimir -> IMPRIMIR ABREPARENTESES Expressao FECHAPARENTESES .)
+    ENQUANTO        reduce using rule 27 (Processo_Imprimir -> IMPRIMIR ABREPARENTESES Expressao FECHAPARENTESES .)
+    ID              reduce using rule 27 (Processo_Imprimir -> IMPRIMIR ABREPARENTESES Expressao FECHAPARENTESES .)
+    NAO             reduce using rule 27 (Processo_Imprimir -> IMPRIMIR ABREPARENTESES Expressao FECHAPARENTESES .)
+    NUMERO          reduce using rule 27 (Processo_Imprimir -> IMPRIMIR ABREPARENTESES Expressao FECHAPARENTESES .)
+    $end            reduce using rule 27 (Processo_Imprimir -> IMPRIMIR ABREPARENTESES Expressao FECHAPARENTESES .)
+    FECHACHAVETAS   reduce using rule 27 (Processo_Imprimir -> IMPRIMIR ABREPARENTESES Expressao FECHAPARENTESES .)
+
+
+state 78
+
+    (28) Processo_Imprimir -> IMPRIMIR ABREPARENTESES CITACAO FECHAPARENTESES .
+
+    IMPRIMIR        reduce using rule 28 (Processo_Imprimir -> IMPRIMIR ABREPARENTESES CITACAO FECHAPARENTESES .)
+    ENTRADA         reduce using rule 28 (Processo_Imprimir -> IMPRIMIR ABREPARENTESES CITACAO FECHAPARENTESES .)
+    SE              reduce using rule 28 (Processo_Imprimir -> IMPRIMIR ABREPARENTESES CITACAO FECHAPARENTESES .)
+    ENQUANTO        reduce using rule 28 (Processo_Imprimir -> IMPRIMIR ABREPARENTESES CITACAO FECHAPARENTESES .)
+    ID              reduce using rule 28 (Processo_Imprimir -> IMPRIMIR ABREPARENTESES CITACAO FECHAPARENTESES .)
+    NAO             reduce using rule 28 (Processo_Imprimir -> IMPRIMIR ABREPARENTESES CITACAO FECHAPARENTESES .)
+    NUMERO          reduce using rule 28 (Processo_Imprimir -> IMPRIMIR ABREPARENTESES CITACAO FECHAPARENTESES .)
+    $end            reduce using rule 28 (Processo_Imprimir -> IMPRIMIR ABREPARENTESES CITACAO FECHAPARENTESES .)
+    FECHACHAVETAS   reduce using rule 28 (Processo_Imprimir -> IMPRIMIR ABREPARENTESES CITACAO FECHAPARENTESES .)
+
+
+state 79
+
+    (29) Processo_Entrada -> ENTRADA ABREPARENTESES Variavel FECHAPARENTESES .
+
+    IMPRIMIR        reduce using rule 29 (Processo_Entrada -> ENTRADA ABREPARENTESES Variavel FECHAPARENTESES .)
+    ENTRADA         reduce using rule 29 (Processo_Entrada -> ENTRADA ABREPARENTESES Variavel FECHAPARENTESES .)
+    SE              reduce using rule 29 (Processo_Entrada -> ENTRADA ABREPARENTESES Variavel FECHAPARENTESES .)
+    ENQUANTO        reduce using rule 29 (Processo_Entrada -> ENTRADA ABREPARENTESES Variavel FECHAPARENTESES .)
+    ID              reduce using rule 29 (Processo_Entrada -> ENTRADA ABREPARENTESES Variavel FECHAPARENTESES .)
+    NAO             reduce using rule 29 (Processo_Entrada -> ENTRADA ABREPARENTESES Variavel FECHAPARENTESES .)
+    NUMERO          reduce using rule 29 (Processo_Entrada -> ENTRADA ABREPARENTESES Variavel FECHAPARENTESES .)
+    $end            reduce using rule 29 (Processo_Entrada -> ENTRADA ABREPARENTESES Variavel FECHAPARENTESES .)
+    FECHACHAVETAS   reduce using rule 29 (Processo_Entrada -> ENTRADA ABREPARENTESES Variavel FECHAPARENTESES .)
+
+
+state 80
+
+    (21) Processo_Se -> SE ABREPARENTESES Expressao FECHAPARENTESES . ABRECHAVETAS Corpo FECHACHAVETAS
+    (22) Processo_Se -> SE ABREPARENTESES Expressao FECHAPARENTESES . ABRECHAVETAS Corpo FECHACHAVETAS SENAO ABRECHAVETAS Corpo FECHACHAVETAS
+
+    ABRECHAVETAS    shift and go to state 85
+
+
+state 81
+
+    (23) Processo_Enquanto -> ENQUANTO ABREPARENTESES Expressao FECHAPARENTESES . ABRECHAVETAS Corpo FECHACHAVETAS
+
+    ABRECHAVETAS    shift and go to state 86
+
+
+state 82
+
+    (25) Atribuicao -> ID ABREPARENTESESRET Fator FECHAPARENTESESRET . IGUAL Expressao
+    (26) Atribuicao -> ID ABREPARENTESESRET Fator FECHAPARENTESESRET . ABREPARENTESESRET Fator FECHAPARENTESESRET IGUAL Expressao
+
+    IGUAL           shift and go to state 88
+    ABREPARENTESESRET shift and go to state 87
+
+
+state 83
+
+    (49) Fator -> ID ABREPARENTESESRET Expressao FECHAPARENTESESRET .
+    (50) Fator -> ID ABREPARENTESESRET Expressao FECHAPARENTESESRET . ABREPARENTESESRET Expressao FECHAPARENTESESRET
+
+    MULTIPLICACAO   reduce using rule 49 (Fator -> ID ABREPARENTESESRET Expressao FECHAPARENTESESRET .)
+    DIVISAO         reduce using rule 49 (Fator -> ID ABREPARENTESESRET Expressao FECHAPARENTESESRET .)
+    RESTO           reduce using rule 49 (Fator -> ID ABREPARENTESESRET Expressao FECHAPARENTESESRET .)
+    ADICAO          reduce using rule 49 (Fator -> ID ABREPARENTESESRET Expressao FECHAPARENTESESRET .)
+    SUBTRACAO       reduce using rule 49 (Fator -> ID ABREPARENTESESRET Expressao FECHAPARENTESESRET .)
+    EQUIVALENTE     reduce using rule 49 (Fator -> ID ABREPARENTESESRET Expressao FECHAPARENTESESRET .)
+    MAIOR           reduce using rule 49 (Fator -> ID ABREPARENTESESRET Expressao FECHAPARENTESESRET .)
+    MENOR           reduce using rule 49 (Fator -> ID ABREPARENTESESRET Expressao FECHAPARENTESESRET .)
+    MAIORIGUAL      reduce using rule 49 (Fator -> ID ABREPARENTESESRET Expressao FECHAPARENTESESRET .)
+    MENORIGUAL      reduce using rule 49 (Fator -> ID ABREPARENTESESRET Expressao FECHAPARENTESESRET .)
+    E               reduce using rule 49 (Fator -> ID ABREPARENTESESRET Expressao FECHAPARENTESESRET .)
+    OU              reduce using rule 49 (Fator -> ID ABREPARENTESESRET Expressao FECHAPARENTESESRET .)
+    IMPRIMIR        reduce using rule 49 (Fator -> ID ABREPARENTESESRET Expressao FECHAPARENTESESRET .)
+    ENTRADA         reduce using rule 49 (Fator -> ID ABREPARENTESESRET Expressao FECHAPARENTESESRET .)
+    SE              reduce using rule 49 (Fator -> ID ABREPARENTESESRET Expressao FECHAPARENTESESRET .)
+    ENQUANTO        reduce using rule 49 (Fator -> ID ABREPARENTESESRET Expressao FECHAPARENTESESRET .)
+    ID              reduce using rule 49 (Fator -> ID ABREPARENTESESRET Expressao FECHAPARENTESESRET .)
+    NAO             reduce using rule 49 (Fator -> ID ABREPARENTESESRET Expressao FECHAPARENTESESRET .)
+    NUMERO          reduce using rule 49 (Fator -> ID ABREPARENTESESRET Expressao FECHAPARENTESESRET .)
+    $end            reduce using rule 49 (Fator -> ID ABREPARENTESESRET Expressao FECHAPARENTESESRET .)
+    FECHAPARENTESES reduce using rule 49 (Fator -> ID ABREPARENTESESRET Expressao FECHAPARENTESESRET .)
+    FECHACHAVETAS   reduce using rule 49 (Fator -> ID ABREPARENTESESRET Expressao FECHAPARENTESESRET .)
+    FECHAPARENTESESRET reduce using rule 49 (Fator -> ID ABREPARENTESESRET Expressao FECHAPARENTESESRET .)
+    ABREPARENTESESRET shift and go to state 89
+
+
+state 84
+
+    (11) Variavel -> ID ABREPARENTESESRET NUMERO FECHAPARENTESESRET .
+    (12) Variavel -> ID ABREPARENTESESRET NUMERO FECHAPARENTESESRET . ABREPARENTESESRET NUMERO FECHAPARENTESESRET
+
+    VIRGULA         reduce using rule 11 (Variavel -> ID ABREPARENTESESRET NUMERO FECHAPARENTESESRET .)
+    INTEIRO         reduce using rule 11 (Variavel -> ID ABREPARENTESESRET NUMERO FECHAPARENTESESRET .)
+    IMPRIMIR        reduce using rule 11 (Variavel -> ID ABREPARENTESESRET NUMERO FECHAPARENTESESRET .)
+    ENTRADA         reduce using rule 11 (Variavel -> ID ABREPARENTESESRET NUMERO FECHAPARENTESESRET .)
+    SE              reduce using rule 11 (Variavel -> ID ABREPARENTESESRET NUMERO FECHAPARENTESESRET .)
+    ENQUANTO        reduce using rule 11 (Variavel -> ID ABREPARENTESESRET NUMERO FECHAPARENTESESRET .)
+    ID              reduce using rule 11 (Variavel -> ID ABREPARENTESESRET NUMERO FECHAPARENTESESRET .)
+    NAO             reduce using rule 11 (Variavel -> ID ABREPARENTESESRET NUMERO FECHAPARENTESESRET .)
+    NUMERO          reduce using rule 11 (Variavel -> ID ABREPARENTESESRET NUMERO FECHAPARENTESESRET .)
+    FECHAPARENTESES reduce using rule 11 (Variavel -> ID ABREPARENTESESRET NUMERO FECHAPARENTESESRET .)
+    ABREPARENTESESRET shift and go to state 90
+
+
+state 85
+
+    (21) Processo_Se -> SE ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS . Corpo FECHACHAVETAS
+    (22) Processo_Se -> SE ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS . Corpo FECHACHAVETAS SENAO ABRECHAVETAS Corpo FECHACHAVETAS
+    (3) Corpo -> . Processo
+    (4) Corpo -> . Corpo Processo
+    (13) Processo -> . Processo_Imprimir
+    (14) Processo -> . Processo_Entrada
+    (15) Processo -> . Processo_Se
+    (16) Processo -> . Processo_Enquanto
+    (17) Processo -> . Incremento
+    (18) Processo -> . Decremento
+    (19) Processo -> . Expressao
+    (20) Processo -> . Atribuicao
+    (27) Processo_Imprimir -> . IMPRIMIR ABREPARENTESES Expressao FECHAPARENTESES
+    (28) Processo_Imprimir -> . IMPRIMIR ABREPARENTESES CITACAO FECHAPARENTESES
+    (29) Processo_Entrada -> . ENTRADA ABREPARENTESES Variavel FECHAPARENTESES
+    (21) Processo_Se -> . SE ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS
+    (22) Processo_Se -> . SE ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS SENAO ABRECHAVETAS Corpo FECHACHAVETAS
+    (23) Processo_Enquanto -> . ENQUANTO ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS
+    (30) Incremento -> . ID INCREMENTO
+    (31) Decremento -> . ID DECREMENTO
+    (32) Expressao -> . Termo
+    (33) Expressao -> . Expressao ADICAO Termo
+    (34) Expressao -> . Expressao SUBTRACAO Termo
+    (35) Expressao -> . Expressao EQUIVALENTE Expressao
+    (36) Expressao -> . Expressao MAIOR Expressao
+    (37) Expressao -> . Expressao MENOR Expressao
+    (38) Expressao -> . Expressao MAIORIGUAL Expressao
+    (39) Expressao -> . Expressao MENORIGUAL Expressao
+    (40) Expressao -> . Expressao E Expressao
+    (41) Expressao -> . Expressao OU Expressao
+    (42) Expressao -> . NAO Expressao
+    (24) Atribuicao -> . ID IGUAL Expressao
+    (25) Atribuicao -> . ID ABREPARENTESESRET Fator FECHAPARENTESESRET IGUAL Expressao
+    (26) Atribuicao -> . ID ABREPARENTESESRET Fator FECHAPARENTESESRET ABREPARENTESESRET Fator FECHAPARENTESESRET IGUAL Expressao
+    (43) Termo -> . Fator
+    (44) Termo -> . Termo MULTIPLICACAO Fator
+    (45) Termo -> . Termo DIVISAO Fator
+    (46) Termo -> . Termo RESTO Fator
+    (47) Fator -> . ID
+    (48) Fator -> . NUMERO
+    (49) Fator -> . ID ABREPARENTESESRET Expressao FECHAPARENTESESRET
+    (50) Fator -> . ID ABREPARENTESESRET Expressao FECHAPARENTESESRET ABREPARENTESESRET Expressao FECHAPARENTESESRET
+
+    IMPRIMIR        shift and go to state 15
+    ENTRADA         shift and go to state 16
+    SE              shift and go to state 17
+    ENQUANTO        shift and go to state 18
+    ID              shift and go to state 19
+    NAO             shift and go to state 21
+    NUMERO          shift and go to state 23
+
+    Expressao                      shift and go to state 13
+    Corpo                          shift and go to state 91
+    Processo                       shift and go to state 5
+    Processo_Imprimir              shift and go to state 7
+    Processo_Entrada               shift and go to state 8
+    Processo_Se                    shift and go to state 9
+    Processo_Enquanto              shift and go to state 10
+    Incremento                     shift and go to state 11
+    Decremento                     shift and go to state 12
+    Atribuicao                     shift and go to state 14
+    Termo                          shift and go to state 20
+    Fator                          shift and go to state 22
+
+state 86
+
+    (23) Processo_Enquanto -> ENQUANTO ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS . Corpo FECHACHAVETAS
+    (3) Corpo -> . Processo
+    (4) Corpo -> . Corpo Processo
+    (13) Processo -> . Processo_Imprimir
+    (14) Processo -> . Processo_Entrada
+    (15) Processo -> . Processo_Se
+    (16) Processo -> . Processo_Enquanto
+    (17) Processo -> . Incremento
+    (18) Processo -> . Decremento
+    (19) Processo -> . Expressao
+    (20) Processo -> . Atribuicao
+    (27) Processo_Imprimir -> . IMPRIMIR ABREPARENTESES Expressao FECHAPARENTESES
+    (28) Processo_Imprimir -> . IMPRIMIR ABREPARENTESES CITACAO FECHAPARENTESES
+    (29) Processo_Entrada -> . ENTRADA ABREPARENTESES Variavel FECHAPARENTESES
+    (21) Processo_Se -> . SE ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS
+    (22) Processo_Se -> . SE ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS SENAO ABRECHAVETAS Corpo FECHACHAVETAS
+    (23) Processo_Enquanto -> . ENQUANTO ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS
+    (30) Incremento -> . ID INCREMENTO
+    (31) Decremento -> . ID DECREMENTO
+    (32) Expressao -> . Termo
+    (33) Expressao -> . Expressao ADICAO Termo
+    (34) Expressao -> . Expressao SUBTRACAO Termo
+    (35) Expressao -> . Expressao EQUIVALENTE Expressao
+    (36) Expressao -> . Expressao MAIOR Expressao
+    (37) Expressao -> . Expressao MENOR Expressao
+    (38) Expressao -> . Expressao MAIORIGUAL Expressao
+    (39) Expressao -> . Expressao MENORIGUAL Expressao
+    (40) Expressao -> . Expressao E Expressao
+    (41) Expressao -> . Expressao OU Expressao
+    (42) Expressao -> . NAO Expressao
+    (24) Atribuicao -> . ID IGUAL Expressao
+    (25) Atribuicao -> . ID ABREPARENTESESRET Fator FECHAPARENTESESRET IGUAL Expressao
+    (26) Atribuicao -> . ID ABREPARENTESESRET Fator FECHAPARENTESESRET ABREPARENTESESRET Fator FECHAPARENTESESRET IGUAL Expressao
+    (43) Termo -> . Fator
+    (44) Termo -> . Termo MULTIPLICACAO Fator
+    (45) Termo -> . Termo DIVISAO Fator
+    (46) Termo -> . Termo RESTO Fator
+    (47) Fator -> . ID
+    (48) Fator -> . NUMERO
+    (49) Fator -> . ID ABREPARENTESESRET Expressao FECHAPARENTESESRET
+    (50) Fator -> . ID ABREPARENTESESRET Expressao FECHAPARENTESESRET ABREPARENTESESRET Expressao FECHAPARENTESESRET
+
+    IMPRIMIR        shift and go to state 15
+    ENTRADA         shift and go to state 16
+    SE              shift and go to state 17
+    ENQUANTO        shift and go to state 18
+    ID              shift and go to state 19
+    NAO             shift and go to state 21
+    NUMERO          shift and go to state 23
+
+    Expressao                      shift and go to state 13
+    Corpo                          shift and go to state 92
+    Processo                       shift and go to state 5
+    Processo_Imprimir              shift and go to state 7
+    Processo_Entrada               shift and go to state 8
+    Processo_Se                    shift and go to state 9
+    Processo_Enquanto              shift and go to state 10
+    Incremento                     shift and go to state 11
+    Decremento                     shift and go to state 12
+    Atribuicao                     shift and go to state 14
+    Termo                          shift and go to state 20
+    Fator                          shift and go to state 22
+
+state 87
+
+    (26) Atribuicao -> ID ABREPARENTESESRET Fator FECHAPARENTESESRET ABREPARENTESESRET . Fator FECHAPARENTESESRET IGUAL Expressao
+    (47) Fator -> . ID
+    (48) Fator -> . NUMERO
+    (49) Fator -> . ID ABREPARENTESESRET Expressao FECHAPARENTESESRET
+    (50) Fator -> . ID ABREPARENTESESRET Expressao FECHAPARENTESESRET ABREPARENTESESRET Expressao FECHAPARENTESESRET
+
+    ID              shift and go to state 51
+    NUMERO          shift and go to state 23
+
+    Fator                          shift and go to state 93
+
+state 88
+
+    (25) Atribuicao -> ID ABREPARENTESESRET Fator FECHAPARENTESESRET IGUAL . Expressao
+    (32) Expressao -> . Termo
+    (33) Expressao -> . Expressao ADICAO Termo
+    (34) Expressao -> . Expressao SUBTRACAO Termo
+    (35) Expressao -> . Expressao EQUIVALENTE Expressao
+    (36) Expressao -> . Expressao MAIOR Expressao
+    (37) Expressao -> . Expressao MENOR Expressao
+    (38) Expressao -> . Expressao MAIORIGUAL Expressao
+    (39) Expressao -> . Expressao MENORIGUAL Expressao
+    (40) Expressao -> . Expressao E Expressao
+    (41) Expressao -> . Expressao OU Expressao
+    (42) Expressao -> . NAO Expressao
+    (43) Termo -> . Fator
+    (44) Termo -> . Termo MULTIPLICACAO Fator
+    (45) Termo -> . Termo DIVISAO Fator
+    (46) Termo -> . Termo RESTO Fator
+    (47) Fator -> . ID
+    (48) Fator -> . NUMERO
+    (49) Fator -> . ID ABREPARENTESESRET Expressao FECHAPARENTESESRET
+    (50) Fator -> . ID ABREPARENTESESRET Expressao FECHAPARENTESESRET ABREPARENTESESRET Expressao FECHAPARENTESESRET
+
+    NAO             shift and go to state 21
+    ID              shift and go to state 51
+    NUMERO          shift and go to state 23
+
+    Fator                          shift and go to state 22
+    Expressao                      shift and go to state 94
+    Termo                          shift and go to state 20
+
+state 89
+
+    (50) Fator -> ID ABREPARENTESESRET Expressao FECHAPARENTESESRET ABREPARENTESESRET . Expressao FECHAPARENTESESRET
+    (32) Expressao -> . Termo
+    (33) Expressao -> . Expressao ADICAO Termo
+    (34) Expressao -> . Expressao SUBTRACAO Termo
+    (35) Expressao -> . Expressao EQUIVALENTE Expressao
+    (36) Expressao -> . Expressao MAIOR Expressao
+    (37) Expressao -> . Expressao MENOR Expressao
+    (38) Expressao -> . Expressao MAIORIGUAL Expressao
+    (39) Expressao -> . Expressao MENORIGUAL Expressao
+    (40) Expressao -> . Expressao E Expressao
+    (41) Expressao -> . Expressao OU Expressao
+    (42) Expressao -> . NAO Expressao
+    (43) Termo -> . Fator
+    (44) Termo -> . Termo MULTIPLICACAO Fator
+    (45) Termo -> . Termo DIVISAO Fator
+    (46) Termo -> . Termo RESTO Fator
+    (47) Fator -> . ID
+    (48) Fator -> . NUMERO
+    (49) Fator -> . ID ABREPARENTESESRET Expressao FECHAPARENTESESRET
+    (50) Fator -> . ID ABREPARENTESESRET Expressao FECHAPARENTESESRET ABREPARENTESESRET Expressao FECHAPARENTESESRET
+
+    NAO             shift and go to state 21
+    ID              shift and go to state 51
+    NUMERO          shift and go to state 23
+
+    Expressao                      shift and go to state 95
+    Termo                          shift and go to state 20
+    Fator                          shift and go to state 22
+
+state 90
+
+    (12) Variavel -> ID ABREPARENTESESRET NUMERO FECHAPARENTESESRET ABREPARENTESESRET . NUMERO FECHAPARENTESESRET
+
+    NUMERO          shift and go to state 96
+
+
+state 91
+
+    (21) Processo_Se -> SE ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS Corpo . FECHACHAVETAS
+    (22) Processo_Se -> SE ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS Corpo . FECHACHAVETAS SENAO ABRECHAVETAS Corpo FECHACHAVETAS
+    (4) Corpo -> Corpo . Processo
+    (13) Processo -> . Processo_Imprimir
+    (14) Processo -> . Processo_Entrada
+    (15) Processo -> . Processo_Se
+    (16) Processo -> . Processo_Enquanto
+    (17) Processo -> . Incremento
+    (18) Processo -> . Decremento
+    (19) Processo -> . Expressao
+    (20) Processo -> . Atribuicao
+    (27) Processo_Imprimir -> . IMPRIMIR ABREPARENTESES Expressao FECHAPARENTESES
+    (28) Processo_Imprimir -> . IMPRIMIR ABREPARENTESES CITACAO FECHAPARENTESES
+    (29) Processo_Entrada -> . ENTRADA ABREPARENTESES Variavel FECHAPARENTESES
+    (21) Processo_Se -> . SE ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS
+    (22) Processo_Se -> . SE ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS SENAO ABRECHAVETAS Corpo FECHACHAVETAS
+    (23) Processo_Enquanto -> . ENQUANTO ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS
+    (30) Incremento -> . ID INCREMENTO
+    (31) Decremento -> . ID DECREMENTO
+    (32) Expressao -> . Termo
+    (33) Expressao -> . Expressao ADICAO Termo
+    (34) Expressao -> . Expressao SUBTRACAO Termo
+    (35) Expressao -> . Expressao EQUIVALENTE Expressao
+    (36) Expressao -> . Expressao MAIOR Expressao
+    (37) Expressao -> . Expressao MENOR Expressao
+    (38) Expressao -> . Expressao MAIORIGUAL Expressao
+    (39) Expressao -> . Expressao MENORIGUAL Expressao
+    (40) Expressao -> . Expressao E Expressao
+    (41) Expressao -> . Expressao OU Expressao
+    (42) Expressao -> . NAO Expressao
+    (24) Atribuicao -> . ID IGUAL Expressao
+    (25) Atribuicao -> . ID ABREPARENTESESRET Fator FECHAPARENTESESRET IGUAL Expressao
+    (26) Atribuicao -> . ID ABREPARENTESESRET Fator FECHAPARENTESESRET ABREPARENTESESRET Fator FECHAPARENTESESRET IGUAL Expressao
+    (43) Termo -> . Fator
+    (44) Termo -> . Termo MULTIPLICACAO Fator
+    (45) Termo -> . Termo DIVISAO Fator
+    (46) Termo -> . Termo RESTO Fator
+    (47) Fator -> . ID
+    (48) Fator -> . NUMERO
+    (49) Fator -> . ID ABREPARENTESESRET Expressao FECHAPARENTESESRET
+    (50) Fator -> . ID ABREPARENTESESRET Expressao FECHAPARENTESESRET ABREPARENTESESRET Expressao FECHAPARENTESESRET
+
+    FECHACHAVETAS   shift and go to state 97
+    IMPRIMIR        shift and go to state 15
+    ENTRADA         shift and go to state 16
+    SE              shift and go to state 17
+    ENQUANTO        shift and go to state 18
+    ID              shift and go to state 19
+    NAO             shift and go to state 21
+    NUMERO          shift and go to state 23
+
+    Expressao                      shift and go to state 13
+    Processo                       shift and go to state 26
+    Processo_Imprimir              shift and go to state 7
+    Processo_Entrada               shift and go to state 8
+    Processo_Se                    shift and go to state 9
+    Processo_Enquanto              shift and go to state 10
+    Incremento                     shift and go to state 11
+    Decremento                     shift and go to state 12
+    Atribuicao                     shift and go to state 14
+    Termo                          shift and go to state 20
+    Fator                          shift and go to state 22
+
+state 92
+
+    (23) Processo_Enquanto -> ENQUANTO ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS Corpo . FECHACHAVETAS
+    (4) Corpo -> Corpo . Processo
+    (13) Processo -> . Processo_Imprimir
+    (14) Processo -> . Processo_Entrada
+    (15) Processo -> . Processo_Se
+    (16) Processo -> . Processo_Enquanto
+    (17) Processo -> . Incremento
+    (18) Processo -> . Decremento
+    (19) Processo -> . Expressao
+    (20) Processo -> . Atribuicao
+    (27) Processo_Imprimir -> . IMPRIMIR ABREPARENTESES Expressao FECHAPARENTESES
+    (28) Processo_Imprimir -> . IMPRIMIR ABREPARENTESES CITACAO FECHAPARENTESES
+    (29) Processo_Entrada -> . ENTRADA ABREPARENTESES Variavel FECHAPARENTESES
+    (21) Processo_Se -> . SE ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS
+    (22) Processo_Se -> . SE ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS SENAO ABRECHAVETAS Corpo FECHACHAVETAS
+    (23) Processo_Enquanto -> . ENQUANTO ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS
+    (30) Incremento -> . ID INCREMENTO
+    (31) Decremento -> . ID DECREMENTO
+    (32) Expressao -> . Termo
+    (33) Expressao -> . Expressao ADICAO Termo
+    (34) Expressao -> . Expressao SUBTRACAO Termo
+    (35) Expressao -> . Expressao EQUIVALENTE Expressao
+    (36) Expressao -> . Expressao MAIOR Expressao
+    (37) Expressao -> . Expressao MENOR Expressao
+    (38) Expressao -> . Expressao MAIORIGUAL Expressao
+    (39) Expressao -> . Expressao MENORIGUAL Expressao
+    (40) Expressao -> . Expressao E Expressao
+    (41) Expressao -> . Expressao OU Expressao
+    (42) Expressao -> . NAO Expressao
+    (24) Atribuicao -> . ID IGUAL Expressao
+    (25) Atribuicao -> . ID ABREPARENTESESRET Fator FECHAPARENTESESRET IGUAL Expressao
+    (26) Atribuicao -> . ID ABREPARENTESESRET Fator FECHAPARENTESESRET ABREPARENTESESRET Fator FECHAPARENTESESRET IGUAL Expressao
+    (43) Termo -> . Fator
+    (44) Termo -> . Termo MULTIPLICACAO Fator
+    (45) Termo -> . Termo DIVISAO Fator
+    (46) Termo -> . Termo RESTO Fator
+    (47) Fator -> . ID
+    (48) Fator -> . NUMERO
+    (49) Fator -> . ID ABREPARENTESESRET Expressao FECHAPARENTESESRET
+    (50) Fator -> . ID ABREPARENTESESRET Expressao FECHAPARENTESESRET ABREPARENTESESRET Expressao FECHAPARENTESESRET
+
+    FECHACHAVETAS   shift and go to state 98
+    IMPRIMIR        shift and go to state 15
+    ENTRADA         shift and go to state 16
+    SE              shift and go to state 17
+    ENQUANTO        shift and go to state 18
+    ID              shift and go to state 19
+    NAO             shift and go to state 21
+    NUMERO          shift and go to state 23
+
+    Expressao                      shift and go to state 13
+    Processo                       shift and go to state 26
+    Processo_Imprimir              shift and go to state 7
+    Processo_Entrada               shift and go to state 8
+    Processo_Se                    shift and go to state 9
+    Processo_Enquanto              shift and go to state 10
+    Incremento                     shift and go to state 11
+    Decremento                     shift and go to state 12
+    Atribuicao                     shift and go to state 14
+    Termo                          shift and go to state 20
+    Fator                          shift and go to state 22
+
+state 93
+
+    (26) Atribuicao -> ID ABREPARENTESESRET Fator FECHAPARENTESESRET ABREPARENTESESRET Fator . FECHAPARENTESESRET IGUAL Expressao
+
+    FECHAPARENTESESRET shift and go to state 99
+
+
+state 94
+
+    (25) Atribuicao -> ID ABREPARENTESESRET Fator FECHAPARENTESESRET IGUAL Expressao .
+    (33) Expressao -> Expressao . ADICAO Termo
+    (34) Expressao -> Expressao . SUBTRACAO Termo
+    (35) Expressao -> Expressao . EQUIVALENTE Expressao
+    (36) Expressao -> Expressao . MAIOR Expressao
+    (37) Expressao -> Expressao . MENOR Expressao
+    (38) Expressao -> Expressao . MAIORIGUAL Expressao
+    (39) Expressao -> Expressao . MENORIGUAL Expressao
+    (40) Expressao -> Expressao . E Expressao
+    (41) Expressao -> Expressao . OU Expressao
+
+    IMPRIMIR        reduce using rule 25 (Atribuicao -> ID ABREPARENTESESRET Fator FECHAPARENTESESRET IGUAL Expressao .)
+    ENTRADA         reduce using rule 25 (Atribuicao -> ID ABREPARENTESESRET Fator FECHAPARENTESESRET IGUAL Expressao .)
+    SE              reduce using rule 25 (Atribuicao -> ID ABREPARENTESESRET Fator FECHAPARENTESESRET IGUAL Expressao .)
+    ENQUANTO        reduce using rule 25 (Atribuicao -> ID ABREPARENTESESRET Fator FECHAPARENTESESRET IGUAL Expressao .)
+    ID              reduce using rule 25 (Atribuicao -> ID ABREPARENTESESRET Fator FECHAPARENTESESRET IGUAL Expressao .)
+    NAO             reduce using rule 25 (Atribuicao -> ID ABREPARENTESESRET Fator FECHAPARENTESESRET IGUAL Expressao .)
+    NUMERO          reduce using rule 25 (Atribuicao -> ID ABREPARENTESESRET Fator FECHAPARENTESESRET IGUAL Expressao .)
+    $end            reduce using rule 25 (Atribuicao -> ID ABREPARENTESESRET Fator FECHAPARENTESESRET IGUAL Expressao .)
+    FECHACHAVETAS   reduce using rule 25 (Atribuicao -> ID ABREPARENTESESRET Fator FECHAPARENTESESRET IGUAL Expressao .)
+    ADICAO          shift and go to state 30
+    SUBTRACAO       shift and go to state 31
+    EQUIVALENTE     shift and go to state 32
+    MAIOR           shift and go to state 33
+    MENOR           shift and go to state 34
+    MAIORIGUAL      shift and go to state 35
+    MENORIGUAL      shift and go to state 36
+    E               shift and go to state 37
+    OU              shift and go to state 38
+
+
+state 95
+
+    (50) Fator -> ID ABREPARENTESESRET Expressao FECHAPARENTESESRET ABREPARENTESESRET Expressao . FECHAPARENTESESRET
+    (33) Expressao -> Expressao . ADICAO Termo
+    (34) Expressao -> Expressao . SUBTRACAO Termo
+    (35) Expressao -> Expressao . EQUIVALENTE Expressao
+    (36) Expressao -> Expressao . MAIOR Expressao
+    (37) Expressao -> Expressao . MENOR Expressao
+    (38) Expressao -> Expressao . MAIORIGUAL Expressao
+    (39) Expressao -> Expressao . MENORIGUAL Expressao
+    (40) Expressao -> Expressao . E Expressao
+    (41) Expressao -> Expressao . OU Expressao
+
+    FECHAPARENTESESRET shift and go to state 100
+    ADICAO          shift and go to state 30
+    SUBTRACAO       shift and go to state 31
+    EQUIVALENTE     shift and go to state 32
+    MAIOR           shift and go to state 33
+    MENOR           shift and go to state 34
+    MAIORIGUAL      shift and go to state 35
+    MENORIGUAL      shift and go to state 36
+    E               shift and go to state 37
+    OU              shift and go to state 38
+
+
+state 96
+
+    (12) Variavel -> ID ABREPARENTESESRET NUMERO FECHAPARENTESESRET ABREPARENTESESRET NUMERO . FECHAPARENTESESRET
+
+    FECHAPARENTESESRET shift and go to state 101
+
+
+state 97
+
+    (21) Processo_Se -> SE ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS .
+    (22) Processo_Se -> SE ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS . SENAO ABRECHAVETAS Corpo FECHACHAVETAS
+
+    IMPRIMIR        reduce using rule 21 (Processo_Se -> SE ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS .)
+    ENTRADA         reduce using rule 21 (Processo_Se -> SE ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS .)
+    SE              reduce using rule 21 (Processo_Se -> SE ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS .)
+    ENQUANTO        reduce using rule 21 (Processo_Se -> SE ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS .)
+    ID              reduce using rule 21 (Processo_Se -> SE ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS .)
+    NAO             reduce using rule 21 (Processo_Se -> SE ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS .)
+    NUMERO          reduce using rule 21 (Processo_Se -> SE ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS .)
+    $end            reduce using rule 21 (Processo_Se -> SE ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS .)
+    FECHACHAVETAS   reduce using rule 21 (Processo_Se -> SE ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS .)
+    SENAO           shift and go to state 102
+
+
+state 98
+
+    (23) Processo_Enquanto -> ENQUANTO ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS .
+
+    IMPRIMIR        reduce using rule 23 (Processo_Enquanto -> ENQUANTO ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS .)
+    ENTRADA         reduce using rule 23 (Processo_Enquanto -> ENQUANTO ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS .)
+    SE              reduce using rule 23 (Processo_Enquanto -> ENQUANTO ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS .)
+    ENQUANTO        reduce using rule 23 (Processo_Enquanto -> ENQUANTO ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS .)
+    ID              reduce using rule 23 (Processo_Enquanto -> ENQUANTO ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS .)
+    NAO             reduce using rule 23 (Processo_Enquanto -> ENQUANTO ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS .)
+    NUMERO          reduce using rule 23 (Processo_Enquanto -> ENQUANTO ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS .)
+    $end            reduce using rule 23 (Processo_Enquanto -> ENQUANTO ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS .)
+    FECHACHAVETAS   reduce using rule 23 (Processo_Enquanto -> ENQUANTO ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS .)
+
+
+state 99
+
+    (26) Atribuicao -> ID ABREPARENTESESRET Fator FECHAPARENTESESRET ABREPARENTESESRET Fator FECHAPARENTESESRET . IGUAL Expressao
+
+    IGUAL           shift and go to state 103
+
+
+state 100
+
+    (50) Fator -> ID ABREPARENTESESRET Expressao FECHAPARENTESESRET ABREPARENTESESRET Expressao FECHAPARENTESESRET .
+
+    MULTIPLICACAO   reduce using rule 50 (Fator -> ID ABREPARENTESESRET Expressao FECHAPARENTESESRET ABREPARENTESESRET Expressao FECHAPARENTESESRET .)
+    DIVISAO         reduce using rule 50 (Fator -> ID ABREPARENTESESRET Expressao FECHAPARENTESESRET ABREPARENTESESRET Expressao FECHAPARENTESESRET .)
+    RESTO           reduce using rule 50 (Fator -> ID ABREPARENTESESRET Expressao FECHAPARENTESESRET ABREPARENTESESRET Expressao FECHAPARENTESESRET .)
+    ADICAO          reduce using rule 50 (Fator -> ID ABREPARENTESESRET Expressao FECHAPARENTESESRET ABREPARENTESESRET Expressao FECHAPARENTESESRET .)
+    SUBTRACAO       reduce using rule 50 (Fator -> ID ABREPARENTESESRET Expressao FECHAPARENTESESRET ABREPARENTESESRET Expressao FECHAPARENTESESRET .)
+    EQUIVALENTE     reduce using rule 50 (Fator -> ID ABREPARENTESESRET Expressao FECHAPARENTESESRET ABREPARENTESESRET Expressao FECHAPARENTESESRET .)
+    MAIOR           reduce using rule 50 (Fator -> ID ABREPARENTESESRET Expressao FECHAPARENTESESRET ABREPARENTESESRET Expressao FECHAPARENTESESRET .)
+    MENOR           reduce using rule 50 (Fator -> ID ABREPARENTESESRET Expressao FECHAPARENTESESRET ABREPARENTESESRET Expressao FECHAPARENTESESRET .)
+    MAIORIGUAL      reduce using rule 50 (Fator -> ID ABREPARENTESESRET Expressao FECHAPARENTESESRET ABREPARENTESESRET Expressao FECHAPARENTESESRET .)
+    MENORIGUAL      reduce using rule 50 (Fator -> ID ABREPARENTESESRET Expressao FECHAPARENTESESRET ABREPARENTESESRET Expressao FECHAPARENTESESRET .)
+    E               reduce using rule 50 (Fator -> ID ABREPARENTESESRET Expressao FECHAPARENTESESRET ABREPARENTESESRET Expressao FECHAPARENTESESRET .)
+    OU              reduce using rule 50 (Fator -> ID ABREPARENTESESRET Expressao FECHAPARENTESESRET ABREPARENTESESRET Expressao FECHAPARENTESESRET .)
+    IMPRIMIR        reduce using rule 50 (Fator -> ID ABREPARENTESESRET Expressao FECHAPARENTESESRET ABREPARENTESESRET Expressao FECHAPARENTESESRET .)
+    ENTRADA         reduce using rule 50 (Fator -> ID ABREPARENTESESRET Expressao FECHAPARENTESESRET ABREPARENTESESRET Expressao FECHAPARENTESESRET .)
+    SE              reduce using rule 50 (Fator -> ID ABREPARENTESESRET Expressao FECHAPARENTESESRET ABREPARENTESESRET Expressao FECHAPARENTESESRET .)
+    ENQUANTO        reduce using rule 50 (Fator -> ID ABREPARENTESESRET Expressao FECHAPARENTESESRET ABREPARENTESESRET Expressao FECHAPARENTESESRET .)
+    ID              reduce using rule 50 (Fator -> ID ABREPARENTESESRET Expressao FECHAPARENTESESRET ABREPARENTESESRET Expressao FECHAPARENTESESRET .)
+    NAO             reduce using rule 50 (Fator -> ID ABREPARENTESESRET Expressao FECHAPARENTESESRET ABREPARENTESESRET Expressao FECHAPARENTESESRET .)
+    NUMERO          reduce using rule 50 (Fator -> ID ABREPARENTESESRET Expressao FECHAPARENTESESRET ABREPARENTESESRET Expressao FECHAPARENTESESRET .)
+    $end            reduce using rule 50 (Fator -> ID ABREPARENTESESRET Expressao FECHAPARENTESESRET ABREPARENTESESRET Expressao FECHAPARENTESESRET .)
+    FECHAPARENTESES reduce using rule 50 (Fator -> ID ABREPARENTESESRET Expressao FECHAPARENTESESRET ABREPARENTESESRET Expressao FECHAPARENTESESRET .)
+    FECHACHAVETAS   reduce using rule 50 (Fator -> ID ABREPARENTESESRET Expressao FECHAPARENTESESRET ABREPARENTESESRET Expressao FECHAPARENTESESRET .)
+    FECHAPARENTESESRET reduce using rule 50 (Fator -> ID ABREPARENTESESRET Expressao FECHAPARENTESESRET ABREPARENTESESRET Expressao FECHAPARENTESESRET .)
+
+
+state 101
+
+    (12) Variavel -> ID ABREPARENTESESRET NUMERO FECHAPARENTESESRET ABREPARENTESESRET NUMERO FECHAPARENTESESRET .
+
+    VIRGULA         reduce using rule 12 (Variavel -> ID ABREPARENTESESRET NUMERO FECHAPARENTESESRET ABREPARENTESESRET NUMERO FECHAPARENTESESRET .)
+    INTEIRO         reduce using rule 12 (Variavel -> ID ABREPARENTESESRET NUMERO FECHAPARENTESESRET ABREPARENTESESRET NUMERO FECHAPARENTESESRET .)
+    IMPRIMIR        reduce using rule 12 (Variavel -> ID ABREPARENTESESRET NUMERO FECHAPARENTESESRET ABREPARENTESESRET NUMERO FECHAPARENTESESRET .)
+    ENTRADA         reduce using rule 12 (Variavel -> ID ABREPARENTESESRET NUMERO FECHAPARENTESESRET ABREPARENTESESRET NUMERO FECHAPARENTESESRET .)
+    SE              reduce using rule 12 (Variavel -> ID ABREPARENTESESRET NUMERO FECHAPARENTESESRET ABREPARENTESESRET NUMERO FECHAPARENTESESRET .)
+    ENQUANTO        reduce using rule 12 (Variavel -> ID ABREPARENTESESRET NUMERO FECHAPARENTESESRET ABREPARENTESESRET NUMERO FECHAPARENTESESRET .)
+    ID              reduce using rule 12 (Variavel -> ID ABREPARENTESESRET NUMERO FECHAPARENTESESRET ABREPARENTESESRET NUMERO FECHAPARENTESESRET .)
+    NAO             reduce using rule 12 (Variavel -> ID ABREPARENTESESRET NUMERO FECHAPARENTESESRET ABREPARENTESESRET NUMERO FECHAPARENTESESRET .)
+    NUMERO          reduce using rule 12 (Variavel -> ID ABREPARENTESESRET NUMERO FECHAPARENTESESRET ABREPARENTESESRET NUMERO FECHAPARENTESESRET .)
+    FECHAPARENTESES reduce using rule 12 (Variavel -> ID ABREPARENTESESRET NUMERO FECHAPARENTESESRET ABREPARENTESESRET NUMERO FECHAPARENTESESRET .)
+
+
+state 102
+
+    (22) Processo_Se -> SE ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS SENAO . ABRECHAVETAS Corpo FECHACHAVETAS
+
+    ABRECHAVETAS    shift and go to state 104
+
+
+state 103
+
+    (26) Atribuicao -> ID ABREPARENTESESRET Fator FECHAPARENTESESRET ABREPARENTESESRET Fator FECHAPARENTESESRET IGUAL . Expressao
+    (32) Expressao -> . Termo
+    (33) Expressao -> . Expressao ADICAO Termo
+    (34) Expressao -> . Expressao SUBTRACAO Termo
+    (35) Expressao -> . Expressao EQUIVALENTE Expressao
+    (36) Expressao -> . Expressao MAIOR Expressao
+    (37) Expressao -> . Expressao MENOR Expressao
+    (38) Expressao -> . Expressao MAIORIGUAL Expressao
+    (39) Expressao -> . Expressao MENORIGUAL Expressao
+    (40) Expressao -> . Expressao E Expressao
+    (41) Expressao -> . Expressao OU Expressao
+    (42) Expressao -> . NAO Expressao
+    (43) Termo -> . Fator
+    (44) Termo -> . Termo MULTIPLICACAO Fator
+    (45) Termo -> . Termo DIVISAO Fator
+    (46) Termo -> . Termo RESTO Fator
+    (47) Fator -> . ID
+    (48) Fator -> . NUMERO
+    (49) Fator -> . ID ABREPARENTESESRET Expressao FECHAPARENTESESRET
+    (50) Fator -> . ID ABREPARENTESESRET Expressao FECHAPARENTESESRET ABREPARENTESESRET Expressao FECHAPARENTESESRET
+
+    NAO             shift and go to state 21
+    ID              shift and go to state 51
+    NUMERO          shift and go to state 23
+
+    Fator                          shift and go to state 22
+    Expressao                      shift and go to state 105
+    Termo                          shift and go to state 20
+
+state 104
+
+    (22) Processo_Se -> SE ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS SENAO ABRECHAVETAS . Corpo FECHACHAVETAS
+    (3) Corpo -> . Processo
+    (4) Corpo -> . Corpo Processo
+    (13) Processo -> . Processo_Imprimir
+    (14) Processo -> . Processo_Entrada
+    (15) Processo -> . Processo_Se
+    (16) Processo -> . Processo_Enquanto
+    (17) Processo -> . Incremento
+    (18) Processo -> . Decremento
+    (19) Processo -> . Expressao
+    (20) Processo -> . Atribuicao
+    (27) Processo_Imprimir -> . IMPRIMIR ABREPARENTESES Expressao FECHAPARENTESES
+    (28) Processo_Imprimir -> . IMPRIMIR ABREPARENTESES CITACAO FECHAPARENTESES
+    (29) Processo_Entrada -> . ENTRADA ABREPARENTESES Variavel FECHAPARENTESES
+    (21) Processo_Se -> . SE ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS
+    (22) Processo_Se -> . SE ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS SENAO ABRECHAVETAS Corpo FECHACHAVETAS
+    (23) Processo_Enquanto -> . ENQUANTO ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS
+    (30) Incremento -> . ID INCREMENTO
+    (31) Decremento -> . ID DECREMENTO
+    (32) Expressao -> . Termo
+    (33) Expressao -> . Expressao ADICAO Termo
+    (34) Expressao -> . Expressao SUBTRACAO Termo
+    (35) Expressao -> . Expressao EQUIVALENTE Expressao
+    (36) Expressao -> . Expressao MAIOR Expressao
+    (37) Expressao -> . Expressao MENOR Expressao
+    (38) Expressao -> . Expressao MAIORIGUAL Expressao
+    (39) Expressao -> . Expressao MENORIGUAL Expressao
+    (40) Expressao -> . Expressao E Expressao
+    (41) Expressao -> . Expressao OU Expressao
+    (42) Expressao -> . NAO Expressao
+    (24) Atribuicao -> . ID IGUAL Expressao
+    (25) Atribuicao -> . ID ABREPARENTESESRET Fator FECHAPARENTESESRET IGUAL Expressao
+    (26) Atribuicao -> . ID ABREPARENTESESRET Fator FECHAPARENTESESRET ABREPARENTESESRET Fator FECHAPARENTESESRET IGUAL Expressao
+    (43) Termo -> . Fator
+    (44) Termo -> . Termo MULTIPLICACAO Fator
+    (45) Termo -> . Termo DIVISAO Fator
+    (46) Termo -> . Termo RESTO Fator
+    (47) Fator -> . ID
+    (48) Fator -> . NUMERO
+    (49) Fator -> . ID ABREPARENTESESRET Expressao FECHAPARENTESESRET
+    (50) Fator -> . ID ABREPARENTESESRET Expressao FECHAPARENTESESRET ABREPARENTESESRET Expressao FECHAPARENTESESRET
+
+    IMPRIMIR        shift and go to state 15
+    ENTRADA         shift and go to state 16
+    SE              shift and go to state 17
+    ENQUANTO        shift and go to state 18
+    ID              shift and go to state 19
+    NAO             shift and go to state 21
+    NUMERO          shift and go to state 23
+
+    Expressao                      shift and go to state 13
+    Corpo                          shift and go to state 106
+    Processo                       shift and go to state 5
+    Processo_Imprimir              shift and go to state 7
+    Processo_Entrada               shift and go to state 8
+    Processo_Se                    shift and go to state 9
+    Processo_Enquanto              shift and go to state 10
+    Incremento                     shift and go to state 11
+    Decremento                     shift and go to state 12
+    Atribuicao                     shift and go to state 14
+    Termo                          shift and go to state 20
+    Fator                          shift and go to state 22
+
+state 105
+
+    (26) Atribuicao -> ID ABREPARENTESESRET Fator FECHAPARENTESESRET ABREPARENTESESRET Fator FECHAPARENTESESRET IGUAL Expressao .
+    (33) Expressao -> Expressao . ADICAO Termo
+    (34) Expressao -> Expressao . SUBTRACAO Termo
+    (35) Expressao -> Expressao . EQUIVALENTE Expressao
+    (36) Expressao -> Expressao . MAIOR Expressao
+    (37) Expressao -> Expressao . MENOR Expressao
+    (38) Expressao -> Expressao . MAIORIGUAL Expressao
+    (39) Expressao -> Expressao . MENORIGUAL Expressao
+    (40) Expressao -> Expressao . E Expressao
+    (41) Expressao -> Expressao . OU Expressao
+
+    IMPRIMIR        reduce using rule 26 (Atribuicao -> ID ABREPARENTESESRET Fator FECHAPARENTESESRET ABREPARENTESESRET Fator FECHAPARENTESESRET IGUAL Expressao .)
+    ENTRADA         reduce using rule 26 (Atribuicao -> ID ABREPARENTESESRET Fator FECHAPARENTESESRET ABREPARENTESESRET Fator FECHAPARENTESESRET IGUAL Expressao .)
+    SE              reduce using rule 26 (Atribuicao -> ID ABREPARENTESESRET Fator FECHAPARENTESESRET ABREPARENTESESRET Fator FECHAPARENTESESRET IGUAL Expressao .)
+    ENQUANTO        reduce using rule 26 (Atribuicao -> ID ABREPARENTESESRET Fator FECHAPARENTESESRET ABREPARENTESESRET Fator FECHAPARENTESESRET IGUAL Expressao .)
+    ID              reduce using rule 26 (Atribuicao -> ID ABREPARENTESESRET Fator FECHAPARENTESESRET ABREPARENTESESRET Fator FECHAPARENTESESRET IGUAL Expressao .)
+    NAO             reduce using rule 26 (Atribuicao -> ID ABREPARENTESESRET Fator FECHAPARENTESESRET ABREPARENTESESRET Fator FECHAPARENTESESRET IGUAL Expressao .)
+    NUMERO          reduce using rule 26 (Atribuicao -> ID ABREPARENTESESRET Fator FECHAPARENTESESRET ABREPARENTESESRET Fator FECHAPARENTESESRET IGUAL Expressao .)
+    $end            reduce using rule 26 (Atribuicao -> ID ABREPARENTESESRET Fator FECHAPARENTESESRET ABREPARENTESESRET Fator FECHAPARENTESESRET IGUAL Expressao .)
+    FECHACHAVETAS   reduce using rule 26 (Atribuicao -> ID ABREPARENTESESRET Fator FECHAPARENTESESRET ABREPARENTESESRET Fator FECHAPARENTESESRET IGUAL Expressao .)
+    ADICAO          shift and go to state 30
+    SUBTRACAO       shift and go to state 31
+    EQUIVALENTE     shift and go to state 32
+    MAIOR           shift and go to state 33
+    MENOR           shift and go to state 34
+    MAIORIGUAL      shift and go to state 35
+    MENORIGUAL      shift and go to state 36
+    E               shift and go to state 37
+    OU              shift and go to state 38
+
+
+state 106
+
+    (22) Processo_Se -> SE ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS SENAO ABRECHAVETAS Corpo . FECHACHAVETAS
+    (4) Corpo -> Corpo . Processo
+    (13) Processo -> . Processo_Imprimir
+    (14) Processo -> . Processo_Entrada
+    (15) Processo -> . Processo_Se
+    (16) Processo -> . Processo_Enquanto
+    (17) Processo -> . Incremento
+    (18) Processo -> . Decremento
+    (19) Processo -> . Expressao
+    (20) Processo -> . Atribuicao
+    (27) Processo_Imprimir -> . IMPRIMIR ABREPARENTESES Expressao FECHAPARENTESES
+    (28) Processo_Imprimir -> . IMPRIMIR ABREPARENTESES CITACAO FECHAPARENTESES
+    (29) Processo_Entrada -> . ENTRADA ABREPARENTESES Variavel FECHAPARENTESES
+    (21) Processo_Se -> . SE ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS
+    (22) Processo_Se -> . SE ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS SENAO ABRECHAVETAS Corpo FECHACHAVETAS
+    (23) Processo_Enquanto -> . ENQUANTO ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS
+    (30) Incremento -> . ID INCREMENTO
+    (31) Decremento -> . ID DECREMENTO
+    (32) Expressao -> . Termo
+    (33) Expressao -> . Expressao ADICAO Termo
+    (34) Expressao -> . Expressao SUBTRACAO Termo
+    (35) Expressao -> . Expressao EQUIVALENTE Expressao
+    (36) Expressao -> . Expressao MAIOR Expressao
+    (37) Expressao -> . Expressao MENOR Expressao
+    (38) Expressao -> . Expressao MAIORIGUAL Expressao
+    (39) Expressao -> . Expressao MENORIGUAL Expressao
+    (40) Expressao -> . Expressao E Expressao
+    (41) Expressao -> . Expressao OU Expressao
+    (42) Expressao -> . NAO Expressao
+    (24) Atribuicao -> . ID IGUAL Expressao
+    (25) Atribuicao -> . ID ABREPARENTESESRET Fator FECHAPARENTESESRET IGUAL Expressao
+    (26) Atribuicao -> . ID ABREPARENTESESRET Fator FECHAPARENTESESRET ABREPARENTESESRET Fator FECHAPARENTESESRET IGUAL Expressao
+    (43) Termo -> . Fator
+    (44) Termo -> . Termo MULTIPLICACAO Fator
+    (45) Termo -> . Termo DIVISAO Fator
+    (46) Termo -> . Termo RESTO Fator
+    (47) Fator -> . ID
+    (48) Fator -> . NUMERO
+    (49) Fator -> . ID ABREPARENTESESRET Expressao FECHAPARENTESESRET
+    (50) Fator -> . ID ABREPARENTESESRET Expressao FECHAPARENTESESRET ABREPARENTESESRET Expressao FECHAPARENTESESRET
+
+    FECHACHAVETAS   shift and go to state 107
+    IMPRIMIR        shift and go to state 15
+    ENTRADA         shift and go to state 16
+    SE              shift and go to state 17
+    ENQUANTO        shift and go to state 18
+    ID              shift and go to state 19
+    NAO             shift and go to state 21
+    NUMERO          shift and go to state 23
+
+    Expressao                      shift and go to state 13
+    Processo                       shift and go to state 26
+    Processo_Imprimir              shift and go to state 7
+    Processo_Entrada               shift and go to state 8
+    Processo_Se                    shift and go to state 9
+    Processo_Enquanto              shift and go to state 10
+    Incremento                     shift and go to state 11
+    Decremento                     shift and go to state 12
+    Atribuicao                     shift and go to state 14
+    Termo                          shift and go to state 20
+    Fator                          shift and go to state 22
+
+state 107
+
+    (22) Processo_Se -> SE ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS SENAO ABRECHAVETAS Corpo FECHACHAVETAS .
+
+    IMPRIMIR        reduce using rule 22 (Processo_Se -> SE ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS SENAO ABRECHAVETAS Corpo FECHACHAVETAS .)
+    ENTRADA         reduce using rule 22 (Processo_Se -> SE ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS SENAO ABRECHAVETAS Corpo FECHACHAVETAS .)
+    SE              reduce using rule 22 (Processo_Se -> SE ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS SENAO ABRECHAVETAS Corpo FECHACHAVETAS .)
+    ENQUANTO        reduce using rule 22 (Processo_Se -> SE ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS SENAO ABRECHAVETAS Corpo FECHACHAVETAS .)
+    ID              reduce using rule 22 (Processo_Se -> SE ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS SENAO ABRECHAVETAS Corpo FECHACHAVETAS .)
+    NAO             reduce using rule 22 (Processo_Se -> SE ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS SENAO ABRECHAVETAS Corpo FECHACHAVETAS .)
+    NUMERO          reduce using rule 22 (Processo_Se -> SE ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS SENAO ABRECHAVETAS Corpo FECHACHAVETAS .)
+    $end            reduce using rule 22 (Processo_Se -> SE ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS SENAO ABRECHAVETAS Corpo FECHACHAVETAS .)
+    FECHACHAVETAS   reduce using rule 22 (Processo_Se -> SE ABREPARENTESES Expressao FECHAPARENTESES ABRECHAVETAS Corpo FECHACHAVETAS SENAO ABRECHAVETAS Corpo FECHACHAVETAS .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for ADICAO in state 50 resolved as shift
+WARNING: shift/reduce conflict for SUBTRACAO in state 50 resolved as shift
+WARNING: shift/reduce conflict for EQUIVALENTE in state 50 resolved as shift
+WARNING: shift/reduce conflict for MAIOR in state 50 resolved as shift
+WARNING: shift/reduce conflict for MENOR in state 50 resolved as shift
+WARNING: shift/reduce conflict for MAIORIGUAL in state 50 resolved as shift
+WARNING: shift/reduce conflict for MENORIGUAL in state 50 resolved as shift
+WARNING: shift/reduce conflict for E in state 50 resolved as shift
+WARNING: shift/reduce conflict for OU in state 50 resolved as shift
+WARNING: shift/reduce conflict for ADICAO in state 56 resolved as shift
+WARNING: shift/reduce conflict for SUBTRACAO in state 56 resolved as shift
+WARNING: shift/reduce conflict for EQUIVALENTE in state 56 resolved as shift
+WARNING: shift/reduce conflict for MAIOR in state 56 resolved as shift
+WARNING: shift/reduce conflict for MENOR in state 56 resolved as shift
+WARNING: shift/reduce conflict for MAIORIGUAL in state 56 resolved as shift
+WARNING: shift/reduce conflict for MENORIGUAL in state 56 resolved as shift
+WARNING: shift/reduce conflict for E in state 56 resolved as shift
+WARNING: shift/reduce conflict for OU in state 56 resolved as shift
+WARNING: shift/reduce conflict for ADICAO in state 57 resolved as shift
+WARNING: shift/reduce conflict for SUBTRACAO in state 57 resolved as shift
+WARNING: shift/reduce conflict for EQUIVALENTE in state 57 resolved as shift
+WARNING: shift/reduce conflict for MAIOR in state 57 resolved as shift
+WARNING: shift/reduce conflict for MENOR in state 57 resolved as shift
+WARNING: shift/reduce conflict for MAIORIGUAL in state 57 resolved as shift
+WARNING: shift/reduce conflict for MENORIGUAL in state 57 resolved as shift
+WARNING: shift/reduce conflict for E in state 57 resolved as shift
+WARNING: shift/reduce conflict for OU in state 57 resolved as shift
+WARNING: shift/reduce conflict for ADICAO in state 58 resolved as shift
+WARNING: shift/reduce conflict for SUBTRACAO in state 58 resolved as shift
+WARNING: shift/reduce conflict for EQUIVALENTE in state 58 resolved as shift
+WARNING: shift/reduce conflict for MAIOR in state 58 resolved as shift
+WARNING: shift/reduce conflict for MENOR in state 58 resolved as shift
+WARNING: shift/reduce conflict for MAIORIGUAL in state 58 resolved as shift
+WARNING: shift/reduce conflict for MENORIGUAL in state 58 resolved as shift
+WARNING: shift/reduce conflict for E in state 58 resolved as shift
+WARNING: shift/reduce conflict for OU in state 58 resolved as shift
+WARNING: shift/reduce conflict for ADICAO in state 59 resolved as shift
+WARNING: shift/reduce conflict for SUBTRACAO in state 59 resolved as shift
+WARNING: shift/reduce conflict for EQUIVALENTE in state 59 resolved as shift
+WARNING: shift/reduce conflict for MAIOR in state 59 resolved as shift
+WARNING: shift/reduce conflict for MENOR in state 59 resolved as shift
+WARNING: shift/reduce conflict for MAIORIGUAL in state 59 resolved as shift
+WARNING: shift/reduce conflict for MENORIGUAL in state 59 resolved as shift
+WARNING: shift/reduce conflict for E in state 59 resolved as shift
+WARNING: shift/reduce conflict for OU in state 59 resolved as shift
+WARNING: shift/reduce conflict for ADICAO in state 60 resolved as shift
+WARNING: shift/reduce conflict for SUBTRACAO in state 60 resolved as shift
+WARNING: shift/reduce conflict for EQUIVALENTE in state 60 resolved as shift
+WARNING: shift/reduce conflict for MAIOR in state 60 resolved as shift
+WARNING: shift/reduce conflict for MENOR in state 60 resolved as shift
+WARNING: shift/reduce conflict for MAIORIGUAL in state 60 resolved as shift
+WARNING: shift/reduce conflict for MENORIGUAL in state 60 resolved as shift
+WARNING: shift/reduce conflict for E in state 60 resolved as shift
+WARNING: shift/reduce conflict for OU in state 60 resolved as shift
+WARNING: shift/reduce conflict for ADICAO in state 61 resolved as shift
+WARNING: shift/reduce conflict for SUBTRACAO in state 61 resolved as shift
+WARNING: shift/reduce conflict for EQUIVALENTE in state 61 resolved as shift
+WARNING: shift/reduce conflict for MAIOR in state 61 resolved as shift
+WARNING: shift/reduce conflict for MENOR in state 61 resolved as shift
+WARNING: shift/reduce conflict for MAIORIGUAL in state 61 resolved as shift
+WARNING: shift/reduce conflict for MENORIGUAL in state 61 resolved as shift
+WARNING: shift/reduce conflict for E in state 61 resolved as shift
+WARNING: shift/reduce conflict for OU in state 61 resolved as shift
+WARNING: shift/reduce conflict for ADICAO in state 62 resolved as shift
+WARNING: shift/reduce conflict for SUBTRACAO in state 62 resolved as shift
+WARNING: shift/reduce conflict for EQUIVALENTE in state 62 resolved as shift
+WARNING: shift/reduce conflict for MAIOR in state 62 resolved as shift
+WARNING: shift/reduce conflict for MENOR in state 62 resolved as shift
+WARNING: shift/reduce conflict for MAIORIGUAL in state 62 resolved as shift
+WARNING: shift/reduce conflict for MENORIGUAL in state 62 resolved as shift
+WARNING: shift/reduce conflict for E in state 62 resolved as shift
+WARNING: shift/reduce conflict for OU in state 62 resolved as shift
+WARNING: shift/reduce conflict for FECHAPARENTESESRET in state 69 resolved as shift
