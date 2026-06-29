@@ -57,9 +57,7 @@ Projeto_Final/
 └── README.md
 ```
 
-## Autores
 
-<!-- Adicionar aqui os nomes dos elementos do grupo -->
 
 ## Docente
 
