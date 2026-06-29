@@ -1,1 +1,4 @@
-# BD-2526
+## 📘 BD – Bases de Dados
+
+**Nota Final do Trabalho**: ⭐️ 15 valores  
+
