@@ -1,0 +1,255 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    scroll-behavior: smooth;
+    background-color: #fdfdfd;
+    line-height: 1.6;
+    color: #222;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
+    z-index: 1000;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 0;
+}
+
+nav a {
+    color: #333;
+    margin: 0 25px;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 500;
+    transition: color 0.3s ease, border-bottom 0.3s ease;
+    position: relative;
+}
+
+nav a::after {
+    content: "";
+    display: block;
+    width: 0%;
+    height: 2px;
+    background: #007BFF;
+    transition: width 0.3s ease;
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+}
+
+nav a:hover {
+    color: #007BFF;
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 80px 20px 60px;
+}
+
+h2 {
+    font-size: 2.5em;
+    margin: 0;
+    padding: 20px 0;
+    text-align: center;
+    color: #333;
+}
+
+section {
+    padding: 120px 0;
+}
+
+.anchor {
+    display: block;
+    position: relative;
+    top: -100px;
+    visibility: hidden;
+}
+
+.imagens {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+}
+
+.imagens img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.canvas-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+canvas {
+    border: 1px solid #000;
+    touch-action: none;
+}
+
+.controls {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 40px;
+    margin-top: 20px;
+}
+
+.controls input,
+.controls select {
+    padding: 6px 10px;
+    font-size: 16px;
+}
+
+.controls2 {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 40px;
+    margin-top: 20px;
+}
+
+.controls2 input,
+.controls2 select {
+    padding: 6px 10px;
+    font-size: 16px;
+}
+
+/* Ajustando o controle do raio */
+.radius-control {
+    flex-basis: 25%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.radius-control span {
+    margin-top: 4px;
+    font-size: 14px;
+}
+
+.valores-predefinidos {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.valores-predefinidos button {
+    padding: 6px 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+
+.custom-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.custom-checkbox input {
+    opacity: 0;
+    /* Esconde o checkbox nativo */
+}
+
+.checkmark {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #007BFF;
+    display: inline-block;
+    border-radius: 3px;
+}
+
+.custom-checkbox input:checked+.checkmark {
+    background-color: #007BFF;
+}
+
+section {
+    padding: 30px 0;
+}
+
+
+
+/* Garantindo que o canvas tenha uma margem adequada */
+#canvas1,
+#canvas2 {
+    margin-top: 20px;
+}
+
+/* Estilo para os controles do centro */
+.center-control {
+    flex-basis: 65%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fefefe;
+    padding: 15px 20px;
+}
+
+.center-control label {
+    flex: 1 1 100%;
+    font-weight: 500;
+    color: #444;
+}
+
+.center-control input {
+    flex: 1 1 45%;
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: #fff;
+}
+
+.center-control span {
+    flex: 1 1 45%;
+    text-align: right;
+    font-size: 14px;
+    color: #007BFF;
+    font-weight: 500;
+}
+
+/* Ajuste responsivo */
+@media (max-width: 600px) {
+    .controls, 
+    .controls2 {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .radius-control,
+    .center-control {
+        flex-basis: 100%;
+    }
+
+    .center-control input,
+    .center-control span {
+        flex-basis: 100%;
+        text-align: left;
+    }
+}

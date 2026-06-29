@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Transformações de Joukowski</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+  <header>
+    <nav>
+      <a href="#inicio">Início</a>
+      <a href="#vis">Visualização</a>
+      <a href="https://drive.google.com/uc?export=download&id=1qAdhiz7O9VjBk7q1EoK0_gdkbIo5h42c" download>DownloadApp</a>
+
+    </nav>
+  </header>
+
+  <main>
+    
+    <section id="inicio">
+      <h2>Transformações Conformes</h2>
+      <p>
+      	As <strong>transformações conformes</strong> são funções que preservam a forma local das figuras, 
+      	nomeadamente os <strong>ângulos</strong> entre curvas que se cruzam. No plano complexo, estas transformações 
+      	desempenham um papel importante em várias áreas da física, como a aerodinâmica, a hidrodinâmica e a eletrostática.
+      </p>
+      As transformações conformes são particularmente úteis para <em>transformar  domínios complicados em domínios mais simples</em>, 
+      onde os problemas matemáticos são mais fáceis de resolver. 
+      <p>
+      	Formalmente, uma transformação conforme é uma função holomorfa com derivada não nula. Isso garante que, localmente, 
+      	a função preserva a estrutura geométrica, deformando as figuras com suavidade mas sem torções nem dobras.
+      </p>
+      
+      
+      <p>
+      	A capacidade de 
+      	<em>"simplificar sem perder a estrutura local"</em> torna as transformações conformes uma ferramenta poderosa tanto 
+      	na teoria como na prática.
+      </p>
+      <div class="imagens">
+        <img src="img/grelha.png" />
+        <img src="img/sen(z).png" />
+      </div>
+
+      <h2>Transformação de Joukowski</h2>
+      <p>
+      	A <strong>transformação de Joukowski</strong>  é uma transformação complexa definida como:
+      $$w = T(z) = z + \frac1{z}$$
+      ou, mais geralmente, como
+      $$w = F(z) = z + \frac{c^2}{z}$$ onde \(c\) é um número real positivo e \(z\) pertence ao plano complexo, com \(z ≠ 0\).
+      </p>
+      
+      <h3> Propriedades de \(T\) </h3>
+      <ul>
+      	<li> \(T\) é <strong>conforme</strong> em \(\mathbb C  \setminus \{  0\}\), exceto nos pontos onde \(T '(z) = 0\), ou seja em \(\pm 1\).</li>
+      	  <br>     
+      	<li> \(T\) transforma circunferências centradas na origem em elipses.</li>
+      <br>
+       Consideremos, no plano complexo \(z\), a circunferência   de raio \( R \), centrada na
+        origem, \( z = R e^{i\theta} \), com \( \theta \in [0, 2\pi] \).
+        Aplicando a transformação de Joukowski, obtemos:
+              $$w ={R}e^{i\theta} + \frac{1} {R}e^{-i\theta}.$$
+       Separando em partes real e imaginária:
+       $$w = \left(R + \frac{1}{R}\right)\cos \theta + i\left(R - \frac{1} {R}\right)\sin \theta.$$
+       Escrevendo \(w=u+iv\), facilmente se conclui que, se \(R\ne 1\),
+       $$\frac{u^2}{\left(R + \frac{1}{R}\right)^2} + \frac{v^2}{\left(R - \frac{1}{R}\right)^2}=1.$$
+       Esta é a equação de uma elipse no plano \(w\) centrada na origem, semieixos \(a=R + \frac{1}{R}\) e \(b=|R - \frac{1}{R}|\),   focos em \((\pm c,0)\), onde \(c=\sqrt{(R+\frac1{R})^2-(R-\frac1{R})^2}=2\) e excentricidade \(e=\frac{2 R}{1 + R^2}\).
+<br>
+        Quando \( R = 1 \), obtemos \[ w = 2 \cos\theta \]
+        que corresponde a um segmento de reta entre -2 e 2, uma vez que a parte imaginária se anula (elipse degenerada com excentricidade 1).
+      </p>
+      <div class="canvas-container">
+        <canvas id="canvas3" width="400" height="400"></canvas>
+      </div>
+      <div class="controls2">
+        <div class="radius-control">
+          <label for="radiusSlider2">Raio</label>
+          <input type="range" id="radiusSlider2" min="20" max="400" value="80" />
+          <span id="radiusValue2">1.00</span>
+        </div>
+      </div>
+      <h4>Transformação Inversa</h4>
+      <p>
+       Podemos também estudar o comportamento inverso da transformação de Joukowski, resolvendo a equação:
+\(w = z + \frac{1}{z}\)
+para \(z\).
+  	Multiplicando ambos os membros por \(z\), obtemos uma equação quadrática:
+ $$z^2 - wz + 1 = 0,$$
+  cujas soluções  são:
+  $$z = \frac{w \pm \sqrt{w^2 - 4}}{2}.$$
+  	Isto mostra que, para cada valor \(w\ne \pm2\) existem duas soluções distintas para \(z\). Quando  \(w\in[−2,2]\), as duas soluções são conjugadas, estão sobre a circunferência unitária \(|z| = 1\) e são enviadas para o mesmo ponto \(w\).
+  	Ou seja, a transformação de Joukowski não é injetiva em todo o plano.
+
+  	O segmento real \([-2, 2]\) é precisamente a imagem da circunferência \(|z| = 1\) sob a transformação, 
+  	onde as duas soluções coincidem. Este é o local onde a transformação “colapsa” dois pontos num só.
+ 
+  	Fora desse segmento, o plano <code>z</code> pode ser dividido em duas regiões:
+  interior do círculo \(|z| &lt; 1\); exterior do círculo</strong> \(|z| &gt; 1\).
+  	Cada uma dessas regiões é mapeada bijetivamente para a região do plano \(w\) fora do intervalo \([-2, 2]\).
+  
+  </p>
+      <h4>Imagem de circunferências não centradas na origem </h4>
+      <p>
+        Quando aplicamos a transformação de Joukowski a circunferências que não estão centradas na origem no plano \(z\),
+        as imagens no plano \(w\) variam significativamente consoante a posição e o raio da circunferência.
+      </p>
+    
+      <p>
+        Se a circunferência passa por algum dos pontos \( z = \pm 1 \), a imagem no plano \(w\) deixa de ser suave
+        e surge uma <strong>cúspide</strong> em \( w = \pm 2 \). Este fenómeno, conhecido como <em>trailing edge</em>,
+        ocorre devido à não regularidade da transformação de Joukowski nesses pontos. Nestes casos, a imagem pode adquirir
+        uma forma típica de <strong>aerofólio</strong> — o contorno típico de uma asa
+        de avião —  desde que o centro do círculo esteja suficientemente próximo da origem.
+        A geometria resultante nestes casos é a razão pela qual a transformação de Joukowski é amplamente usada em modelação aerodinâmica.
+      </p>
+      
+      <p>
+        A posição do centro da circunferência no plano \( z \) tem influência direta na simetria da imagem:
+        <ul>
+          <li>Centro no eixo real → perfil simétrico.</li>
+          <li>Centro com parte imaginária não nula → perfil assimétrico.</li>
+    
+        
+       </ul>
+      </p>
+    </section>
+
+    <section id="vis">
+      <h2>APP</h2>
+      <div class="canvas-container">
+        <canvas id="canvas1" width="400" height="400"></canvas>
+        <canvas id="canvas2" width="400" height="400"></canvas>
+      </div>
+
+      <div class="controls">
+        <div class="radius-control">
+          <label for="radiusSlider">Raio</label>
+          <input type="range" id="radiusSlider" min="20" max="160" value="80" />
+          <span id="radiusValue">1.00</span>
+
+          <div class="valores-predefinidos">
+            <label>Valores Predefinidos
+              <button id="predefinido">Predefinidos</button>
+            </label>
+
+            <div class="fluxo-ativar">
+              <label class="custom-checkbox">
+                <input type="checkbox" id="fluxo">
+                <span class="checkmark"></span>
+                Fluxo
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="center-control">
+          <label for="centerX">Centro X</label>
+          <input type="number" id="centerX" value="0" step="0.01" lang="en" />
+          <label for="centerY">Centro Y</label>
+          <input type="number" id="centerY" value="0" step="0.01" lang="en" />
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <script defer src="script.js"></script>
+</body>
+
+</html>
