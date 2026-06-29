@@ -7,3 +7,4 @@ Este repositório contém os trabalhos desenvolvidos das seguintes disciplinas:
 - **LC - Lógica Computacional**
 - **Poo - Programação Orientada aos Objetos**
 - **PLC - Processamento de Linguagens e Compiladores**
+- **BD - Bases de Dados** 
