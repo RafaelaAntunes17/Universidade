@@ -11,7 +11,7 @@ O projeto tem duas componentes:
 - **`app/`** — ferramenta computacional interativa que visualiza como diferentes funções
   de variável complexa transformam figuras geométricas no plano.
 
-🔗 **Relatório (site) online:** <!-- colar aqui o link do Netlify -->
+🔗 **Relatório (site) online:** https://transformacao-joukowski.netlify.app/
 
 ## Contexto
 
@@ -35,21 +35,7 @@ uma função e visualizar a transformação resultante.
 - **Funções:** sen(x), cos(x), exp(x) e a transformação de Joukowski (z + 1/z).
 - Para obter um perfil de Joukowski: selecionar **Circunferência** + **z + 1/z**.
 
-### Instalação e execução
 
-```bash
-cd app
-python -m venv venv
-source venv/bin/activate      # Linux / macOS
-venv\Scripts\activate         # Windows
-pip install -r ../requirements.txt
-python main.py
-```
-
-## Relatório / site (`site/`)
-
-Site estático (HTML, CSS, JavaScript, com MathJax para as fórmulas), publicado no Netlify.
-Para abrir localmente, basta abrir `site/index.html` no navegador.
 
 ## Estrutura
 
