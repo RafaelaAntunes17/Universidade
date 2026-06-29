@@ -57,7 +57,7 @@ Projeto_Final/
 └── README.md
 ```
 
-
+## **Nota Final**: ⭐️ 16 valores  
 
 ## Docente
 
